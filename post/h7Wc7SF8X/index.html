@@ -1,0 +1,1097 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    使用Cloudflare Worker搭建反向代理 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="
+请先阅读本站的免责声明:https://blog.gd1214b.icu/post/disclaimers/
+请遵循当地法律使用，如您有违反当地法律造成的责任，本站拒不承担.
+
+前言
+Cloudflare 推出了 Workers 服务，在..." />
+    <meta name="keywords" content="Cloudflare Worker,反向代理" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/h7Wc7SF8X.png');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-06-08"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/h7Wc7SF8X/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/h7Wc7SF8X/"> </span>
+              </a>
+              <span id="/h7Wc7SF8X/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-0 ctag-cloudflare-worker" aria-label="">Cloudflare Worker</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-1 ctag-fan-xiang-dai-li" aria-label="">反向代理</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">使用Cloudflare Worker搭建反向代理</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <blockquote>
+<p><strong>请先阅读本站的免责声明:<a href="https://blog.gd1214b.icu/post/disclaimers/">https://blog.gd1214b.icu/post/disclaimers/</a></strong><br>
+<strong>请遵循当地法律使用，如您有违反当地法律造成的责任，本站拒不承担.</strong></p>
+</blockquote>
+<h1 id="前言">前言</h1>
+<p>Cloudflare 推出了 Workers 服务，在国内一般叫它边缘计算。<a href="https://github.com/EtherDream/jsproxy">jsproxy</a> 是个 Github 开源项目，可以通过 Cloudflare Workers 服务搭建一个反向代理服务器，这个反向代理服务器不需要安装在我们自己的 VPS 主机上，而是直接部署在 Cloudflare 节点上，这可以极大的降低我们自身 VPS 主机的性能损耗。</p>
+<h1 id="教程">教程</h1>
+<h2 id="1">1</h2>
+<p>打开<a href="https://dash.cloudflare.com/">Cloudflare</a>，登录CLoudflare账户。（Cloudflare支持中文界面，操作前可先将界面语言调换只中文）；<br>
+<img src="https://www.gd1214b.icu/post-images/1623119946925.png" alt="" loading="lazy"></p>
+<h2 id="2">2</h2>
+<p>创建Worker实例（创建前还要配置一下，这里就不多说了，可以根据自己的需求进行选择，免费的一天可以处理十万请求，正常来说很够用）；<br>
+<img src="https://www.gd1214b.icu/post-images/1623119975841.png" alt="" loading="lazy"></p>
+<h2 id="3">3</h2>
+<p>将以下代码复制到左侧脚本框中；</p>
+<pre><code class="language-javascript">'use strict'
+
+/**
+ * static files (404.html, sw.js, conf.js)
+ */
+const ASSET_URL = 'https://etherdream.github.io/jsproxy'
+
+const JS_VER = 10
+const MAX_RETRY = 1
+
+/** @type {RequestInit} */
+const PREFLIGHT_INIT = {
+  status: 204,
+  headers: new Headers({
+    'access-control-allow-origin': '*',
+    'access-control-allow-methods': 'GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS',
+    'access-control-max-age': '1728000',
+  }),
+}
+
+/**
+ * @param {any} body
+ * @param {number} status
+ * @param {Object&lt;string, string&gt;} headers
+ */
+function makeRes(body, status = 200, headers = {}) {
+  headers['--ver'] = JS_VER
+  headers['access-control-allow-origin'] = '*'
+  return new Response(body, {status, headers})
+}
+
+
+/**
+ * @param {string} urlStr 
+ */
+function newUrl(urlStr) {
+  try {
+    return new URL(urlStr)
+  } catch (err) {
+    return null
+  }
+}
+
+
+addEventListener('fetch', e =&gt; {
+  const ret = fetchHandler(e)
+    .catch(err =&gt; makeRes('cfworker error:\n' + err.stack, 502))
+  e.respondWith(ret)
+})
+
+
+/**
+ * @param {FetchEvent} e 
+ */
+async function fetchHandler(e) {
+  const req = e.request
+  const urlStr = req.url
+  const urlObj = new URL(urlStr)
+  const path = urlObj.href.substr(urlObj.origin.length)
+
+  if (urlObj.protocol === 'http:') {
+    urlObj.protocol = 'https:'
+    return makeRes('', 301, {
+      'strict-transport-security': 'max-age=99999999; includeSubDomains; preload',
+      'location': urlObj.href,
+    })
+  }
+
+  if (path.startsWith('/http/')) {
+    return httpHandler(req, path.substr(6))
+  }
+
+  switch (path) {
+  case '/http':
+    return makeRes('请更新 cfworker 到最新版本!')
+  case '/ws':
+    return makeRes('not support', 400)
+  case '/works':
+    return makeRes('it works')
+  default:
+    // static files
+    return fetch(ASSET_URL + path)
+  }
+}
+
+
+/**
+ * @param {Request} req
+ * @param {string} pathname
+ */
+function httpHandler(req, pathname) {
+  const reqHdrRaw = req.headers
+  if (reqHdrRaw.has('x-jsproxy')) {
+    return Response.error()
+  }
+
+  // preflight
+  if (req.method === 'OPTIONS' &amp;&amp;
+      reqHdrRaw.has('access-control-request-headers')
+  ) {
+    return new Response(null, PREFLIGHT_INIT)
+  }
+
+  let acehOld = false
+  let rawSvr = ''
+  let rawLen = ''
+  let rawEtag = ''
+
+  const reqHdrNew = new Headers(reqHdrRaw)
+  reqHdrNew.set('x-jsproxy', '1')
+
+  // 此处逻辑和 http-dec-req-hdr.lua 大致相同
+  // https://github.com/EtherDream/jsproxy/blob/master/lua/http-dec-req-hdr.lua
+  const refer = reqHdrNew.get('referer')
+  const query = refer.substr(refer.indexOf('?') + 1)
+  if (!query) {
+    return makeRes('missing params', 403)
+  }
+  const param = new URLSearchParams(query)
+
+  for (const [k, v] of Object.entries(param)) {
+    if (k.substr(0, 2) === '--') {
+      // 系统信息
+      switch (k.substr(2)) {
+      case 'aceh':
+        acehOld = true
+        break
+      case 'raw-info':
+        [rawSvr, rawLen, rawEtag] = v.split('|')
+        break
+      }
+    } else {
+      // 还原 HTTP 请求头
+      if (v) {
+        reqHdrNew.set(k, v)
+      } else {
+        reqHdrNew.delete(k)
+      }
+    }
+  }
+  if (!param.has('referer')) {
+    reqHdrNew.delete('referer')
+  }
+
+  // cfworker 会把路径中的 `//` 合并成 `/`
+  const urlStr = pathname.replace(/^(https?):\/+/, '$1://')
+  const urlObj = newUrl(urlStr)
+  if (!urlObj) {
+    return makeRes('invalid proxy url: ' + urlStr, 403)
+  }
+
+  /** @type {RequestInit} */
+  const reqInit = {
+    method: req.method,
+    headers: reqHdrNew,
+    redirect: 'manual',
+  }
+  if (req.method === 'POST') {
+    reqInit.body = req.body
+  }
+  return proxy(urlObj, reqInit, acehOld, rawLen, 0)
+}
+
+
+/**
+ * 
+ * @param {URL} urlObj 
+ * @param {RequestInit} reqInit 
+ * @param {number} retryTimes 
+ */
+async function proxy(urlObj, reqInit, acehOld, rawLen, retryTimes) {
+  const res = await fetch(urlObj.href, reqInit)
+  const resHdrOld = res.headers
+  const resHdrNew = new Headers(resHdrOld)
+
+  let expose = '*'
+  
+  for (const [k, v] of resHdrOld.entries()) {
+    if (k === 'access-control-allow-origin' ||
+        k === 'access-control-expose-headers' ||
+        k === 'location' ||
+        k === 'set-cookie'
+    ) {
+      const x = '--' + k
+      resHdrNew.set(x, v)
+      if (acehOld) {
+        expose = expose + ',' + x
+      }
+      resHdrNew.delete(k)
+    }
+    else if (acehOld &amp;&amp;
+      k !== 'cache-control' &amp;&amp;
+      k !== 'content-language' &amp;&amp;
+      k !== 'content-type' &amp;&amp;
+      k !== 'expires' &amp;&amp;
+      k !== 'last-modified' &amp;&amp;
+      k !== 'pragma'
+    ) {
+      expose = expose + ',' + k
+    }
+  }
+
+  if (acehOld) {
+    expose = expose + ',--s'
+    resHdrNew.set('--t', '1')
+  }
+
+  // verify
+  if (rawLen) {
+    const newLen = resHdrOld.get('content-length') || ''
+    const badLen = (rawLen !== newLen)
+
+    if (badLen) {
+      if (retryTimes &lt; MAX_RETRY) {
+        urlObj = await parseYtVideoRedir(urlObj, newLen, res)
+        if (urlObj) {
+          return proxy(urlObj, reqInit, acehOld, rawLen, retryTimes + 1)
+        }
+      }
+      return makeRes(res.body, 400, {
+        '--error': `bad len: ${newLen}, except: ${rawLen}`,
+        'access-control-expose-headers': '--error',
+      })
+    }
+
+    if (retryTimes &gt; 1) {
+      resHdrNew.set('--retry', retryTimes)
+    }
+  }
+
+  let status = res.status
+
+  resHdrNew.set('access-control-expose-headers', expose)
+  resHdrNew.set('access-control-allow-origin', '*')
+  resHdrNew.set('--s', status)
+  resHdrNew.set('--ver', JS_VER)
+
+  resHdrNew.delete('content-security-policy')
+  resHdrNew.delete('content-security-policy-report-only')
+  resHdrNew.delete('clear-site-data')
+
+  if (status === 301 ||
+      status === 302 ||
+      status === 303 ||
+      status === 307 ||
+      status === 308
+  ) {
+    status = status + 10
+  }
+
+  return new Response(res.body, {
+    status,
+    headers: resHdrNew,
+  })
+}
+
+
+/**
+ * @param {URL} urlObj 
+ */
+function isYtUrl(urlObj) {
+  return (
+    urlObj.host.endsWith('.googlevideo.com') &amp;&amp;
+    urlObj.pathname.startsWith('/videoplayback')
+  )
+}
+
+/**
+ * @param {URL} urlObj 
+ * @param {number} newLen 
+ * @param {Response} res 
+ */
+async function parseYtVideoRedir(urlObj, newLen, res) {
+  if (newLen &gt; 2000) {
+    return null
+  }
+  if (!isYtUrl(urlObj)) {
+    return null
+  }
+  try {
+    const data = await res.text()
+    urlObj = new URL(data)
+  } catch (err) {
+    return null
+  }
+  if (!isYtUrl(urlObj)) {
+    return null
+  }
+  return urlObj
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://www.gd1214b.icu/post-images/1623120092067.png" alt="" loading="lazy"></figure>
+<h2 id="4">4</h2>
+<p>点击保存并部署即可。<br>
+<img src="https://www.gd1214b.icu/post-images/1623120198254.png" alt="" loading="lazy"></p>
+<h2 id="5">5</h2>
+<p>点击这里即可访问你搭建的反向代理网站:<br>
+<img src="https://www.gd1214b.icu/post-images/1623120299391.png" alt="" loading="lazy"><br>
+如果你在搭建过程中遇到任何问题, 欢迎在下方的评论区里留言.</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/NbdQntVCG.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/NbdQntVCG/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-06-08">2021-06-08</time>
+                  <h4 class="title white no-margin">在Heroku上部署v2ray</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/BS6mLI2Ud.jpeg');"></div>
+                 <a href="https://www.gd1214b.icu/post/BS6mLI2Ud/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-06-07">2021-06-07</time>
+                  <h4 class="title white no-margin">如何评价某媒体文章《「躺平」可耻，哪来的正义感？》？躺平真的可耻吗？</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

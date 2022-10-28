@@ -1,0 +1,931 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    如何选择适合的公共 DNS？ | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="
+本文转自:https://blog.skk.moe/post/which-public-dns-to-use/
+
+DNS 是互联网的基石之一，之前我在博客的 DNS 标签下写了不少关于权威 DNS 的文章，这次写一篇关于递归 DNS（也就..." />
+    <meta name="keywords" content="DNS,网络" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/Zr3HDqj6D.webp');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-01-07"><i class="fa fa-calendar"></i><span class="lately">10 个月前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/Zr3HDqj6D/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/Zr3HDqj6D/"> </span>
+              </a>
+              <span id="/Zr3HDqj6D/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-0 ctag-dns" aria-label="">DNS</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-1 ctag-wang-luo" aria-label="">网络</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">如何选择适合的公共 DNS？</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <blockquote>
+<p>本文转自:<a href="https://blog.skk.moe/post/which-public-dns-to-use/">https://blog.skk.moe/post/which-public-dns-to-use/</a></p>
+</blockquote>
+<p>DNS 是互联网的基石之一，之前我在博客的 DNS 标签下写了不少关于权威 DNS 的文章，这次写一篇关于递归 DNS（也就是公共 DNS）的文章，从公共 DNS 的必要性、利弊来讲一讲选择公共 DNS 需要关注的事情，以及列举一些当前主流的公共 DNS。</p>
+<h1 id="是否需要公共-dns">是否需要公共 DNS</h1>
+<p>在选择公共 DNS 之前，你需要考虑一个问题：你是否真的需要公共 DNS 么？</p>
+<p>无论我们是 PPPoE 拨号上网，还是 DHCP 连接光猫上网，互联网服务提供商（ISP）都会下发两个 DNS 给你。为了方便介绍，在下文中我称这两个 DNS 为 ISP DNS。<br>
+在 DNS 的解析过程中，用户向递归 DNS 发起请求，递归 DNS 向权威 DNS 请求解析结果，可以说递归 DNS 起到一种转发的作用。运营商的 ISP DNS 就是递归 DNS；同时一些个人或互联网服务提供商也会架设自己的递归 DNS 开放给所有人使用，称为公共 DNS。</p>
+<p>对于绝大部分人来说，运营商下发的 ISP DNS 应该是最准确的和最合适的，响应时间短、CDN 解析结果也会最准确。</p>
+<p>但是运营商不是做公益的。运营商经常使用 DNS 投毒来引导用户去使用他们的 缓存服务器，从而降低运营商带宽负载；或者劫持解析将用户引导去他们已经插入了广告的镜像站点，从而获利；或者为了国家相关法律政策要求或者运营商自己的需求屏蔽一些网站的访问（如辽宁联通曾将工信部举报站点的域名解析至 127.0.0.1）；或者自行篡改 TTL（DNS 结果缓存时间）降低 DNS 的负载，结果就是解析结果不能尽快更新；或者对于不正确的域名给你返回一个满是广告的页面，等等。即使运营商非常良心不使用 DNS 做坏事，也有可能因为设备没有及时扩容或者维护不善而导致不佳的体验。</p>
+<p>如果你为了追求更安全、更准确的 DNS 解析结果而决定继续使用公共 DNS（比如和我一样 雾），你就可以继续阅读下去了。</p>
+<h1 id="选择公共-dns-时应该考虑什么">选择公共 DNS 时应该考虑什么</h1>
+<p>公共 DNS 服务有很多，有大公司搭建的，有非盈利组织搭建的，还有个人搭建的，令人眼花缭乱。在选择的时候我们需要考虑很多方面才能选出适合我们需求的 DNS。通常在选择对于我们上网起非常重要作用的 DNS 时，我们需要考虑以下方面：</p>
+<ul>
+<li>SLA 服务在线率。DNS 是上网冲浪事时非常重要的一个环节，DNS 的可靠性直接影响到上网的体验；如果 DNS 宕机，那么很大一部分网站将无法访问</li>
+<li>响应速度 在访问一个新的网站时，DNS 对这个网站的响应速度会直接影响到当前网站的直观加载速度</li>
+<li>准确性 即使不考虑 DNS 污染和投毒，DNS 对网站访问的结果是否准确是非常重要的</li>
+<li>EDNS 简单地说，EDNS（正确的简称应该是 ECS）有助于帮助你获取最准确的 CDN 解析结果</li>
+<li>其它特性 一些个人搭建的 DNS 会提供一些去广告或者爱国上网的功能</li>
+<li>DNS 出口 通常情况下，公共 DNS 的入口和出口不同。你可以通过 dig命令 查看你的 DNS 出口 IP：</li>
+</ul>
+<pre><code class="language-shell">dig whoami.akamai.net
+</code></pre>
+<p>DNS 出口对于 CDN 非常重要。公共 DNS 的本质上就是把你的查询请求转发给上游 DNS；在没有 EDNS 的情况下，CDN 的权威 DNS 会根据公共 DNS 使用的请求 IP（也就是 DNS 出口）来判定你的运营商、你所在的位置，从而返回距离你最近的节点 IP。<br>
+所以说，理论上 ISP 给你分配的 DNS 应该是最快的、也是 CDN 友好的。本文接下来提到的 CDN 优化、CDN 友好，也是指的 DNS 出口的 IP 能否让你访问到最快的 CDN 节点。</p>
+<p>受篇幅限制，本文只介绍一些大型的、有名的公共 DNS，而一些类似服务不稳定的 1.1.9.9（由牙木运营）公共 DNS 和速度慢 还不遵守 RFC 规范 的 IBM Quad9 DNS、Level 3 DNS，或者最好不被公开的 USTC 抗污染 DNS，亦或是只有单线单点部署的 360 公共 DNS、Verisign DNS，还有实际上没什么卵用的“安全 DNS” 如诺顿 DNS 和 OneDNS，本文就不介绍了。</p>
+<h1 id="中国国内一些公共-dns-服务">中国国内一些公共 DNS 服务</h1>
+<h2 id="腾讯-dnspod">腾讯 DNSPod</h2>
+<ul>
+<li>Anycast：上海、天津、广州、香港</li>
+<li>DNS 出口：同上</li>
+<li>ECS：不完整支持</li>
+<li>TCP 查询：不支持</li>
+<li>IPV4: <code>119.29.29.29</code>, <code>119.28.28.28</code></li>
+<li>IPV6: <code>2402:4e00::</code></li>
+<li>DoH: <code>https://doh.pub/dns-query</code></li>
+<li>DoT: <code>dot.pub</code></li>
+</ul>
+<p>这是 DNSPod 建立的公共 DNS，之后 DNSPod 被腾讯收购以后由腾讯云负责运营。腾讯 DNSPod 公共 DNS 配置了 Anycast，节点囊括了腾讯云所有可用区的节点（包括海外），所以速度还是不错的，并且除了支持 ECS 以外还有一些关于 DNS 出口选择优化的加成，所以 CDN 解析结果相对准确很多。但是 SLA 却并不优秀—— 曾经 经常遭遇 DDoS 攻击导致无法解析。除此以外，由于相对出名、使用人数较多，是运营商重点劫持的对象。</p>
+<p>值得一提的是，DNSPod 的公共 DNS 是免费提供 HTTPDNS 的，Demo 可以看 :<a href="https://www.dnspod.cn/httpdns/demo">https://www.dnspod.cn/httpdns/demo</a></p>
+<h2 id="阿里云公共-dns">阿里云公共 DNS</h2>
+<ul>
+<li>Anycast：成都、深圳、杭州</li>
+<li>DNS 出口：同上</li>
+<li>ECS：部分支持（DNS JSON API 支持 edns_client_subnet）</li>
+<li>TCP 查询：不支持</li>
+<li>IPV4: <code>223.5.5.5</code> ,<code>223.6.6.6</code></li>
+<li>IPV6: <code>2400:3200::1</code>, <code>2400:3200:baba::1</code></li>
+<li>DoH: <code>https://dns.alidns.com/dns-query</code></li>
+<li>DoT: <code>dns.alidns.com</code></li>
+</ul>
+<p>阿里建立的公共 DNS。和腾讯一样，阿里公共 DNS 也是搭建在自家的云服务——阿里云上。虽然也配置了 Anycast，不过不包括海外节点，国内也就浙江阿里云和深圳阿里云两个节点， 而且华北地区都是隧道穿透回深圳，响应速度略逊于 DNSPod 提供的公共 DNS；阿里公共 DNS 不支持 ECS ，有 DNS 出口的优化 （一般都是广东出口），。关于阿里的公共 DNS 没有听说太多宕机、无法使用相关的报告。，但是倒是听说阿里公共 DNS 时常有返回 NXDOMAIN 影响使用体验。 NSDOMAIN 问题已得到一定缓解。</p>
+<h2 id="南京信风公共-dns">南京信风公共 DNS</h2>
+<ul>
+<li>Anycast：南京、济南、芝加哥</li>
+<li>DNS 出口：未测出</li>
+<li>TCP 查询：不支持</li>
+<li>DoT、DoH：不支持</li>
+<li>ECS：不支持</li>
+<li>IPV4: <code>114.114.114.114</code>, <code>114.114.115.115</code></li>
+</ul>
+<p>无疑是国内最著名的公共 DNS，但是显然不是最好的。有 Anycast，国内有南京和青岛济南两个节点、海外有芝加哥节点，响应速度不敢恭维。国内最著名的公共 DNS、使用的人很多，SLA 非常可靠，因此也是运营商重点劫持的对象。但是考虑到南京信风为运营商旁路广告劫持提供技术和硬件支持，对他们提供的公共 DNS 服务还是戴着有色眼镜来看吧。</p>
+<h2 id="cnnic-公共-dns">CNNIC 公共 DNS</h2>
+<ul>
+<li>Anycast：北京、杭州、香港</li>
+<li>DNS 出口：CNNIC 和阿里云</li>
+<li>TCP 查询：不支持</li>
+<li>DoT、DoH：不支持</li>
+<li>ECS：不支持</li>
+<li>IPV4: <code>1.2.4.8</code> ,<code>210.2.4.8</code></li>
+</ul>
+<p>CNNIC 名声并不好（CNNIC Root CA 的故事），因此有些许人相对都有些对 CNNIC 的抵触心理。CNNIC 的公共 DNS（SDNS）国内仅双点部署、Anycast 配得一塌糊涂、速度堪忧，解析结果没有 CDN 优化（DNS 出口都是阿里云）。至于撇开 CNNIC 来谈 SDNS 推不推荐使用？SLA 比 DNSPod 的公共 DNS 还惨，解析请求时不时超时。</p>
+<h2 id="百度公共-dns">百度公共 DNS</h2>
+<ul>
+<li>Anycast：北京、南京、深圳</li>
+<li>DNS 出口：同上</li>
+<li>DoT、DoH：不支持</li>
+<li>TCP 查询：不支持</li>
+<li>ECS：不支持</li>
+<li>IPV4：<code>180.76.76.76</code></li>
+<li>IPV6: <code>2400:da00::6666</code></li>
+</ul>
+<p>百度的名声现在怕是比 CNNIC 还要臭得多，他们的公共 DNS 于 2017 年上线，现在也不被太多人知道，不过还是简单提两笔：百度也为公共 DNS 也配置了 Anycast，国内是北京、南京、深圳三点，海外是单点百度香港数据中心。用的人少，也许不容易被运营商劫持，有兴趣的可以试一试看。</p>
+<h1 id="国外常用-dns-服务">国外常用 DNS 服务</h1>
+<h2 id="google-public-dns">Google Public DNS</h2>
+<ul>
+<li>Anycast：Google 的 36 个数据中心（不包括 Google Global Cache）</li>
+<li>DNS 出口：Google 全球边缘网络</li>
+<li>TCP 查询：支持</li>
+<li>DoH: <code>https://dns.google/dns-query</code> – RFC 8484 (GET and POST)<br>
+<code>https://dns.google/resolve?</code> – JSON API (GET)</li>
+<li>DoT：<code>dns.google</code></li>
+<li>ECS：支持（DNS JSON API 支持 edns_client_subnet）</li>
+<li>IPV4: <code>8.8.8.8</code> ,<code>8.8.4.4</code></li>
+<li>IPV6: <code>2001:4860:4860::8888</code> ,<code>2001:4860:4860::8844</code></li>
+<li></li>
+</ul>
+<p>最著名的公共 DNS（即使在国内也是很有名的），得益于 Google 庞大的全球网络设施（不过 Google 公共 DNS 并未使用 Google Global Cache，并且在非洲和大洋洲也没有节点），速度虽然不能说是最快的，但是至少不慢；支持 ECS、DoH、DoT，SLA 无限接近 100（Google 搜索引擎的 SLA 是 99.9999%），海外 CDN 都有针对 Google DNS 做优化，解析海外站点时强烈推荐。</p>
+<h2 id="cloudflare-dns">Cloudflare DNS</h2>
+<ul>
+<li>Anycast：Cloudflare 的 160+ 个数据中心</li>
+<li>DNS 出口：Cloudflare 的 160+ 个数据中心</li>
+<li>TCP 查询：支持</li>
+<li>DoH：<code>https://cloudflare-dns.com/dns-query</code></li>
+<li>DoT: <code>cloudflare-dns.com</code></li>
+<li>ECS：不支持（由于 ECS 需要基于用户 IP 查询，和 Cloudflare DNS 保护隐私相违背）</li>
+<li>IPV4: <code>1.0.0.1</code> ,<code>1.1.1.1</code></li>
+<li>IPV6: <code>2606:4700:4700::1111</code>, <code>2606:4700:4700::1001</code></li>
+</ul>
+<p>当 Cloudflare 从 APNIC 手上接过 1.0.0.0/24 和 1.1.1.0/24 并架设了公共 DNS 以后，得益于 Cloudflare 全球 160+ 数据中心（Cloudflare 拥有 185+ 数据中心，但其公共 DNS 并没有部署在百度云加速的节点上）、BGP Anycast 和 Cloudflare Argo 等技术，成功超越 OpenDNS 成为了世界上最快的公共 DNS（数据来自 DNSPerf），还支持 DoT、DoH 等常见加密解析方案。由于其隐私政策，Cloudflare 公共 DNS 不记录用户 IP，意味着无法使用 ECS 等技术，不过仗着节点数量众多、DNS 出口覆盖全球各大区域，也适合作为主力 DNS。</p>
+<h2 id="opendns">OpenDNS</h2>
+<ul>
+<li>Anycast：OpenDNS 的 32 个数据中心</li>
+<li>DNS 出口：未测出</li>
+<li>TCP 查询：支持</li>
+<li>DoT：不支持</li>
+<li>DoH: <code>https://doh.opendns.com/dns-query</code></li>
+<li>ECS：支持</li>
+<li>IPV4: <code>208.67.222.222</code>, <code>208.67.220.220</code></li>
+<li>IPV6: <code>2620:119:35::35</code> ,<code>2620:119:53::53</code></li>
+</ul>
+<p>被  Cisco 收购的 OpenDNS 一度是世界上最快的公共 DNS——OpenDNS 在全球拥有 30 余节点并且 Anycast 配的很棒。支持 ECS 和 SLA 达到 100，而且 OpenDNS 开放非常规端口 5353 查询和 TCP 查询，即使从国内直接请求也不容易被污染和劫持。如果你在使用 ChinaDNS 这类工具同时又没有专门为其准备一条加密隧道，那么直连 OpenDNS 的 5353 就是一个不错的替代选择。</p>
+<h2 id="freenom-world">Freenom World</h2>
+<ul>
+<li>Anycast：是</li>
+<li>DNS 出口：Freenom 的 Transit 的 IP</li>
+<li>TCP 查询：支持</li>
+<li>DoT、DoH：不支持</li>
+<li>ECS：支持</li>
+<li>IPV4: <code>80.80.80.80</code> ,<code>80.80.81.81</code></li>
+</ul>
+<p>注册过后缀如 .cf .ga .ml .gq .tk的免费域名的，对 Freenom 这个名字一定不会陌生。这家荷兰域名注册商借助自己旗下的云服务资源也运营了一家公共 DNS 服务，卖点是隐私和安全。支持 ECS，测到的 DNS 出口都是落地 IP。部署了 Anycast 但是节点不多，响应速度并不算拔尖。Freenom 的公共 DNS 的一个特点其实是电信走 163 去 HK，联通移动走 IIJ 去 JP，因此如果你所在的地区和 ISP 对国外递归 DNS 的污染并不严重的话可以尝试使用 Freenom 的 DNS。</p>
+<h2 id="dnssb">DNS.sb</h2>
+<ul>
+<li>Anycast：是</li>
+<li>DNS 出口：SB Network 的上游的 IP</li>
+<li>TCP 查询：支持</li>
+<li>DoH：<code>https://doh.sb/dns-query</code></li>
+<li>DoT: <code>dot.sb</code></li>
+<li>ECS：不支持</li>
+<li>IPV4: <code>185.222.222.222</code> <code>45.11.45.11</code></li>
+<li>IPV6: <code>2a09::</code> <code>2a11::</code></li>
+</ul>
+<p>和 Cloudflare 一样支持主流的 DoT、DoH 等加密 DNS 解析。启用了 Anycast，节点可能没有 Cloudflare 那么多，不过还是覆盖了大部分地区；此外，有 VPS 的可以试试 trace 一下 185.222.222.222、没准你会发现你的 VPS 和 dns.sb 在同一内网里。</p>
+<h1 id="公共-dns-最佳实践">公共 DNS 最佳实践</h1>
+<h2 id="综上所述如果你需要选择公共-dns-的话同时需要获得尽可能友好的-cdn-解析结果解析国内站点推荐使用阿里-dns-和腾讯-dnspod注重稳定请用前者-注重准确请用后者解析海外网站推荐主-dns-1111-或-20867222222备-dns-8888-或-8844有从国人商家购买-vps-的可以-trace-一下-185222222222-试试看">综上所述，如果你需要选择公共 DNS 的话同时需要获得尽可能友好的 CDN 解析结果，解析国内站点推荐使用阿里 DNS 和腾讯 DNSPod（注重稳定请用前者、注重准确请用后者）；解析海外网站推荐主 DNS 1.1.1.1 或 208.67.222.222，备 DNS 8.8.8.8 或 8.8.4.4；有从国人商家购买 VPS 的可以 trace 一下 185.222.222.222 试试看。</h2>
+<p>本文采用 CC BY-NC-SA 4.0 许可协议，著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br>
+作者：Sukka<br>
+来源：如何选择适合的公共 DNS？ [2020] | Sukka's Blog<br>
+链接：https://blog.skk.moe/post/which-public-dns-to-use/</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/1_lSbPqlr.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/1_lSbPqlr/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-02-14">2022-02-14</time>
+                  <h4 class="title white no-margin">深入理解GFW：路由扩散技术</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/8bMggYQLK.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/8bMggYQLK/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-12-20">2021-12-20</time>
+                  <h4 class="title white no-margin">白嫖 Hax 1核512M 纯 IPV6 VPS</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

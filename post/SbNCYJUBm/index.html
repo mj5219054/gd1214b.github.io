@@ -1,0 +1,856 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    数字证书及 CA 的扫盲介绍 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="
+本文转自:https://program-think.blogspot.com/2010/02/introduce-digital-certificate-and-ca.html
+
+先说一个通俗的例子
+普通的介绍信
+想必大伙儿都听说过介绍..." />
+    <meta name="keywords" content="CA证书,网络" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/SbNCYJUBm.png');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-05-28"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/SbNCYJUBm/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/SbNCYJUBm/"> </span>
+              </a>
+              <span id="/SbNCYJUBm/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-0 ctag-ca-zheng-shu" aria-label="">CA证书</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-1 ctag-wang-luo" aria-label="">网络</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">数字证书及 CA 的扫盲介绍</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <blockquote>
+<p>本文转自:<a href="https://program-think.blogspot.com/2010/02/introduce-digital-certificate-and-ca.html">https://program-think.blogspot.com/2010/02/introduce-digital-certificate-and-ca.html</a></p>
+</blockquote>
+<h1 id="先说一个通俗的例子">先说一个通俗的例子</h1>
+<h2 id="普通的介绍信">普通的介绍信</h2>
+<p>想必大伙儿都听说过介绍信的例子吧？假设 A 公司的张三先生要到 B 公司去拜访，但是 B 公司的所有人都不认识他，他咋办捏？常用的办法是带公司开的一张介绍信，在信中说：兹有张三先生前往贵公司办理业务，请给予接洽......云云。然后在信上敲上A公司的公章。<br>
+　　张三先生到了 B 公司后，把介绍信递给 B 公司的前台李四小姐。李小姐一看介绍信上有 A 公司的公章，而且A公司是经常和 B 公司有业务往来的，这位李小姐就相信张先生不是歹人了。<br>
+　　说到这，爱抬杠的同学会问了：万一公章是伪造的，咋办捏？在此，俺要先声明，在本例子中，先假设公章是难以伪造滴，否则俺的故事没法说下去鸟。</p>
+<h2 id="引入中介机构的介绍信">引入中介机构的介绍信</h2>
+<p>好，回到刚才的话题。如果和 B 公司有业务往来的公司很多，每个公司的公章都不同，那前台就要懂得分辨各种公章，非常滴麻烦。所以，有某个中介公司 C，发现了这个商机。C公司专门开设了一项“代理公章”的业务。<br>
+　　今后，A 公司的业务员去B公司，需要带2个介绍信：<br>
+　　介绍信1<br>
+　　含有 C 公司的公章及 A 公司的公章。并且特地注明：C 公司信任A公司。<br>
+　　介绍信2<br>
+　　仅含有 A 公司的公章，然后写上：兹有张三先生前往贵公司办理业务，请给予接洽......云云。</p>
+<p>某些不开窍的同学会问了，这样不是增加麻烦了吗？有啥好处捏？<br>
+　　主要的好处在于，对于接待公司的前台，就不需要记住各个公司的公章分别是啥样子的；他/她只要记住中介公司 C 的公章即可。当他/她拿到两份介绍信之后，先对“介绍信1”的 C 公章，验明正身；确认无误之后，再比对“介绍信1”和“介绍信2”的两个 A 公章是否一致。如果是一样的，那就可以证明“介绍信2”是可以信任的了。</p>
+<h1 id="相关专业术语的解释">相关【专业术语】的解释</h1>
+<p>费了不少口水，终于说完了一个俺自认为比较通俗的例子。如果你听到到这儿，还是想不明白这个例子在说啥，那后续的内容，就不必浪费时间听了 😦<br>
+　　下面，俺就着上述的例子，把相关的名词，作一些解释。</p>
+<h2 id="证书是啥">“证书”是啥？</h2>
+<p>“证书”洋文也叫“digital certificate”或“public key certificate”<br>
+　　它是用来证明某某东西确实是某某东西的东西（是不是像绕口令？）。通俗地说，证书就好比例子里面的公章。通过公章，可以证明该介绍信确实是对应的公司发出的。<br>
+　　理论上，人人都可以找个证书工具，自己做一个证书。那如何防止坏人自己制作证书出来骗人捏？请看后续 CA 的介绍。</p>
+<h2 id="ca是啥">“CA”是啥？</h2>
+<p>CA 是“Certificate Authority”的缩写，也叫“证书授权中心”。<br>
+　　它是负责管理和签发证书的第三方机构，就好比例子里面的中介——C 公司。一般来说，CA 必须是所有行业和所有公众都信任的、认可的。因此它必须具有足够的权威性。就好比A、B两公司都必须信任 C 公司，才会找 C 公司作为公章的中介。</p>
+<h2 id="ca-证书是啥">“CA 证书”是啥？</h2>
+<p>CA 证书，顾名思义，就是CA颁发的证书。<br>
+　　前面已经说了，人人都可以找工具制作证书。但是你一个小破孩制作出来的证书是没啥用处的。因为你【不是】权威的 CA 机关，你自己搞的证书不具有权威性。<br>
+　　这就好比上述的例子里，某个坏人自己刻了一个公章，盖到介绍信上。但是别人一看，不是【受信任】的中介公司的公章，就不予理睬。坏蛋的阴谋就不能得逞啦。<br>
+　　文本后续提及的证书，若无特殊说明，均指 CA 证书。</p>
+<h2 id="啥是证书之间的信任关系">啥是证书之间的【信任关系】？</h2>
+<p>在俺的例子里谈到，引入中介后，业务员要同时带两个介绍信。第一个介绍信包含了两个公章，并注明，公章C信任公章A。证书间的信任关系，就和这个类似。就是用一个证书来证明另一个证书是真实可信滴。</p>
+<h2 id="啥是证书的信任链">啥是证书的【信任链】？</h2>
+<p>实际上，证书之间的信任关系，是可以嵌套的。比如，C 信任 A1，A1 信任 A2，A2 信任 A3......这个叫做证书的信任链。只要你信任链上的头一个证书，那后续的证书，都是可以信任滴。</p>
+<h2 id="啥是根证书">啥是【根证书】？</h2>
+<p>“根证书”的洋文叫“root certificate”。为了说清楚根证书是咋回事，再来看个稍微复杂点的例子。<br>
+　　假设 C 证书信任 A 和 B；然后 A 信任 A1 和 A2；B 信任 B1 和 B2。则它们之间，构成如下的一个树形关系（一个倒立的树）。<br>
+<img src="https://www.gd1214b.icu/post-images/1622197859502.png" alt="" loading="lazy"></p>
+<p>处于最顶上的树根位置的那个证书，就是“根证书”。除了根证书，其它证书都要依靠上一级的证书，来证明自己。那谁来证明“根证书”可靠捏？实际上，根证书自己证明自己是可靠滴（或者换句话说，根证书是不需要被证明滴）。<br>
+　　聪明的同学此刻应该意识到了：根证书是整个证书体系安全的根本。所以，如果某个证书体系中，根证书出了问题（不再可信了），那么所有被根证书所信任的其它证书，也就不再可信了。这个后果是相当相当滴严重（简直可以说是灾难性的）。</p>
+<h1 id="证书有啥用">证书有啥用？</h1>
+<p>CA 证书的作用有很多，俺为了节省口水，只列出常用的几个。</p>
+<h2 id="验证网站是否可信针对-https">验证网站是否可信（针对 HTTPS）</h2>
+<p>通常，我们如果访问某些敏感的网页（比如用户登录的页面），其协议都会使用 HTTPS 而不是 HTTP。因为 HTTP 协议是明文的，一旦有坏人在偷窥你的网络通讯，他/她就可以看到网络通讯的内容（比如你的密码、银行帐号、等）；而 HTTPS 是加密的协议，可以保证你的传输过程中，坏蛋无法偷窥。<br>
+　　但是，千万【不要】以为，HTTPS 协议有了加密，就可高枕无忧了。俺再举一个例子来说明，光有加密是不够滴。假设有一个坏人，搞了一个假的网银的站点，然后诱骗你上这个站点。假设你又比较单纯，一不留神，就把你的帐号，口令都输入进去了。那这个坏蛋的阴谋就得逞鸟。<br>
+　　为了防止坏人这么干，HTTPS 协议除了有加密的机制，还有一套证书的机制。通过证书来确保，某个站点确实就是某个站点。<br>
+　　有了证书之后，当你的浏览器在访问某个 HTTPS 网站时，会验证该站点上的 CA 证书（类似于验证介绍信的公章）。如果浏览器发现该证书没有问题（证书被某个根证书信任、证书上绑定的域名和该网站的域名一致、证书没有过期），那么页面就直接打开；否则的话，浏览器会给出一个警告，告诉你该网站的证书存在某某问题，是否继续访问该站点？为了形象起见，下面给出 IE 和 Firefox 的抓图：<br>
+<img src="https://www.gd1214b.icu/post-images/1622197913198.png" alt="" loading="lazy"><br>
+<img src="https://www.gd1214b.icu/post-images/1622197930063.png" alt="" loading="lazy"></p>
+<p>大多数知名的网站，如果用了 HTTPS 协议，其证书都是可信的（也就不会出现上述警告）。所以，今后你如果上某个知名网站，发现浏览器跳出上述警告，你就要小心啦！</p>
+<h2 id="验证某文件是否可信是否被篡改">验证某文件是否可信（是否被篡改）</h2>
+<p>证书除了可以用来验证某个网站，还可以用来验证某个文件是否被篡改。具体是通过证书来制作文件的数字签名。制作数字签名的过程太专业，咱就不说了。后面专门告诉大家如何验证文件的数字签名。考虑到大多数人用 Windows 系统，俺就拿 Windows 的例子来说事儿。<br>
+　　比如，俺手头有一个 Firefox 的安装文件（带有数字签名）。当俺查看该文件的属性，会看到如下的界面。眼神好的同学，会注意到到上面有个“数字签名”的标签页。如果没有出现这个标签页，就说明该文件没有附带数字签名。<br>
+<img src="https://www.gd1214b.icu/post-images/1622197973986.png" alt="" loading="lazy"></p>
+<p>选择该标签页，看到如下界面。<br>
+　　顺便说一下，某些数字签名中没有包含“邮件地址”，那么这一项会显示“不可用”；同样的，某些数字签名没有包含“时间戳”，也会显示“不可用”。不要紧张，这里显示的“不可用”跟数字签名的有效性【没关系】。<br>
+<img src="https://www.gd1214b.icu/post-images/1622197996715.png" alt="" loading="lazy"></p>
+<p>一般来说，签名列表中，有且仅有一个签名。选中它，点“详细信息”按钮。跳出如下界面：<br>
+　　通常这个界面会显示一行字：“该数字签名正常”（图中红圈标出）。如果有这行字，就说明该文件从出厂到你手里，中途没有被篡改过（是原装滴、是纯洁滴）。<br>
+<img src="https://www.gd1214b.icu/post-images/1622198010703.png" alt="" loading="lazy"></p>
+<p>如果该文件被篡改过了（比如，感染了病毒、被注入木马），那么对话框会出现一个警告提示“该数字签名无效”（图中红圈标出）。界面如下：<br>
+<img src="https://www.gd1214b.icu/post-images/1622198028435.png" alt="" loading="lazy"><br>
+　　不论签名是否正常，你都可以点“查看证书”按钮。这时候，会跳出证书的对话框。如下：<br>
+<img src="https://www.gd1214b.icu/post-images/1622198041625.png" alt="" loading="lazy"><br>
+<img src="https://www.gd1214b.icu/post-images/1622198052027.png" alt="" loading="lazy"></p>
+<p>从后一个界面，可以看到俺刚才说的证书信任链。图中的信任链有3层：<br>
+第1层是根证书（Thawte Premium Server CA）<br>
+第2层是 Thawte 专门用来签名的证书<br>
+第3层是 Mozilla 自己的证书</p>
+<p>目前大多数知名的公司（或组织机构），其发布的可执行文件（比如软件安装包、驱动程序、安全补丁），都带有数字签名。你可以自己去看一下。<br>
+　　建议大伙儿在安装软件之前，都先看看是否有数字签名？如果有，就按照上述步骤验证一把。一旦数字签名是坏的，那可千万别装。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://cdn.statically.io/screenshot/program-think.blogspot.com');"></div>
+                 <a href="https://www.gd1214b.icu/post/myyQXbG7P/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-06-04">2021-06-04</time>
+                  <h4 class="title white no-margin">编程随想的博客备份</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/ee3pG-Qog.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/ee3pG-Qog/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-05-21">2021-05-21</time>
+                  <h4 class="title white no-margin">对比4种强化域名安全的协议——DNSSEC，DNSCrypt，DNS over TLS，DNS over HTTPS</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

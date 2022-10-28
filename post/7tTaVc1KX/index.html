@@ -1,0 +1,1640 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    PGP 加解密完整教程 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="一, 什么是PGP
+PGP（英语：Pretty Good Privacy，中文翻译“优良保密协议”）是一种加密程序，可为数据通信提供加密和身份验证。PGP 可用于对文本、电子邮件、文件、文件夹乃至整个磁盘分区进行签名、加密和解密，并提高电子..." />
+    <meta name="keywords" content="PGP" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/7tTaVc1KX.png');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-08-17"><i class="fa fa-calendar"></i><span class="lately">2 个月前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/7tTaVc1KX/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/7tTaVc1KX/"> </span>
+              </a>
+              <span id="/7tTaVc1KX/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-0 ctag-pgp" aria-label="">PGP</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">PGP 加解密完整教程</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h1 id="一-什么是pgp">一, 什么是PGP</h1>
+<p>PGP（英语：Pretty Good Privacy，中文翻译“优良保密协议”）是一种加密程序，可为数据通信提供加密和身份验证。PGP 可用于对文本、电子邮件、文件、文件夹乃至整个磁盘分区进行签名、加密和解密，并提高电子邮件通信的安全性。</p>
+<h1 id="二-为什么要使用pgp">二, 为什么要使用PGP</h1>
+<ol>
+<li>
+<p>能用来加密和签名信息</p>
+<p>随着互联网承载的信息甚至隐私内容逐渐增多，我们不免对信息的安全性感到担忧，尽管有SSL/TLS提供传输过程中的加密，但互联网内容提供商依旧可以看到用户所上传的文件、发送的文本，此时我们就需要找到一个简单、易用、且足够安全的加密方式，通常我在此时会推荐选择PGP。</p>
+<p>记录片<a href="https://www.imdb.com/title/tt4044364/">《第四公民》</a>中 Edward Snowden 就是使用 PGP 与女记者 Laura Poitras 之间收发邮件的，以下来自电影截图：</p>
+<figure data-type="image" tabindex="1"><img src="https://www.gd1214b.icu/post-images/1660710594827.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.gd1214b.icu/post-images/1660710605851.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>验证Git Commiter身份<br>
+Github判定提交者只是依靠Git 客户端设置的user.name 和 user.email 来判定身份，而不会去验证真实性，也就是说你可以在你的仓库提交记录中伪造任何人的提交记录。</p>
+<figure data-type="image" tabindex="3"><img src="https://www.gd1214b.icu/post-images/1660710658998.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>能用来放在博客简介里作为身份的象征, 并增加联系你的安全方式</p>
+<figure data-type="image" tabindex="4"><img src="https://www.gd1214b.icu/post-images/1660710776342.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>用来代替SSH</p>
+</li>
+</ol>
+<p>拥有了自己的pgp key之后，就可以用 gpg-agent 来代替 OpenSSH Agent来进行 SSH操作了。不过替换了之后并不会增加SSH的安全性。还可以更方便地使用Yubikey(一种硬件加密智能卡)来SSH。</p>
+<h1 id="三-为什么pgp是安全的">三, 为什么PGP是安全的</h1>
+<ol>
+<li>因为PGP使用的是非对称加密方式。</li>
+</ol>
+<p>传统的加密手段往往是使用同一个密码进行加密和解密。例如你加密时用的密码是“abc”， 则解密时也要使用“abc”才行。这样就存在一个问题，你不能够把一段加密信息发送给你的朋友。试想，如果采用这种加密方式把信息发送给你的朋友时，你的朋友必须要知道你的密码才能把你的信息解密出来。但你如何保证你的朋友是绝对可靠的呢？也就是说，如果你的朋友把你的密码告诉了别人，你的密码就不再安全了。</p>
+<p>非对称加密采用的是另一种思想。它会给你产生两个密钥，一个称为“公钥”，另一个称为“私钥”。公钥是可以公开的，你可以把它告诉别人；私钥你一定要保管好不让其他任何人知道。当某人得到你的公钥后，他就可以给你发送加密信息了。具体来说，他把他要发给你的信息用你的公钥加密后发给你，加密的信息只能用你的私钥去解密。这样，因为世界上除了你以外没有别人知道你的私钥，所以即使别人看到发送给你的加密信息他也无法解密，甚至连发送者本人也不行，因为他不知道你的私钥。简单说来，就是用公钥去加密，用对应的私钥去解密；想给谁发送加密信息，首先要得到他的公钥；并且只有拥有私钥的人才能解密信息。</p>
+<ol start="2">
+<li>
+<p>PGP使用的是用数学手段保证安全的算法</p>
+<p>以PGP最常用的RSA算法为例，对极大整数做因数分解的难度决定了 RSA 算法的可靠性。换言之，对一极大整数做因数分解越困难，RSA 算法越可靠。假如有人找到一种快速因数分解的算法的话，那么用 RSA 加密的信息的可靠性就会极度下降。但找到这样的算法的可能性是非常小的。今天只有较短的 RSA 密钥才可能被强力方式破解。到2022年为止，世界上还没有任何可靠的攻击RSA算法的方式。只要其密钥的长度足够长，用RSA加密的信息实际上是不能被破解的。</p>
+</li>
+</ol>
+<h1 id="四-pgp简易入门教程">四, PGP简易入门教程</h1>
+<p>建议你先参照后面教程，在随便一台机器上练习。 等熟练操作之后，再阅读 安全使用 生成你真正主要使用的PGP密钥对 。</p>
+<p>本节以Windows端的 GPG4win 软件为例，其他平台请看后面的 PGP完全入门教程</p>
+<ol>
+<li>前往官网下载 GPG4win ，并安装<br>
+官网：<a href="https://www.gpg4win.org/download.html">https://www.gpg4win.org/download.html</a></li>
+</ol>
+<figure data-type="image" tabindex="5"><img src="https://www.gd1214b.icu/post-images/1660711905401.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://www.gd1214b.icu/post-images/1660711972828.png" alt="" loading="lazy"></figure>
+<p>安装过程无脑点下一步即可，这里不再详细说明。</p>
+<ol start="2">
+<li>
+<p>生成密钥</p>
+<ul>
+<li>点击 新建密钥对</li>
+</ul>
+<figure data-type="image" tabindex="7"><img src="https://www.gd1214b.icu/post-images/1660712134584.png" alt="" loading="lazy"></figure>
+<ul>
+<li>输入你的个人信息，为了安全起见，一定要勾选 使用密码句保护生成的密钥</li>
+</ul>
+<figure data-type="image" tabindex="8"><img src="https://www.gd1214b.icu/post-images/1660712356943.png" alt="" loading="lazy"></figure>
+</li>
+</ol>
+<ul>
+<li>点击“高级设置”可以选择密钥类型，此处建议 ECC椭圆曲线（默认选项即可）或RSA中的 RSA2048 及以上强度，不建议选择 RSA1024 或 DSA（因为RSA1024处于被攻破的边缘）；用途建议全选，有效期建议1~3年，不建议生成无限期证书（防止暴力破解）。</li>
+</ul>
+<figure data-type="image" tabindex="9"><img src="https://www.gd1214b.icu/post-images/1660712467853.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>点击 “OK”，退回到上一页，然后再点击“新建”生成密钥。</p>
+<figure data-type="image" tabindex="10"><img src="https://www.gd1214b.icu/post-images/1660712616977.png" alt="" loading="lazy"></figure>
+<p>这里会让你设置一个用于加密私钥的密码（请确保此密码不同于任何你在在线服务使用的密码，且无被社工攻破风险）</p>
+<ul>
+<li>
+<p>若成功生成，会有如下的提示</p>
+<figure data-type="image" tabindex="11"><img src="https://www.gd1214b.icu/post-images/1660712736423.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>退回证书列表后应该类似下图所示</p>
+<figure data-type="image" tabindex="12"><img src="https://www.gd1214b.icu/post-images/1660712795777.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="加解密教程">加解密教程</h2>
+<p>本段会分别介绍 纯文本、文件和邮件 的加解密方法。</p>
+<h3 id="加密纯文本">加密纯文本</h3>
+<ul>
+<li>打开右上方的记事本</li>
+</ul>
+<figure data-type="image" tabindex="13"><img src="https://www.gd1214b.icu/post-images/1660712989563.png" alt="" loading="lazy"></figure>
+<ul>
+<li>在此处输入内容，输入完成后点击 “收件人”</li>
+</ul>
+<figure data-type="image" tabindex="14"><img src="https://www.gd1214b.icu/post-images/1660713076266.png" alt="" loading="lazy"></figure>
+<p>一般建议勾选 “签名” 和 “为我加密” ，如果需要为别人加密的话需要导入对方的公钥。<br>
+导入公钥的方式为：<br>
+左上角 “文件” - “导入” ，导入后使用第一个生成的名为“ROOT”的密钥对进行信任。</p>
+<ul>
+<li>确认无误后点击 “ 签名/加密记事本内容”</li>
+</ul>
+<figure data-type="image" tabindex="15"><img src="https://www.gd1214b.icu/post-images/1660713157175.png" alt="" loading="lazy"></figure>
+<ul>
+<li>输入私钥密码</li>
+</ul>
+<figure data-type="image" tabindex="16"><img src="https://www.gd1214b.icu/post-images/1660713243008.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>然后会显示加密后的密文，发送给别人时请全文复制<br>
+<img src="https://www.gd1214b.icu/post-images/1660713276654.png" alt="" loading="lazy"></p>
+<h3 id="解密纯文本">解密纯文本</h3>
+<p>点击 “记事本”，将PGP加密的文本复制到记事本框内，点击 “解密/验证记事本内容”即可</p>
+<h3 id="加密文件">加密文件</h3>
+<ul>
+<li>在主界面上点击 签名/加密</li>
+</ul>
+<figure data-type="image" tabindex="17"><img src="https://www.gd1214b.icu/post-images/1660715510357.png" alt="" loading="lazy"></figure>
+<ul>
+<li>
+<p>参照上一部分步骤进行加密</p>
+<figure data-type="image" tabindex="18"><img src="https://www.gd1214b.icu/post-images/1660715565916.png" alt="" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>以<code>.pgp</code>为后缀名的文件就是加密后的文件。</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="19"><img src="https://www.gd1214b.icu/post-images/1660715688425.png" alt="" loading="lazy"></figure>
+<p>加密后的文件你可以使用任何方式安全的发送给对方。</p>
+<h3 id="解密文件">解密文件</h3>
+<ul>
+<li>
+<p>打开加密后的文件，会让你输入私钥密码</p>
+<figure data-type="image" tabindex="20"><img src="https://www.gd1214b.icu/post-images/1660715739675.png" alt="" loading="lazy"></figure>
+</li>
+<li>
+<p>输入完之后会有如下提示：</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="21"><img src="https://www.gd1214b.icu/post-images/1660715778227.png" alt="" loading="lazy"></figure>
+<p>点击 <code>Save All</code> 保存解密后的文件.</p>
+<h1 id="五-pgp完全入门教程">五, PGP完全入门教程</h1>
+<h2 id="安装">安装</h2>
+<ul>
+<li>🍎Mac OS:</li>
+</ul>
+<pre><code class="language-bash">brew install gpg
+</code></pre>
+<ul>
+<li>
+<p>🐧Linux:<br>
+各发行版一般都会默认安装GnuPG。</p>
+</li>
+<li>
+<p>🪟Windows:<br>
+下载地址: <a href="https://www.gnupg.org/download/">https://www.gnupg.org/download/</a></p>
+</li>
+</ul>
+<p>🌐OpenBSD:</p>
+<pre><code class="language-bash">pkg_add gnupg
+</code></pre>
+<h2 id="生成主密钥">生成主密钥</h2>
+<p>先打开终端, 以下操作需在终端中进行</p>
+<pre><code class="language-bash"># step 0 
+gpg --full-gen-key
+# 这里不推荐使用的 `gpg --gen-key`
+
+
+# step 1
+gpg (GnuPG) 2.2.20; Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+  (14) Existing key from card
+Your selection?
+#  默认就可以
+
+
+# step 2
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (3072)
+
+# 此处输入你希望的密钥长度， RSA的不应低于2048 bits，当然输入的数字越大越安全，相应的，加解密的速度也会更慢
+
+# step 3
+Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0)  2y
+
+# 默认可以选0 ，即永不过期， 这里我选了2y，  因为到期之前随时可以更改你的过期时间，以确保你对此密钥仍拥有控制权
+
+# step 4
+Key expires at Wed 11 Jan 2023 05:50:53 PM CST
+Is this correct? (y/N) y
+
+#确定
+
+# step 5
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name:  linus   # 这里名字可以是网名，可以是任意名字，如果你注重隐私就不要输入自己真名了 
+Email address: linus@outlook.com  
+Comment:     # 备注可以留空
+
+# 注意了： 这里的邮箱， 如果你不打算使用PGP为你的Git记录认证， 这里其实是可以随便输入的，不需要是你的邮箱， 甚至不需要是一个真实存在的邮箱，只要接受你信息的人知道就行。隐私泄漏问题很严重，你一旦设置了，并且发布到公钥服务器，就永远删不掉了 😅
+
+
+# step 6
+You selected this USER-ID:
+    &quot;linus &lt;linust@outlook.com&gt;&quot;
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? o
+
+# 确认无误后输入 o
+
+# step 7
+┌──────────────────────────────────────────────────────┐
+│ Please enter the passphrase to                       											  │
+│ protect your new key                                                           │ 
+│                                                      │
+│ Passphrase: ________________________________________ 														 │
+│                                                      │
+│       &lt;OK&gt;                              &lt;Cancel&gt;     │
+└──────────────────────────────────────────────────────┘
+
+# 输入一个复杂的密码 并确认
+
+# step 8
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+
+# 随机移动你的鼠标，越随机你的密钥越安全
+
+# step 9 大功告成
+                 
+gpg: key 99F583599B7E31F1 marked as ultimately trusted
+gpg: revocation certificate stored as '/root/.gnupg/openpgp-revocs.d/705358AB85366CAB05C0220F99F583599B7E31F1.rev'
+public and secret key created and signed.
+
+pub   rsa3072 2021-01-11 [SC]
+      705358AB85366CAB05C0220F99F583599B7E31F1			 # 你的 key id
+uid                      linus &lt;linus@outlook.com&gt;
+sub   rsa3072 2021-01-11 [E] 		 # 这个是自动生成的用于加密的子密钥，E代表Encrypt 加密
+</code></pre>
+<p>以下是常见缩写释义：</p>
+<pre><code>A    =&gt;    Authentication
+C    =&gt;    Certify
+E    =&gt;    Encrypt
+S    =&gt;    Sign
+?    =&gt;    Unknown capability
+sec  =&gt;    Secret Key
+ssb  =&gt;    Secret SuBkey
+pub  =&gt;    Public Key
+sub  =&gt;    Public Subkey
+</code></pre>
+<h2 id="生成子密钥">生成子密钥</h2>
+<p>你日常使用应该使用子密钥，主密钥除了签发新的子密钥不要使用。</p>
+<p>建议为不同环境，不同用途都单独生成子密钥，互不干扰。</p>
+<pre><code class="language-bash"># step 0
+gpg --edit-key linus # 或者key id  
+
+# step 1  进入gpg交互界面	
+gpg (GnuPG) 2.2.20; Copyright (C) 2020 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa3072/99F583599B7E31F1
+     created: 2021-01-11  expires: never       usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa3072/6FE9C71CFED44076
+     created: 2021-01-11  expires: never       usage: E
+[ultimate] (1). linus &lt;linus@outlook.com&gt;C
+
+# step 2  
+gpg&gt;   addkey
+Please select what kind of key you want:
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (5) Elgamal (encrypt only)
+   (6) RSA (encrypt only)
+  (14) Existing key from card
+Your selection? 4   
+# 根据你的用途选择， 这里生成一个只用于签名的子密钥（sign only）
+
+#  后面的选择和主密钥生成的大同小异，按提示操作即可
+
+# 生成完毕后
+sec  rsa3072/99F583599B7E31F1
+     created: 2021-01-11  expires: never       usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa3072/6FE9C71CFED44076
+     created: 2021-01-11  expires: never       usage: E
+ssb  rsa3072/FDB960B857D397F6
+     created: 2021-01-11  expires: never       usage: S
+[ultimate] (1). linus &lt;linus@outlook.com&gt;
+
+#  last step
+gpg&gt;  save  #  记得save， 直接退出的话什么也没有
+</code></pre>
+<h2 id="生成撤销证书">生成撤销证书</h2>
+<p>假如你忘了主密钥的密码，或者丢失了对主密钥的控制权（丢失，被夺取），如果没有撤销凭证的话， 除了一个个通知你的朋友们没有任何办法 证明你不再使用这个密钥，这简直是灾难。</p>
+<pre><code class="language-bash"># step 0
+gpg --gen-revoke -ao   revoke.pgp   linus # uid 或者key id
+
+# step 1
+sec  rsa3072/99F583599B7E31F1 2021-01-11 linus &lt;linus@outlook.com&gt;
+
+Create a revocation certificate for this key? (y/N) y
+Please select the reason for the revocation:
+  0 = No reason specified
+  1 = Key has been compromised
+  2 = Key is superseded
+  3 = Key is no longer used
+  Q = Cancel
+(Probably you want to select 1 here) 3
+
+# 按提示走完流程就可以
+</code></pre>
+<p>生成的revoke.pgp就是撤销凭证， 有了这个撤销凭证，你可以在没有密码的情况下使一个公钥失效，所以一定要妥善保存，而且最好比主密钥多一份。</p>
+<h2 id="备份">备份</h2>
+<pre><code class="language-bash">gpg -ao public-key.txt --export linus   # 导出公钥
+
+# 注意这里最后 要带上“!”， 不然会导出全部子密钥， 感谢@Dallas Lu 指正 
+gpg  -ao secret-key --export-secret-key 99F583599B7E31F1! 			# 导出主私钥，建议secret-key 替换为你的加密设备备份文件的路径，直接导入到设备中
+gpg  -ao sign-subkey --export-secret-subkeys FDB960B857D397F6!   	 #导出有[S]标识、签名用子私钥
+gpg  -ao encrypt-subkey --export-secret-subkeys 6FE9C71CFED44076!    #导出有[E]标识、加密用子私钥 ,这里的ID替换为你的子密钥ID
+
+
+# 别忘了同时将你刚刚生成的撤销凭证也备份起来
+</code></pre>
+<h2 id="删除">删除</h2>
+<p>备份完后，要将本机的密钥清除干净</p>
+<pre><code class="language-bash">gpg --delete-secret-keys linus  # 删除私钥，  UID 也可以替换成子密钥ID, 主密钥Key ID
+gpg --delete-keys linus		 # 删除公钥
+
+# 如果想全部删除推荐直接删文件夹,即删除 $HOME/.gnupg
+</code></pre>
+<p>由于gpg生成的私钥会在你的磁盘上使用明文储存，所以一个单独的 rm 或者右键删除 并不能彻底删除掉，可以使用 wipe 工具。如果你使用的是 SSD 且没有 启用全盘加密，是没法彻底删除的。</p>
+<p>特别推荐使用 <a href="https://tails.boum.org/">Tails</a> 发行版来生成主要使用的密钥， 系统自带pgp和paper key 等工具, 可以确保全程断网操作, 同时此系统重启会擦除所有内容，还免去了擦除密钥的麻烦。</p>
+<h2 id="导入">导入</h2>
+<pre><code class="language-bash">#从文件导入
+gpg --import [密钥文件]   # 刚刚备份的子密钥文件， 或者其他人的公钥
+
+# 暂不推荐从公钥服务器导入，具体用法会在公钥服务器一章介绍
+# 这里先推荐 练习导入自己的子密钥
+
+
+ # 输出
+sec#   rsa3072/0x99F583599B7E31F1 2021-01-11 [SC]		 # sec 后面带有 # 号说明主密钥未导入，是安全的
+      Key fingerprint = 7053 58AB 8536 6CAB 05C0  220F 99F5 8359 9B7E 31F1 #指纹信息
+uid                   [unknown] linus &lt;linus@outlook.com&gt;
+ssb #    rsa3072/0x6FE9C71CFED44076 2021-01-11 [E]           # 带有 # 号说明该子密钥已导入
+</code></pre>
+<h2 id="签名和验证">签名和验证</h2>
+<p>这里只讲 如何签名和验证 他人文件， 为他人公钥签名和验证 放在公钥的发布和交换一章讲解。</p>
+<pre><code class="language-bash"># 第一种方式，生成二进制签名文件
+
+gpg --sign input.txt  # 当然也可以加上--output参数
+
+# 第二种方式，生成ASCII格式签名
+gpg --clearsign input.txt
+
+# 第三种，签名和原文本分开（前两种的签名文件中包含了所有原文本，所以体积会比较大）
+gpg --armor --detach-sign input.txt  #不加armor生成会二进制
+
+
+
+#  验证签名文件
+gpg --verify demo.txt.asc demo.txt
+</code></pre>
+<h2 id="加解密">加解密</h2>
+<pre><code class="language-bash"># 加密：
+
+# recipient指定接收者的公钥ID
+gpg --recipient {keyid/uid} --output encrypt.txt --encrypt input.txt
+# 也可以按喜好加上--armor选项等
+
+# 我更喜欢用 
+gpg  -se  -o  encrypt.txt  -r  {keyid/uid}   input.txt  
+# s代表签名  e代表加密
+# o是 将结果 输出到文件  encrypt.txt
+# r后面跟 接收者的 uid或者 key id， 接收者的公钥必须已经导入过
+# input.txt 是你要加密的文件
+
+
+# 解密：
+gpg --decrypt encrypt.txt --output decrypt.txt
+# 也可以
+gpg -d encrypt.txt   # 输出到终端 直接查看
+</code></pre>
+<h2 id="发布-与-交换">发布 与 交换</h2>
+<p>公钥的交换是所有非对称加密算法的脆弱点，所谓现代的使用方式，主要体现在密钥的交换和发布上面， 之后会单独来探讨。</p>
+<p>阅读并理解本系列之前请不要发布你的公钥到公钥服务器。</p>
+<h2 id="撤销">撤销</h2>
+<p>由于PGP没有提供任何将吊销信息通知其他用户的方式，他不能保证没人会使用撤销了的已经变得不安全的密钥。</p>
+<p>你丢失的私钥仍然可以被攻击者使用，并用来解密那些没有更新你的公钥的人发送的加密消息。 revoke 子密钥并更新公钥后，若有人用老的公钥加密信息，虽然你仍然可以解密，但是攻击者同样可以，这时候是极度不安全的。</p>
+<p>例如：如果A的私人密钥被盗，她将发出一个密钥撤销证书（key revocation certificate），但是由于这个密钥的分发是非正式的且将费大量的时间和口舌，故不能保证密钥环中每一个有A公开密钥的用户都能收到。由于A必须用她的私人密钥签名撤消的证书，所以如果A同时丢失了私人密钥，她就不能撤销密钥。密钥的撤销问题被认为是整个系统最薄弱的环节。</p>
+<p>所以在你将密钥撤销后，请将撤销后的公钥发布到你一贯公布公钥的地方， 并尽可能通知其他人。</p>
+<h3 id="撤销主密钥">撤销主密钥</h3>
+<pre><code class="language-bash">gpg --import gpg-linus.asc                                               # 在一台新的电脑上导入你的公钥
+gpg: key 99F583599B7E31F1: &quot;linus &lt;linus@outlook.com&gt;&quot; not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+
+
+
+gpg --import revoke                                                       # 导入你备份的撤销凭证，直接会导致密钥不可用
+
+
+
+gpg: key 99F583599B7E31F1: &quot;linus &lt;linus@outlook.com&gt;&quot; revocation certificate imported
+gpg: Total number processed: 1
+gpg:    new key revocations: 1
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   1  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: depth: 1  valid:   1  signed:   0  trust: 1-, 0q, 0n, 0m, 0f, 0u
+gpg: next trustdb check due at 2021-09-29
+
+
+
+gpg -k		# 查看已经撤销的密钥
+
+
+pub   rsa3072 2021-01-11 [SC] [revoked: 2021-01-11]
+      705358AB85366CAB05C0220F99F583599B7E31F1
+uid           [ revoked] linus &lt;linus@outlook.com&gt;
+</code></pre>
+<h3 id="撤销子密钥">撤销子密钥</h3>
+<pre><code class="language-bash">gpg --edit-key linus  
+  
+gpg &gt;   list         # 列出你所有的子密钥
+gpg &gt;   key  {n}  # 选择你要销毁的子密钥的 序号
+gpg &gt;   revkey
+gpg &gt;   save      # 退出前一定要save, 不然所有更改不会生效
+</code></pre>
+<h1 id="六-安全使用和备份">六, 安全使用和备份</h1>
+<h2 id="准备">准备</h2>
+<p>为了安全性，建议在一台断网的Linux或者BSD系统上生成你的密钥对。</p>
+<p>特别推荐使用 <a href="https://tails.boum.org/">Tails</a>发行版，系统自带gpg和paperkey 等工具, 可以确保全程断网操作, 同时此系统重启会擦除所有内容，还免去了擦除密钥的麻烦。 需要工具：</p>
+<ul>
+<li>一台电脑</li>
+<li>一个装有Tails系统的U盘0 , 使用它生成密钥</li>
+<li>一个已经全盘加密的U盘/TF 卡 1（推荐），或者智能卡 , 用来存储主密钥</li>
+<li>一个智能卡 (推荐) ，或者已经全盘加密的U盘/TF 卡 2, 用来存放子密钥，日常使用</li>
+</ul>
+<h2 id="备份策略">备份策略</h2>
+<ul>
+<li>主密钥只保留一份，备份在一个全盘加密的U盘中，然后放在一个安全的地方。</li>
+<li>子密钥可以复制多份，通过U盘导入各个设备，专密专用， 日常使用推荐用智能卡（比如Yubikey），还能免去每次输密码的麻烦, 而且还能增加安全性</li>
+<li>撤销凭证可以和主密钥放在一起备份一份， 另外单独备份一份（这样丢失密钥，起码还可以撤销）</li>
+</ul>
+<h3 id="备份介质">备份介质</h3>
+<h4 id="智能卡">智能卡</h4>
+<p>主密钥不建议导入智能卡设备，因为智能卡的使用场景是随身携带，随时取用，虽然智能卡中的密钥无法导出，但是随身携带增加了丢失的风险，主密钥一旦丢失，将会非常麻烦。</p>
+<p>如果是土豪，当然导入智能卡中更好，因为智能卡中密钥无法导出，只不过这个智能卡不能再随身携带，而同样应该在一个安全的地方， 不到万不得已不再取用， 不过这样有些浪费，也是我不推荐的理由。</p>
+<h4 id="网盘存储">网盘存储</h4>
+<p>你可以将主密钥加密后上传到网盘或其他线上服务。</p>
+<h4 id="paperkey纸密钥">PaperKey(纸密钥)</h4>
+<p>纸密钥是很经典的一种备份方式，就是将密钥写/打印在纸上，不过若你想将这一眼望不到头的私钥抄下来， 或者打印下来，将来需要恢复的时候再一个个输入进电脑，显然不现实。</p>
+<p>Linux下有一个工具叫做paperkey， 可以用来删除私钥中冗余的公钥信息，极大减少私钥长度，然后可以将精简过的私钥(以base 16格式)打印出来，或者将原始格式转换成二维码打印出来。</p>
+<p>注意：</p>
+<ul>
+<li>既然决定用PaperKey， 还是不要使用网络打印机了，</li>
+<li>paperkey这个工具在Tails新版中是默认软件</li>
+<li>paperkey 手册中推荐 恢复私钥时使用OCR扫描， 而大部分OCR服务都要联网， 请注意这点。</li>
+</ul>
+<h4 id="其他">其他</h4>
+<p>密钥只是一段信息，理论上可以放在其他任何可以存储信息的介质中，例如光盘，隐写在图片中， 写入IC卡 ， 纹身，， X光片 ，背下来 等等，尽情发挥你的想象力。</p>
+<h2 id="安全使用">安全使用</h2>
+<p>请在你信任的电脑上使用子密钥，主密钥不到万不得已不要拿出来用，如果你将子密钥放在智能卡中使用，可以忽略这部分。</p>
+<p>子密钥可以放在移动存储设备上直接使用，而无需拷贝/导入到电脑使用， 使用方法：</p>
+<pre><code class="language-bash">gpg --homedir [你的存储设备的路径]
+</code></pre>
+<h1 id="七-pgp-公钥的发布与交换">七, PGP 公钥的发布与交换</h1>
+<p>讨论公钥安全交换的中文文章比较少，而这一环是整个加密体系的重中之重。 大部分的PGP教程最后一步就是让小白用户将公钥上传，这是非常过时，且不负责任的，所以这里来详细介绍下PGP 公钥的发布与交换。</p>
+<h2 id="原则">原则</h2>
+<p>首先明确一点： 上传公钥到公钥服务器不是<strong>必要的</strong>，甚至是<strong>危险的</strong>。</p>
+<p>如果你是新手，请<strong>不要</strong>发布你的公钥到公钥服务器。</p>
+<h2 id="引子">引子</h2>
+<p>通过前文，你已经熟悉了gpg的本地使用， 并且生成了自己的PGP 密钥对。</p>
+<p>想象一下， 如果你生活在1980年代， 想和远方的朋友加密通信，需要先交换彼此的公钥，又没有一个统一的可信的认证机构，这时会有什么问题？</p>
+<p>当面交换吗？当然是个办法，但是相信你不会想要将下列</p>
+<pre><code>-----BEGIN PGP PUBLIC KEY BLOCK-----
+mQGNBGGzBfgBDADCID2AxdFxesbiKwwvuuItzvvDz8KOj1K2k0xFEcF13sIw+/6J
+6bBWNO0UZbQYI0kwUfqI13Ytn5jvSz4vryAssIQgyct9lSqlaMThg67Msbz07SeO
+s2CKDxxT6XOUztcKw4Efg0EuFP3m66RP7dhJfa2SHOqABR+vwboXgjOdpM2ikfzf
+KJstiNAKtG7d3cy72VwjBFxaZn1c41b6t5YVw1+gI1lpGMOsAWWXXIXW8HbdJnx/
+1joGxNWA6TOcWDE0c6pfK38HcCY845fT4R4A4Aj1/O3cIrKqv/G2rFXIcRJMwZxW
+uJNlC8MdRAi25XjOGS/VFKouOv4nqQoo/2WJqBJmvTz1tWA2dc2bE1910u7v+IVm
+/q98hUzBibthUo+c9Yqns2hc23sX83R3VU514MJvq0v45Jd4yon3/fFBUPX9KoJt
+sUTRkUGFA82JIiDAgxRakJ5g+6+BZ9r0zgSW7K9PlJiA5ZK2k4aUxuwZ4YDaxy4K
+9wMTs6lcbLXg4jsAEQEAAbQVTU9YQSA8cHNpcnRAbW94YS5jb20+iQHUBBMBCAA+
+FiEEa9YS1gMVTZjtjzsnZgIzRZz1mAIFAmGzBfgCGwMFCQPCMcgFCwkIBwIGFQoJ
+CAsCBBYCAwECHgECF4AACgkQZgIzRZz1mAItZgwAqY6moCSf7rFiPLZE1OiaeuaO
+m+otjYGMSj8iABEn1uthWTDrLlE2WDbaOKM5w1xHe8cpZajEv1jfB0whmyryLUGx
+hjVOp2BpEwWxRWsuN3uWSvVUmQiESjzwNqcca4d+iaYRXfnzGUgUVTXbeGlZHjHJ
+XbXBUS3zYepSnVGynWx2GDi8bll+irPD3I7UAaVamVVxA6/OWkmf+3Et5ZVpP6Xc
+L3PrX/CN1BaH/0ifHmsOPvKcL/u3Vd+GqaxavenBoXc+RJTb+CtkMPaqgghIZjOl
+QtQbfbk7ba6D1WpSUdEpLPLgqAQ1q9m55X1PYYGvu8ySzoUCe9D77Mf8u93oyGOD
+gsJH8kX9yKDYo3aVLciLFDsvwJ5Qr4/bATSKNrWVo1fon9Rly5CrQpF6gMF62LVH
+SpOy4+BUDGw+J52jVo+3fl5fIFGkURIVIIAJJhL6aCAxsauXVsqXxjPatiR5+/Q7
+dMShdoMJ+xHJ2zgkN2C0loX6VCl+HKbNong16WASuQGNBGGzBfgBDADE7YzEqzbt
+99Epe2FIoUC4Z4iIr2TOw44NkWvv0FtBsxECX9I69/Krj+bGny2nDjerRTyxWFIU
+yMgHucgCXKasQZdJV9qmY1mUgjahfSVBTwR2WFKPhWJVKahjaegjvRI0k/mHHoWu
+gu+HyZlHl0DuMj+uvmcU1uBqMEZenWh2B7/kqbe/Ldiiee2HO9Nncs1TuL5IDvUH
+2SHdjb/oT40mVbX3uaeeev/d3HukRUUwzb1zcpWdtQ82HsPZ7kHEltAFD1IhY083
+8g2x4rNIGrlPbOADGBoCDwwNIIO7sEEGT37kphzn92EFb9Q3cs8Wweqo6tsy/bjG
+vAP20qZ8syf6L5LPmL1KvPH+Rc2/Yr33gkjuAqmFxACrIgI6n4x1mYt2U7VChob/
+99i2oDeJS3FXb2/zPpy6fEXlXPzk0LUmtqfPoDvQRj7b53XoRBlFV7hEmXhUw0Au
+JhGudMQDJPXW/XPBzGyCNuTV/34KLszyhi4Lu38ArV61WdIm2qdqsycAEQEAAYkB
+vAQYAQgAJhYhBGvWEtYDFU2Y7Y87J2YCM0Wc9ZgCBQJhswX4AhsMBQkDwjHIAAoJ
+EGYCM0Wc9ZgC198MAJ1C715T1TSEaD6F8ENRuj0wXQ1Nu+EG9+68XplbKASM+YNJ
+9LNe7IiiB0SAR13DOT6lM3urifXtnEcQ/ZQTISkFzrr+PytkNd62kWmMU226enq+
+/r70AqfghazPdueb3FXjNQjiej6rfISeho4rIonqItvBVhR6Ka+y+pP3zBlhimPj
+OEr55d7ewb9Z+PCNng8Td0njAKJzZmtybEXcTwCIxES6DhlH8dPwkSi1WcYCtquW
+oUcim1FlzRF0sNFnbhfhjbdHMJLPa0kcrRyaxSYGkQ+dmrfXfXPAOMSGz5NiV6mg
+JLUSNMMoHcMmAVYbIQlvdCDV56IBh8R/3NW+iNIN/gyYH+uEeRm1Fs5rEtKmtNt1
+KCfHkF8jlwfk1A6z+LQ80YOfQ12i+XlGa6c1w11xwXYiKMC15ErY3i+cBAlHHiRN
++amOTCb524EgrgcOOD6r4SKEr0wdwRXEELL19/rNKvBI+TafNoVGkNyoEg9+YSX4
+8/toTD7B4wF0PjVeKw==
+=QjYH
+-----END PGP PUBLIC KEY BLOCK-----
+</code></pre>
+<p>这么长的公钥抄写到纸上，然后开车送到朋友那里，再让朋友照着这个输入他的电脑。如果中间有变动，需要重复以上过程n次。</p>
+<p>那么还有其他办法吗？</p>
+<p>那个时代还没有line、wechat这类即时通讯软件，而邮件提供商默认是不可靠的，不然也不会有PGP的诞生。 并且彼时https还未出现，用邮件交换PGP交换公钥显然不太安全。</p>
+<p>你们双方都需要便捷地交换公玥， 并且确认彼此得到的公钥确实是未经篡改过的，真实有效的，就成了一个难题，这样，公钥服务器也就呼之欲出了。</p>
+<h2 id="公钥服务器-keyserver">公钥服务器 (KeyServer)</h2>
+<p>公钥服务器使得人们只需要交换他们短短的key id 或者user id就可以方便地从公钥服务器下载公钥。</p>
+<h3 id="历史与设计初衷">历史与设计初衷</h3>
+<p>第一个KeyServer 叫做 HKP（ web-based OpenPGP HTTP Keyserver Protocol） Keyserver ， 诞生在上世纪90年代，是Marc Horowitz在麻省理工学习时为了他的论文而搭建的。在此之前， 虽然不是那么安全， 但是大部分人依靠电子邮件来交换公钥。</p>
+<p>虽然服务器有了， 但开发者们担心政府会试图强迫钥匙服务器运营商用政府选择的各种证书来替换证书。</p>
+<p>所以他们做出了一个决定：公钥服务器永远不会删除信息。公钥服务器可以为现有的证书添加信息（比如可以revoke/sign或者调整expire时间），但永远永远永远不会删除证书或证书的信息。</p>
+<p>为了达到这个目标，他们开始运行一个分布式的国际公钥服务器网络，这就是现在的KeyServer。世界各地的公钥服务器会定期相互通信，同步，比较目录。如果政府强迫公钥服务器运营商删除或修改证书，那么在比较步骤中就会被发现。残缺的公钥服务器会用完好钥匙服务器目录中的内容更新自己。</p>
+<p>任何东西都不会被删除，听起来很美好，也是解决政府审查问题的一个简单而有效的办法，可是正是这个原则后来给KeyServer带来了无穷无尽的问题。</p>
+<h3 id="信任网络-web-of-trust">信任网络 (Web of Trust)</h3>
+<p>好了，现在我们有了一个可以方便地上传和下载公钥的地方， 这样是不是就万事大吉了呢？</p>
+<p>对于KeyServer 来说，任何人都可以上传公钥并声称自己是Linus, 是Zuckerberg,或是任何其他人，而KeyServer并不会去验证你是否是你所声称的人（因为KeyServer本来就没有一个中心化的运营者）。</p>
+<p>如果你有一些密码学的基础， 那么就会知道， PGP协议依靠的非对称加密算法， 最脆弱的点就在于公钥的交换这一步。公钥交换时最容易收到中间人攻击，你一定要确定你接收到的公钥确实是你想交流的人的，由此TSL引入了CA证书认证体系，由一个可信的权威第三方来认证并颁发证书来解决身份的认证问题。</p>
+<p>“信任一个权威的第三方” 对于最初的极具有hack精神的开发者们来说， 显然是无法接受的。</p>
+<p>当然，你可以说下载公钥后，通过电话等手段验证下公钥的指纹（fingerprint），就可以确认正确与否。 但是想象一下， 如果你在公钥服务器找到一个声称自己Linus Torvalds 的人, 你并没有他的其他联系方式，将永远无法确定这个公钥持有者到底是谁、这个公钥可信与否 ， 这样无疑是低效的，并且使整个系统沦为了熟人之间的小网络。</p>
+<p>要知道，根据六度分隔理论（Six Degrees of Separation），世界上任何互不相识的两人，平均通过六个人就可以产生联系。 那么可以不可以这么思考， 假设我和小A见过面并检查过他的公钥，因而知道小A的公钥的的确确属于他本人，我选择信任小A。而小A同样验证了小B的证书并为小B的证书签名背书——小A的证书的持有人在此证明该证书是真实属于小B。那么我无须见亲见小B本人，也可以通过小A的背书而接受小B的证书。</p>
+<p>如此循环下去，就形成了一张网， 这就是信任网络。</p>
+<h3 id="主流公钥服务器">主流公钥服务器</h3>
+<ol>
+<li><a href="">SKS Keyserver Pool</a><br>
+当今世界最大的Key Server 池， 符合它的标准的世界各地的公钥服务器会定期相互通信，同步，比较目录，数据完全开放下载。 现在一般说起KeyServer说的就是这个。</li>
+</ol>
+<p>KeyServer虽然一直是PGP的重要基础设置 ,但SKS Keyserver Pool 其实目前只有不到20台服务器，GnuPG默认用的服务器是其中的 HKPS pool,只有四台服务器。</p>
+<ol start="2">
+<li>
+<p>Base Modern Software KeyServer<br>
+有一些KeyServer 没有用SKS的软件，运行的是更下现代和稳定的软件，比较有代表性的是 <a href="http://keyserver.ubuntu.com/">Ubuntu keyserver</a>, 基于Hockeypuck ， 这些服务器仍然会和SKS pool保持同步。</p>
+</li>
+<li>
+<p>独立KeyServer<br>
+这些服务器不与SKS pool同步数据，由中心化的运营者运行， 会对公钥上传者做一定的认证， 并且支持删除自己的公钥。</p>
+</li>
+</ol>
+<p>比较有代表性的有， &lt;keys.openpgp.org&gt; ，<a href="https://keybase.io/">KeyBase</a>等等。</p>
+<h3 id="在gpg中使用">在gpg中使用</h3>
+<h4 id="发布">发布</h4>
+<pre><code>gpg   --send-keys  {keyid/uid}
+</code></pre>
+<h4 id="下载">下载</h4>
+<pre><code>gpg --recv-keys {keyid/uid}
+</code></pre>
+<p>此时有可能报错</p>
+<pre><code>gpg: &quot;xxxxxr&quot; not a key ID: skipping
+</code></pre>
+<p>这时换个KeyServer就行：</p>
+<pre><code>gpg  --keyserver hkps://keyserver.ubuntu.com --recv-keys {keyid/uid}
+</code></pre>
+<h4 id="签名和验证他人的公钥">签名和验证他人的公钥</h4>
+<p>验证公钥真实性 依靠多渠道确认的 公钥指纹。</p>
+<p>一般来说为别人的公钥签名后，需要发还给他，或者发到公钥服务器(最好经过本人同意)。</p>
+<pre><code>gpg --sign-key  {keyid/uid}   # 为已经导入的 他人钥签名， 你为他签名，意味着你将为他的身份真实性背书，请谨慎操作 
+</code></pre>
+<h2 id="keyserver的安全风险和争议">KeyServer的安全风险和争议</h2>
+<p>在20世纪90年代初，开发者们怀着对技术的信心和人性的希望，期望创建一个友善 、纯粹、没有审查的净土， 在当时背景下，KeyServer不能删除任何已上传的东西，听起来是美好的，设计似乎是合理的。</p>
+<p>但是事实是，网络匿名环境中充满了不那么友好的， 甚至是恶意的使用者，在当今看来 ，KeyServer这个系统并不健壮，问题重重，许多问题已经被发现十多年，而且无望解决。</p>
+<h3 id="滥用">滥用</h3>
+<p>按照官方推荐， UID （User ID） 是用来存储用户信息的，应该在里面填上你的名字和邮箱，一个 GPG 帐号下可以有若干个 UID。</p>
+<p>而其实这个UID是没有任何强制限制的，也就是说你可以在UID中放入任何东西，可以是小说片段，可以是磁力链接,可是以编码后的图像、音频或视频…… :</p>
+<figure data-type="image" tabindex="22"><img src="https://www.gd1214b.icu/post-images/1660735034538.png" alt="" loading="lazy"></figure>
+<p>当上传到KeyServer时, UID限制了2k的字符 . 以至于有人写了个用KeyServer存文件的项目<a href="https://github.com/yakamok/keyserver-fs">keyserver-fs</a>。</p>
+<p>再次想象一下，你往网盘传了一个文件，共享给其他人，全世界的人都可以往这个网盘文件中添加文件，而且永远无法删除，情况会变得有多糟糕。</p>
+<h3 id="脆弱的keyid">脆弱的KeyID</h3>
+<p>博主见过一些生成 PGP“靓号”的工具，就是指定你喜欢的ID规则，工具会暴力生成PGP密钥， 从中返回给你想要的密钥。</p>
+<p>由此很容易想到，若攻击者知道了目标的KeyID， 完全可以通过工具来生成完全一样的KeyID（这就是碰撞）, 并上传到KeyServer，来冒充目标。</p>
+<p>而伪造一个KeyID有多容易呢，有研究人员借助<a href="https://github.com/lachesis/scallion">scallion</a>程序，使用了普通的GPU（Nvidia GeForce GTX）进行碰撞，花了4秒的时间就生成了一个指定的32 bit的 KeyID。</p>
+<p>官方推荐公布自己的KeyID时，最少应该公布64 bit（也就是长16位16进制数啦 ），但是研究表明64 bit的KeyID也是可以 被碰撞的。</p>
+<h3 id="投毒">投毒</h3>
+<p>公钥服务器任何人都可以上传公钥，甚至你可以上传别人的公钥，比如你可以将自己签名过的别人的公钥，再次上传到KeyServer。</p>
+<h3 id="签名dos">签名Dos</h3>
+<p>在PGP的证书认证体系的设计中， 当客户端收到一份未知证书时，它应当从公钥服务器拉取所有为这张证书签过名的人的证书，逐层上溯，看看是否能够找到一张已经被用户信任的证书。如果能的话，就视信任这张为可信的。</p>
+<p>2019年6月，有攻击者恶意向公钥服务器提交了对两个著名网友的签名背书。此事件中的受害者 Robert J. Hansen 的证书就被签名了 15000 次。因而任何人的 GPG 在尝试验证他的证书时，都会拉取 15000 个签名。而 GPG 在验证这么多签名的过程中会卡住很久。</p>
+<p>由于被攻击的两个人在 GPG 社区中中地位很高，他们在 GPG 信任网络中处于相当核心的位置。这意味着——当你验证任意一份证书的时候，有不小的概率你会不小心拉取到他们俩的证书，然后你的 GPG 就会卡住。不但他们俩的证书没法用了，他们俩签名过的证书也都面临危险，乃至于他们俩签名过的证书所签名的证书……</p>
+<p>而上传到KeyServer的所有东西都是不可删除的…为了解决这个问题， <a href="https://lwn.net/Articles/793288/">GnuPG 2.2.17 LWN.net</a> 开始， 从KeyServer下载公钥时默认不再下载关联的公钥.</p>
+<h3 id="爆破">爆破</h3>
+<p>有人写了个工具<a href="https://github.com/sowelisuwi/sks-exploit">SKS-Exploit</a>，可以将任何人的PGP公钥损坏，变得不可导入。</p>
+<p>这个工具同时还可以给任意人的公钥 追加伪造的UID（不是KeyID），并骗过KeyServer。</p>
+<figure data-type="image" tabindex="23"><img src="https://www.gd1214b.icu/post-images/1660735486562.png" alt="" loading="lazy"></figure>
+<p>另外能直接让KeyServer宕机。</p>
+<figure data-type="image" tabindex="24"><img src="https://www.gd1214b.icu/post-images/1660735507968.png" alt="" loading="lazy"></figure>
+<h3 id="隐私问题">隐私问题</h3>
+<p>讽刺的是， 最初为了保护人们隐私而生的PGP , 却因为不能满足保护隐私的法规GDPR ，而使一个公开的 SKS 公钥服务器在欧洲处于违法状态（GDPR规定服务商必须提供删除个人信息的选项）。</p>
+<p>许多新手按照教程提示的在创建PGP 密钥的时候填上了自己的真实姓名，并按照那些教程将公钥上传到了KeyServer，在人肉社工猖獗的今天，简直是个灾难。</p>
+<p>我试着在KeyServer搜过一些博客作者留下的PGP Key， 不乏有些比较注重自身隐私的，可是他们大部分都将自己真实的名字（汉字或拼音）和邮箱一起发到了服务器上，要知道那里的数据是公开且永远不能删除的。 也有些人意识到问题之后revoke了带有真实姓名的公钥，可是仍然可以查到，并且变得更加显眼（revoke过的key会变红）。</p>
+<h2 id="其他发布公钥的方法">其他发布公钥的方法</h2>
+<ol>
+<li>WKD（Web Key Directory）<br>
+WKD 的工作过程是 ，通过邮箱客户端 在域名服务器检查一个”well known” 的URL， 如果匹配到了邮箱地址对应的公钥，会使用https下载，并且不需要用户进行其他操作。用户不需要gpg 命令行等等复杂操作，让PGP加密回归单纯的邮件加密本身，用起来有些像S/MIME,但其实不一样。</li>
+</ol>
+<p>这是通过Gpg4win的使用的一个示例，</p>
+<figure data-type="image" tabindex="25"><img src="https://www.gd1214b.icu/post-images/1660735621372.gif" alt="" loading="lazy"></figure>
+<p>这种方法不会泄露自己的邮箱，也不需要验证指纹， 但是需要你的邮件服务商提供支持。</p>
+<p>proton邮箱是原生支持 WKD的， 但是它使用的是自己私钥，似乎没办法使用使用自己本地的公钥，其他也有支持。</p>
+<p>如果你有自己的邮箱服务器，并且想折腾的话，可以参照<a href="https://wiki.gnupg.org/WKDHosting">WKD Hosting</a>。</p>
+<ol start="2">
+<li>当面交换<br>
+如果是和熟识的朋友，你可以约在任何合适地方，用你喜欢的方式交换密钥， 比如交换纸条，交换TF卡 或者usb设备，互相签名认证，互相得到公钥。</li>
+</ol>
+<p>如果是想认识更多的人，并让自己的公钥被更多的人认证， 你可以参加一个公钥签名派对。参与派对的人们相互交换公钥的指纹（公钥一般是存在服务器或是一个别人可以下载到的地方，这里只交换指纹），甚至需要相互出示身份证、护照、驾照、出身证明，以验明正身。</p>
+<figure data-type="image" tabindex="26"><img src="https://www.gd1214b.icu/post-images/1660735754263.jpg" alt="" loading="lazy"></figure>
+<ol start="3">
+<li>DNS<br>
+有很多种方法将你的公钥通过DNS服务发布，但是有些一些方法只适用于老版本的GnuPG，有些方法只适用与新版本的GnuPG，兼容性不佳，而且搞起来比较繁琐，有兴趣的可以自行查找资料。在这里并不推荐使用。</li>
+</ol>
+<p>4.个人网站 或 社交软件中<br>
+现在中文世界， PGP的使用者中 有很多都是 独立的博客作者， 如果你拥有自己的博客或者个人网站，当然可以选择将自己的公钥发布在上面，最好给你的网站上一个HTTPS 。</p>
+<p>很多社交网站的个人展示页，可以自由编辑你的信息，你可以将PGP的 公钥发布在这里， 或者将 指纹 放在这， 这样通过其他渠道下载到公钥的人，也可以确认身份。</p>
+<ol start="5">
+<li>
+<p>代码仓库或Gist<br>
+无论你是不是开发者， 都可以拥有一个Github账号， 你可以开一个仓库专门用来发布自己的公钥，或者将公钥发布到Gist。</p>
+</li>
+<li>
+<p>共享笔记<br>
+Notion或者印象笔记等可以共享笔记的地方，都可以贴出你的公钥。</p>
+</li>
+</ol>
+<h2 id="最后的话">最后的话</h2>
+<p>使用分散的、多渠道的、可能是线下的方式来交换和确认公钥 ，不要相信在放一处的 公钥 和指纹。</p>
+<p>去验证紧跟在公钥后面的指纹 ， 就像你去问一个诈骗者，他是不是一个诈骗者一样无用。</p>
+<p>如果不是当面，请至少从两个渠道进行验证，比如你从一个渠道（比如<a href="https://github.com/gd1214b/PGP">这里</a>）得到了我的公钥 , 你想和我安全通信的话，导入前一定要从另一处（<a href="https://keys.openpgp.org/search?q=gd1214b%40gd1214b.icu">https://keys.openpgp.org/search?q=gd1214b%40gd1214b.icu</a>）得到我的指纹， 验证是否一致后再进行操作。</p>
+<p>而且每次使用前，请重复以上步骤，确保你手上的公钥是最新的。</p>
+<h1 id="八-进阶使用">八, 进阶使用</h1>
+<h2 id="使用其他算法">使用其他算法</h2>
+<p>PGP支持很多算法，可是前面我们生成密钥时，只见到了很少的几种。</p>
+<p>因为gpg还有一种隐藏模式—- 专家模式，生成密钥时可以使用</p>
+<pre><code class="language-bash">gpg --expert --full-gen-key
+# 输出
+
+Please select what kind of key you want:
+   (1) RSA and RSA (default)
+   (2) DSA and Elgamal
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (7) DSA (set your own capabilities)
+   (8) RSA (set your own capabilities)
+   (9) ECC and ECC
+  (10) ECC (sign only)
+  (11) ECC (set your own capabilities)
+  (13) Existing key
+  (14) Existing key from card
+  
+</code></pre>
+<p>就可以看到多出来不少选项，其中ECC算法 全称Elliptic Curve Cryptography 椭圆曲线密码算法。</p>
+<p>上面我选了 9 , 继续</p>
+<pre><code class="language-bash"> Please select which elliptic curve you want
+   (1) Curve 25519
+   (3) NIST P-256
+   (4) NIST P-384
+   (5) NIST P-521
+   (6) Brainpool P-256   
+   (7) Brainpool P-384
+   (8) Brainpool P-512
+   (9) secp256k1            # 比特币使用的算法
+</code></pre>
+<p>其中美国国家标准与技术研究院（NIST）系列椭圆曲线、Brainpool系列椭圆曲线、secp256k1都存在不同的安全风险，不建议使用。</p>
+<p>可以发现这里少了（2）, 其实这里还有一些隐藏算法没有列出，可通过如下命令查看</p>
+<pre><code class="language-bash">gpg --list-config --with-colons curve
+
+# 输出
+cfg:curve:   cv25519;ed25519;nistp256;nistp384;nistp521;brainpoolP256r1;brainpoolP384r1;brainpoolP512r1;secp256k1
+</code></pre>
+<p>上面缺少的(2)对应的就是ed25519 ，是一种签名算法，你选择 （1）时， 主密钥用来签发和签名 用的就是ed25519，自动生成的用来加密的子密钥 算法 是cv25519 。</p>
+<h3 id="rsa-vs-ecc">RSA VS ECC</h3>
+<p>ECC算法比RSA的优势在于，在同等强度下，ECC的密钥长度要小的多，性能也会好一些。 RSA算法的PGP私钥 通过paperkey精简过后一般还会有50+行HEX数据，如果使用的是ECC算法生成的话， 可以减到8行以内，手抄完全没问题。</p>
+<p>RSA算法的优势在于大部分硬件设备的兼容性比较好，比如 YubiKey 5 支持 RSA 4096，但不支持 Curve 25519。而且多数设备都对RSA算法提供了硬件加速。</p>
+<h2 id="追加uid">追加UID</h2>
+<p>UID 即 user id ， 由三个部分组成：</p>
+<ul>
+<li>全名（现在的话网名即可）</li>
+<li>注释（用 ( ) 包括）</li>
+<li>邮箱地址（用 &lt; &gt; 包括）</li>
+</ul>
+<p>UID的性质：</p>
+<ul>
+<li>一个密钥可以有多个 uid，方便不同场合使用。</li>
+<li>uid 与哪个子密钥无关，uid 是作用于整个密钥的。</li>
+<li>uid 可以随时添加，但已有的 uid 不能修改，只能单独吊销。</li>
+<li>uid 单独吊销后，只需要重新发布公钥即可。<br>
+一般来说，操作UID只有主密钥有权限操作， 后面会提到UID可以是伪造，然后提交到服务器的。</li>
+</ul>
+<pre><code class="language-bash">gpg --edit-key {keyid/uid}    
+
+
+gpg&gt; adduid     # 进入交互界面后 输入  help  可以查看支持的操作
+
+# 输入你要追加的信息
+</code></pre>
+<p>使用UID的场景有哪些呢？ 如果你使用一个不常用的邮箱作为你的github/gitlab账号，你主要的邮箱生成的PGP 密钥就不能用来签名了。</p>
+<p>这时候为了保护隐私 且 只要管理一个密钥，就可以 在 Github设置里把 Keep my email addresses private勾上，将为你生成的随机邮箱添加到 uid中， 这样就只需要管理一个PGP密钥，可以同时为你不同的Git账号签名。</p>
+<h2 id="添加头像">添加头像</h2>
+<p>跟添加UID差不多， 在gpg交互 界面 输入 addphoto 就可以， 想要查看的话 输入showphoto。</p>
+<h2 id="使用pgp为git-commit-签名">使用PGP为git commit 签名</h2>
+<p>只要你PGP的uid包含 git config 中的邮箱， 使用</p>
+<pre><code>git commit -S -m your commit message
+</code></pre>
+<p>即可签名。</p>
+<h2 id="使用pgp-进行ssh">使用PGP 进行SSH</h2>
+<ol>
+<li>生成 认证（A）用子密钥</li>
+</ol>
+<pre><code class="language-bash">gpg --expert --edit-key {keyid/uid}                                   ## 使用专家模式, 不然没有认证的选项
+
+gpg&gt; addkey
+Please select what kind of key you want:
+   (3) DSA (sign only)
+   (4) RSA (sign only)
+   (5) Elgamal (encrypt only)
+   (6) RSA (encrypt only)
+   (7) DSA (set your own capabilities)
+   (8) RSA (set your own capabilities)
+  (10) ECC (sign only)
+  (11) ECC (set your own capabilities)
+  (12) ECC (encrypt only)
+  (13) Existing key
+Your selection? 8                                                   ## 选8, RSA, 自定义权限
+
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Sign Encrypt                               ## 这里显示默认有Sign和Encrypt两种权限
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection? S                                                   ## 关闭Sign
+
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Encrypt
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection? E                                                   ## 关闭Encrypt
+
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions:
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection? A                                                   ## 开启Authenticate
+
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Authenticate
+
+   (S) Toggle the sign capability
+   (E) Toggle the encrypt capability
+   (A) Toggle the authenticate capability
+   (Q) Finished
+
+Your selection? Q                                                    ## 退出
+RSA keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048) 4096
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0) 1y                                             ## 有效期
+Key expires at Tue Jan  7 11:33:54 2020 CST
+Is this correct? (y/N) y
+Really create? (y/N) y
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+
+sec  rsa2048/7DEFA5351BCE3C55
+     created: 2019-01-07  expires: 2021-01-06  usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/2FCE923F8ECB63F6
+     created: 2019-01-07  expires: 2021-01-06  usage: E
+ssb  rsa4096/19D32A8839DCAA1F
+     created: 2019-01-07  expires: 2020-01-07  usage: A
+[ultimate] (1). hhhhh &lt;h@mail.com&gt;
+
+gpg&gt; save                                                            ## 保存 
+
+</code></pre>
+<ol start="2">
+<li>修改配置<br>
+编辑<code>bashrc</code> 文件， 将默认ssh 的agent替换为 <code>gpg-agnet</code></li>
+</ol>
+<pre><code class="language-bash">#  ~/.bashrc
+
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+echo UPDATESTARTUPTTY | gpg-connect-agent 1&gt; /dev/null
+</code></pre>
+<p>编辑<code>~/.gnupg/gpg-agent.conf</code>文件,增加：<br>
+enable-ssh-support<br>
+接着：</p>
+<pre><code class="language-bash">❯ gpg -k --with-keygrip    
+/Users/root/.gnupg/pubring.kbx
+-----------------------------
+pub   rsa2048 2019-01-07 [SC] [expires: 2021-01-06]
+      8A9FC025A44AA4824C1F4AE27DEFA5351BCE3C55
+      Keygrip = BEFCCDFE36CC5442B888B8459265C68B60A4ABD2
+uid           [ultimate] hhhhh &lt;h@mail.com&gt;
+sub   rsa2048/0xF681DAEBBAB82124 2019-01-07 [E] [expires: 2021-01-06]
+      Keygrip = 422922ACFD099E79863D93B93333528F225C90FC
+sub   rsa2048/0x501DEDC36BD409C8 2019-01-07 [A] [expires: 2020-01-07]
+      Keygrip = 999A87A51CFE82DAA494BEB42F585051307F9E33
+</code></pre>
+<p>选择你新加的带有[A]标志的那个新的子密钥的 keygrip , 即<code>999A87A51CFE82DAA494BEB42F585051307F9E33</code></p>
+<p>加入到<code>~/.gnupg/sshcontrol文件</code>， 运行<code>ssh-add -l</code>, 查看是否已经加入。</p>
+<p>然后:<br>
+gpg --export-ssh-key   {keyid}!<br>
+注意，这里不能用 uid, 里只能填子密钥的 key id,这个例子里就是 <code>0x501DEDC36BD409C8</code>。</p>
+<p>输出的 ssh public key 放到你的服务器上的<code>~/.ssh/authorized_keys</code>中， 重启shell, 就可以连接了。</p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy">https://en.wikipedia.org/wiki/Pretty_Good_Privacy</a></li>
+<li><a href="https://zikin.org/pgp/">https://zikin.org/pgp/</a></li>
+<li><a href="https://ulyc.github.io/2021/01/13/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8A/">https://ulyc.github.io/2021/01/13/2021年-用更现代的方法使用PGP-上/</a></li>
+<li><a href="http://www.alexgao.com/archives/gpg.html">http://www.alexgao.com/archives/gpg.html</a></li>
+</ul>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/3uXFlsonS.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/3uXFlsonS/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-10-02">2022-10-02</time>
+                  <h4 class="title white no-margin">在VirtualBox上安装macOS虚拟机</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/xQlY-_QW9.webp');"></div>
+                 <a href="https://www.gd1214b.icu/post/xQlY-_QW9/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-08-05">2022-08-05</time>
+                  <h4 class="title white no-margin">DNS 查询原理详解</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

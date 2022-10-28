@@ -1,0 +1,838 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    使用Diceware创建高强度且便于记忆的密码 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="前言
+现在保护您的数字隐私变得越来越容易。iPhone现在加密了大量的个人信息；Mac 和Windows 8.1计算机上的硬盘现在自动锁定；就连Facebook 也在聊天工具 WhatsApp 中提供端到端加密。但是，如果您不知道如何想出一..." />
+    <meta name="keywords" content="Diceware,安全" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/ktuBEdK3E.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-06-01"><i class="fa fa-calendar"></i><span class="lately">5 个月前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/ktuBEdK3E/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/ktuBEdK3E/"> </span>
+              </a>
+              <span id="/ktuBEdK3E/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-0 ctag-diceware" aria-label="">Diceware</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-1 ctag-an-quan" aria-label="">安全</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">使用Diceware创建高强度且便于记忆的密码</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h1 id="前言">前言</h1>
+<p>现在保护您的数字隐私变得越来越容易。iPhone现在加密了大量的个人信息；Mac 和Windows 8.1计算机上的硬盘现在自动锁定；就连Facebook 也在聊天工具 WhatsApp 中提供端到端加密。但是，如果您不知道如何想出一个好的密码短语，那么这些技术都无法提供您想象的那么多保护。</p>
+<p><code>密码短语</code>类似于密码，但更长、更安全。从本质上讲，它是您记住的加密密钥。一旦您开始更深入地关心您的隐私并改善您的计算机安全习惯，您将遇到的第一个障碍就是必须创建密码。</p>
+<p>例如，当您对硬盘驱动器、U盘或计算机上的文档进行加密时，磁盘加密的强度通常仅与您的密码一样强。如果您使用密码数据库或 Web 浏览器中的密码保存功能，您需要设置一个强大的主密码来保护它们。如果您想使用 PGP 加密您的电子邮件，您可以使用密码保护您的私钥。爱德华·斯诺登在给 Laura Poitras 的第一封电子邮件中写道：“请确认没有人拥有您的私钥的副本，并且它使用了强密码。假设你的对手每秒能够进行一万亿次猜测。”</p>
+<p>在这篇文章中，我们将介绍一种简单的方法来提供易于记忆但非常安全的密码短语。事实证明，通常情况下想出一个好的密码短语是非常困难的。如果你的对手真的有能力每秒猜测一万亿次，那么你的密码将会变得很不安全。如果您使用完全随机的字符序列，它可能非常安全，但记住也很痛苦（老实说，浪费脑力）。</p>
+<p>人们经常从流行文化中挑选一些短语——歌曲中最喜欢的歌词或电影或书中最喜欢的台词——然后通过改变一些大小写或添加一些标点符号或修改该短语中每个单词的第一个字母来稍微改变它。其中一些密码短语可能看起来不错并且完全无法猜测，但很容易低估那些投入猜测密码短语的人的能力。</p>
+<p>想象一下，你的对手已经从每首歌曲的歌词、每部电影和电视节目的剧本、每本书的数字化文本以及维基百科的每一页中提取了每种语言的文本，并将其用作猜测列表的基础。你的密码还能安全吗？</p>
+<p>如果您只是通过<strong>想</strong>出一个好的密码来创建密码，那么很有可能它还不足以抵抗间谍机构的力量。例如，您可能会想出“To be, or not to be, that is the question.” 如果是这样，我可以保证您不是第一个使用这句经典莎士比亚名言作为密码的人，而且攻击者知道这一点。</p>
+<p>使用莎士比亚名言作为密码短语糟糕的原因是它缺少称为<code>熵</code>的东西。您可以将熵视为随机性，它是密码学中最重要的概念之一。事实证明，人类无法以真正随机的方式做任何事情。</p>
+<p>即使您不使用引用，而是在脑海中编造一个短语，您的短语仍然远非随机，因为语言是可预测的。正如一篇关于该主题的研究论文所述，“用户无法选择由完全随机的单词组成的短语，但会受到短语在自然语言中出现的概率的影响”，这意味着用户选择的密码短语不包含像你想象的那样多的熵。你的大脑倾向于继续使用减少随机性的常用习语和语法规则。例如，在副词后面加上动词，反之亦然。</p>
+<p>来自流行文化、关于你的生活的事实或任何直接来自你脑海的密码短语比从大自然中收集到的充满实际熵的密码短语要弱得多。</p>
+<p>但幸运的是，这种可用性与安全性之间的矛盾可以解决。有一种生成密码短语的方法，即使是最强大的攻击者也无法猜测，但人类却很可能记住。该方法称为<code>Diceware</code>，它基于一些简单的数学运算。</p>
+<h1 id="什么是diceware">什么是Diceware</h1>
+<p>一旦您承认您的旧密码并不像您想象的那么安全，您就可以使用 Diceware技术了。</p>
+<p>Diceware 是一种由 Arnold Reinhold 创造的生成密码短语的方法。使用 Diceware 需要一份词表和至少一个骰子。词表由7776（6^5）  个不同的单词构成，每个单词对应一个5位“骰子序号”（如 &quot;46134&quot;），每掷5个/次骰子便可选中一个随机的单词。掷30个/次骰子就能生成一个高强度的6词密码短语。由于每个单词有明确的意思，这样的密码短语通常比相同强度的由随机字符组成的密码更容易记忆。</p>
+<h1 id="如何使用diceware">如何使用Diceware</h1>
+<p><a href="http://world.std.com/~reinhold/diceware.wordlist.asc">最初的 Diceware 词表</a> 是英文的，且生僻词较多，不易于中文母语者使用。之后多种其他版本/语言的 Diceware 词表陆续出现，本文使用的中文词表由<a href="https://github.com/cfbao">Chenfeng Bao</a>制作：<a href="https://github.com/cfbao/chinese-diceware">https://github.com/cfbao/chinese-diceware</a></p>
+<p>首先，获取一份Diceware 单词表(可以到<a href="https://cdn.gd1214b.tk/diceware/diceware_chinese_wordlist.txt">https://cdn.gd1214b.tk/diceware/diceware_chinese_wordlist.txt</a>上去下载)，其中包含 7,776 个单词——大约37 页。您会注意到，每个单词旁边都有一个五位数字，每个数字介于 1 和 6 之间。以下是单词列表的一小段摘录：</p>
+<pre><code>11111 aba 阿爸
+11112 afuhan 阿富汗
+11113 aichou 哀愁
+11114 aidai 爱戴
+11115 aidao 哀悼
+11116 aie 挨饿
+11121 aifu 爱抚
+11122 aiguo 爱国
+11123 aihao 爱好
+</code></pre>
+<p>为了保证安全，您应该将单词表打印下来，而不是使用电子版。然后确保您处于一个安全的环境中（旁边没有其他人和摄像头）</p>
+<p>现在拿起一些六面骰子（是的，真正的物理骰子）并掷几次，写下你得到的数字（建议在坚硬的表面上书写，因为这样难以留下痕迹）。您总共需要掷五次骰子才能得出密码短语中的第一个单词。您在这里所做的是生成熵，从自然界中提取真正的随机性并将其转化为数字。</p>
+<p>如果您滚动数字五、二、二、五、一，然后在 Diceware 单词列表 52251 中查找，您会看到“shuxue（数学）”这个词。这将是您密码中的第一个单词。现在重复。</p>
+<p>使用 Diceware，您最终会得到看起来像“haoshi aosang roucuo lizhan cesuan teshi”、“bang vivo threadductknipple train”和“pichai beichu budebu minyao yecao xingge”的密码短语。如果你想要一个更强的密码，你可以使用更多的单词；如果您可以使用较弱的密码短语，则可以使用更少的单词。</p>
+<p>对于像“sanhui beibu fuqiao dongwu yinju guolai （散会-北部-浮桥-动物-隐居-过来）”这样的密码短语来说还不错，大多数人完全有可能记住。将其与“aE6,kP3^fT1&quot;mA5)”这样一个随机密码相比，其熵比七字的 Diceware 密码略少，而且更难记住。</p>
+<p>生成密码后，下一步是牢牢地记住它。</p>
+<p>我们建议您将新密码写在一张纸上，并随身携带，直到您不再需要它为止。每次需要输入时，请先尝试从记忆中输入，但如果需要，请查看纸张。假设你一天打几次，在你不再需要纸之前不应该超过两三天，这时你应该把它销毁（建议用火烧掉）。</p>
+<p>根据对高熵密码短语的研究，定期输入密码短语可以让您通过称为<a href="https://zh.wikipedia.org/zh-cn/%E9%97%B4%E9%9A%94%E9%87%8D%E5%A4%8D">间隔重复</a>的过程记住它。</p>
+<h1 id="关于diceware的安全性">关于Diceware的安全性</h1>
+<p>Diceword 密码短语的强度取决于它包含的单词数量。如果您选择一个单词（从 7,776 个单词的列表中），攻击者有 7,776 分之一的机会在第一次尝试时猜出您的单词。要猜出你的密码短语的话，攻击者至少需要尝试一次，最多尝试 7,776 次，平均尝试 3,888 次（因为攻击者有 50% 的机会会在他们完成单词列表的一半时猜出你的单词）。</p>
+<p>但是，如果您为密码选择两个单词，则可能的密码列表的大小会呈指数增长。仍然有 7,776 分之一的机会正确猜测您的第一个单词，但对于每个第一个单词，也有 7,776 分之一的机会正确猜测第二个单词，攻击者不会知道第一个单词是否正确而无需猜测整个单词密码。</p>
+<p>这意味着对于两个单词，有7,776^2或 60,466,176 个不同的潜在密码短语。平均而言，在前 3000 万次尝试后，可以猜出两个单词的 Diceware 密码。一个五字密码短语，有 7,776^5 个可能的密码短语，可以在平均 14 千亿次尝试后猜出（14 后面有 18 个零）。</p>
+<p>密码短语（或加密密钥或任何其他类型的信息）中的不确定性量以熵的<code>位数</code>来衡量。您可以通过包含多少位熵来衡量随机密码的安全性。Diceware 列表中的每个单词都值大约 12.92 位熵（因为 2^12.92 大约是 7,776）。因此，如果您选择七个单词，您最终会得到一个具有大约 90.5 位熵的密码（因为 12.92 乘以 7 大约是 90.5）。</p>
+<p>换句话说，如果攻击者知道您使用的是 7 个单词的 Diceware 密码短语，并且他们从 Diceware 单词列表中随机选择 7 个单词进行猜测，那么他们一次猜测成功的概率为 :<br>
+1/1,719,070,799,748,422,591,028,658,176。</p>
+<p>以每秒一万亿次的猜测——根据爱德华·斯诺登 2013 年 1 月的警告——猜测这个密码短语平均需要 2700 万年。</p>
+<p>相比之下，一个五字密码短语将在不到六个月的时间内破解，而一个六字密码短语平均需要 3,505 年（每秒猜测一万亿次）。牢记摩尔定律，计算机将不断变得更强大，不久之后，每秒 1 万亿次猜测可能会开始变得更快，因此最好给您的密码短语留出一些安全的空间。</p>
+<p>使用这样的系统，您选择的单词列表是否公开并不重要。列表中的单词是什么甚至都没有关系。重要的是单词列表有多长以及列表中的每个单词都是唯一的。猜测由这些随机选择的单词组成的密码短语的概率随着您添加的每个单词而呈指数级减小，并且使用这个规律可以制作永远无法猜测的密码短语。</p>
+<h1 id="我们如何使用-diceware-保护我们的个人信息">我们如何使用 Diceware 保护我们的个人信息</h1>
+<p>当您将 Diceware 密码短语输入计算机以在本地解密某些内容（例如硬盘驱动器、PGP 密钥或密码数据库）时，它们非常适合。</p>
+<p>您不太需要它们来登录网站或互联网上的其他东西。在这些情况下，您从使用高熵密码短语中获得的好处较少。如果每次猜测都需要与互联网上的服务器通信，那么攻击者将永远无法每秒猜测一万亿次。在某些情况下，攻击者将拥有或接管远程服务器——在这种情况下，他们可以在您登录并发送密码后立即获取密码，无论密码强度如何。</p>
+<p>要登录网站和其他服务器，请使用密码数据库。推荐使用<a href="https://www.keepassx.org/">KeePassX</a>，因为它是免费的、开源的、跨平台的，而且它从不在云中存储任何东西。然后将所有密码锁定在您使用 Diceware 生成的主密码短语后面。使用您的密码管理器为您登录的每个网站生成和存储不同的随机密码。</p>
+<h1 id="我真的必须使用骰子吗">我真的必须使用骰子吗？</h1>
+<p>这是一个复杂的问题，但简短的回答是：使用物理骰子会给你一个更强有力的保证，不会出错。但这既费时又乏味，使用计算机生成这些随机数又是会很方便。<br>
+这里有一个用于生成Diceware短语的程序（仅适用于Windows）：<br>
+<a href="https://cdn.gd1214b.tk/diceware/diceware_password_ generator.exe">点击下载</a></p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/">https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/</a></li>
+<li><a href="https://github.com/cfbao/chinese-diceware">https://github.com/cfbao/chinese-diceware</a></li>
+</ul>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/f4UrtSYZD.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/f4UrtSYZD/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-06-08">2022-06-08</time>
+                  <h4 class="title white no-margin">公安部门高科技查水表取证的方法</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/VpZwzuT9N.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/VpZwzuT9N/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-05-11">2022-05-11</time>
+                  <h4 class="title white no-margin">Web Feed 倡议书</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

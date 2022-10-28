@@ -1,0 +1,1002 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    DNS 查询原理详解 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="通过 DNS 查询，得到域名的 IP 地址，才能访问网站。
+那么，DNS 查询到底是怎么完成的？本文通过实例，详细介绍背后的步骤。
+DNS 服务器
+域名对应的 IP 地址，都保存在 DNS 服务器。
+我们输入域名，浏览器就会在后台，自动向 ..." />
+    <meta name="keywords" content="DNS" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/xQlY-_QW9.webp');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-08-05"><i class="fa fa-calendar"></i><span class="lately">3 个月前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/xQlY-_QW9/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/xQlY-_QW9/"> </span>
+              </a>
+              <span id="/xQlY-_QW9/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-0 ctag-dns" aria-label="">DNS</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">DNS 查询原理详解</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>通过 DNS 查询，得到域名的 IP 地址，才能访问网站。</p>
+<p>那么，DNS 查询到底是怎么完成的？本文通过实例，详细介绍背后的步骤。</p>
+<h1 id="dns-服务器">DNS 服务器</h1>
+<p>域名对应的 IP 地址，都保存在 DNS 服务器。</p>
+<p>我们输入域名，浏览器就会在后台，自动向 DNS 服务器发出请求，获取对应的 IP 地址。这就是 DNS 查询。</p>
+<figure data-type="image" tabindex="1"><img src="https://www.gd1214b.icu/post-images/1659694355017.webp" alt="" loading="lazy"></figure>
+<p>举例来说，我输入 <code>blog.gd1214b.icu</code> 这个域名，浏览器就要向 DNS 服务器查询，它的 IP 地址是什么，然后向该 IP 发出访问请求。</p>
+<p>网上有很多公用的 DNS 服务器，这篇文章选择 Cloudflare 公司提供的 <code>1.1.1.1</code> 进行演示。</p>
+<figure data-type="image" tabindex="2"><img src="https://www.gd1214b.icu/post-images/1659694397569.webp" alt="" loading="lazy"></figure>
+<h1 id="dig-命令">dig 命令</h1>
+<p>命令行工具 dig 可以跟 DNS 服务器互动，我们就用它演示 DNS 查询。如果你还没有安装，可以搜一下安装方法，在 Linux 系统下是非常容易的。</p>
+<p>它的查询语法如下（美元符号<code>$</code>是命令行提示符）。</p>
+<pre><code>$ dig @[DNS 服务器] [域名]
+</code></pre>
+<p>向 1.1.1.1 查询域名，就执行下面的命令。</p>
+<pre><code>$ dig @1.1.1.1 blog.gd1214b.icu
+</code></pre>
+<p>正常情况下，它会输出一大堆内容。</p>
+<pre><code class="language-bash">; &lt;&lt;&gt;&gt; DiG 9.16.27-Debian &lt;&lt;&gt;&gt; blog.gd1214b.icu
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 8420
+;; flags: qr rd ad; QUERY: 1, ANSWER: 14, AUTHORITY: 0, ADDITIONAL: 0
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;blog.gd1214b.icu.              IN      A
+
+;; ANSWER SECTION:
+blog.gd1214b.icu.       0       IN      A       172.67.172.180
+blog.gd1214b.icu.       0       IN      A       104.21.30.93
+dell.ns.cloudflare.com. 0       IN      A       108.162.192.94
+dell.ns.cloudflare.com. 0       IN      A       172.64.32.94
+dell.ns.cloudflare.com. 0       IN      A       173.245.58.94
+corey.ns.cloudflare.com. 0      IN      A       108.162.195.24
+corey.ns.cloudflare.com. 0      IN      A       162.159.44.24
+corey.ns.cloudflare.com. 0      IN      A       172.64.35.24
+dell.ns.cloudflare.com. 0       IN      AAAA    2803:f800:50::6ca2:c05e
+dell.ns.cloudflare.com. 0       IN      AAAA    2a06:98c1:50::ac40:205e
+dell.ns.cloudflare.com. 0       IN      AAAA    2606:4700:50::adf5:3a5e
+corey.ns.cloudflare.com. 0      IN      AAAA    2a06:98c1:50::ac40:2318
+corey.ns.cloudflare.com. 0      IN      AAAA    2606:4700:58::a29f:2c18
+corey.ns.cloudflare.com. 0      IN      AAAA    2803:f800:50::6ca2:c318
+
+;; Query time: 510 msec
+;; SERVER: 172.21.32.1#53(172.21.32.1)
+;; WHEN: Fri Aug 05 18:20:55 CST 2022
+;; MSG SIZE  rcvd: 436
+</code></pre>
+<p>在其中找到 <code>ANSWER SECTION</code> 这个部分，它给出了查询的答案，域名对应的 IP 地址是  172.67.172.180。</p>
+<h1 id="域名的树状结构">域名的树状结构</h1>
+<p>你可能会问，难道 DNS 服务器（比如<code> 1.1.1.1</code>）保存了世界上所有域名（包括二级域名、三级域名）的 IP 地址？</p>
+<p>当然不是。DNS 是一个分布式系统，<code>1.1.1.1</code> 只是用户查询入口，它也需要再向其他 DNS 服务器查询，才能获得最终的 IP 地址。</p>
+<p>要说清楚 DNS 完整的查询过程，就必须了解 域名是一个树状结构。</p>
+<p>最顶层的域名是根域名（root），然后是顶级域名（top-level domain，简写 TLD），再是一级域名、二级域名、三级域名。</p>
+<figure data-type="image" tabindex="3"><img src="https://www.gd1214b.icu/post-images/1659694969818.webp" alt="" loading="lazy"></figure>
+<h2 id="根域名">根域名</h2>
+<p>所有域名的起点都是根域名，它写作一个点.，放在域名的结尾。因为这部分对于所有域名都是相同的，所以就省略不写了，比如<code>gd1214b.icu</code>等同于<code>gd1214b.icu.</code>（结尾多一个点）。</p>
+<p>你可以试试，任何一个域名结尾加一个点，浏览器都可以正常解读。</p>
+<h2 id="顶级域名">顶级域名</h2>
+<p>根域名的下一级是顶级域名。它分成两种：通用顶级域名（gTLD，比如<code> .com</code> 和 <code>.net</code>）和国别顶级域名（ccTLD，比如 <code>.cn</code> 和<code> .us</code>）。</p>
+<p>顶级域名由国际域名管理机构 ICANN 控制，它委托商业公司管理 gTLD，委托各国管理自己的国别域名。</p>
+<h2 id="一级域名">一级域名</h2>
+<p>一级域名就是你在某个顶级域名下面，自己注册的域名。比如，<code>gd1214b.icu</code>就是我在顶级域名<code>.icu</code>下面注册的。</p>
+<h2 id="二级域名">二级域名</h2>
+<p>二级域名是一级域名的子域名，是域名拥有者自行设置的，不用得到许可。比如，<code>blog</code> 就是 <code>gd1214b.icu</code> 的二级域名。</p>
+<h1 id="域名的逐级查询">域名的逐级查询</h1>
+<p>这种树状结构的意义在于，<strong>只有上级域名，才知道下一级域名的 IP 地址，需要逐级查询。</strong></p>
+<p>每一级域名都有自己的 DNS 服务器，存放下级域名的 IP 地址。</p>
+<p>所以，如果想要查询二级域名 <code>blog.gd1214b.icu</code> 的 IP 地址，需要三个步骤。</p>
+<ul>
+<li>
+<p>第一步，查询根域名服务器，获得顶级域名服务器<code>.icu</code>（又称 TLD 服务器）的 IP 地址。</p>
+</li>
+<li>
+<p>第二步，查询 TLD 服务器 .icu，获得一级域名服务器 <code>gd1214b.icu</code> 的 IP 地址。</p>
+</li>
+<li>
+<p>第三步，查询<code>gd1214b.icu</code>的一级域名服务器 ，获得二级域名<code>blog</code> 的 IP 地址。</p>
+</li>
+</ul>
+<p>下面依次演示这三个步骤。</p>
+<h1 id="根域名服务器">根域名服务器</h1>
+<p>根域名服务器全世界一共有13台（都是Anycast IP）。它们的域名和 IP 地址如下。</p>
+<figure data-type="image" tabindex="4"><img src="https://www.gd1214b.icu/post-images/1659695286800.webp" alt="" loading="lazy"></figure>
+<p>根域名服务器的 IP 地址是不变的，集成在操作系统里面。</p>
+<p>操作系统会选其中一台，查询 TLD 服务器的 IP 地址。</p>
+<pre><code>$ dig @192.33.4.12 blog.gd1214b.icu
+</code></pre>
+<p>上面示例中，我们选择192.33.4.12，向它发出查询，询问<code>blog.gd1214b.icu</code>的 TLD 服务器的 IP 地址。</p>
+<p>dig 命令的输出结果如下。</p>
+<pre><code class="language-bash">; &lt;&lt;&gt;&gt; DiG 9.16.27-Debian &lt;&lt;&gt;&gt; @192.33.4.12 blog.gd1214b.icu
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 44298
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 4, ADDITIONAL: 9
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: e5e562298e43a3e00100000062ecf0f6f7ad721265122497 (good)
+;; QUESTION SECTION:
+;blog.gd1214b.icu.              IN      A
+
+;; AUTHORITY SECTION:
+icu.                    172800  IN      NS      c.nic.icu.
+icu.                    172800  IN      NS      b.nic.icu.
+icu.                    172800  IN      NS      a.nic.icu.
+icu.                    172800  IN      NS      d.nic.icu.
+
+;; ADDITIONAL SECTION:
+d.nic.icu.              172800  IN      A       212.18.249.108
+c.nic.icu.              172800  IN      A       212.18.248.108
+b.nic.icu.              172800  IN      A       185.24.64.108
+a.nic.icu.              172800  IN      A       194.169.218.108
+d.nic.icu.              172800  IN      AAAA    2a04:2b00:13ff::108
+c.nic.icu.              172800  IN      AAAA    2a04:2b00:13ee::108
+b.nic.icu.              172800  IN      AAAA    2a04:2b00:13cc::1:108
+a.nic.icu.              172800  IN      AAAA    2001:67c:13cc::1:108
+
+;; Query time: 459 msec
+;; SERVER: 192.33.4.12#53(192.33.4.12)
+;; WHEN: Fri Aug 05 18:29:06 CST 2022
+;; MSG SIZE  rcvd: 323
+</code></pre>
+<p>因为它给不了<code>blog.gd1214b.icu</code> 的 IP 地址，所以输出结果中没有 ANSWER SECTION，只有一个 AUTHORITY SECTION，给出了<code>icu.</code>的4台 TLD 服务器的域名。</p>
+<p>下面还有一个 ADDITIONAL SECTION，给出了这4台 TLD 服务器的 IP 地址（包含 IPv4 和 IPv6 两个地址）。</p>
+<h1 id="tld-服务器">TLD 服务器</h1>
+<p>有了 TLD 服务器的 IP 地址以后，我们再选一台接着查询。</p>
+<pre><code>$ dig @194.169.218.108 blog.gd1214b.icu
+</code></pre>
+<p>上面示例中，<code>194.169.218.108</code> 是随便选的一台 .icu 的 TLD 服务器，我们向它询问 blog.gd1214b.icu 的 IP 地址。</p>
+<p>返回结果如下。</p>
+<pre><code class="language-bash">; &lt;&lt;&gt;&gt; DiG 9.16.27-Debian &lt;&lt;&gt;&gt; @194.169.218.108 blog.gd1214b.icu
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 50740
+;; flags: qr rd; QUERY: 1, ANSWER: 0, AUTHORITY: 2, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+; COOKIE: 7a0ca80202a2796eff8eca8e62ecf209f49eb3246199ce57 (good)
+;; QUESTION SECTION:
+;blog.gd1214b.icu.              IN      A
+
+;; AUTHORITY SECTION:
+gd1214b.icu.            3600    IN      NS      corey.ns.cloudflare.com.
+gd1214b.icu.            3600    IN      NS      dell.ns.cloudflare.com.
+
+;; Query time: 340 msec
+;; SERVER: 194.169.218.108#53(194.169.218.108)
+;; WHEN: Fri Aug 05 18:33:41 CST 2022
+;; MSG SIZE  rcvd: 129
+</code></pre>
+<p>它依然没有 ANSWER SECTION 的部分，只有 AUTHORITY SECTION，给出了一级域名 <code>gd1214b.icu. </code> 的两台 DNS 服务器。</p>
+<p>下面的 ADDITIONAL SECTION 就是这两台 DNS 服务器对应的 IP 地址。</p>
+<h1 id="一级域名的-dns-服务器">一级域名的 DNS 服务器</h1>
+<p>第三步，再向一级域名的 DNS 服务器查询二级域名的 IP 地址。<br>
+dig @corey.ns.cloudflare.com. blog.gd1214b.icu</p>
+<p>返回结果如下。</p>
+<pre><code class="language-bash">; &lt;&lt;&gt;&gt; DiG 9.16.27-Debian &lt;&lt;&gt;&gt; @corey.ns.cloudflare.com. blog.gd1214b.icu
+; (20 servers found)
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 22957
+;; flags: qr aa rd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+;; WARNING: recursion requested but not available
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;blog.gd1214b.icu.              IN      A
+
+;; ANSWER SECTION:
+blog.gd1214b.icu.       300     IN      A       104.21.30.93
+blog.gd1214b.icu.       300     IN      A       172.67.172.180
+
+;; Query time: 20 msec
+;; SERVER: 162.159.44.24#53(162.159.44.24)
+;; WHEN: Fri Aug 05 18:36:40 CST 2022
+;; MSG SIZE  rcvd: 77
+</code></pre>
+<p>这次终于有了 ANSWER SECTION，得到了最终的二级域名的 IP 地址。</p>
+<p>至此，三个步骤的 DNS 查询全部完成。</p>
+<h1 id="dns-服务器的种类">DNS 服务器的种类</h1>
+<p>总结一下，上面一共提到了四种DNS服务器。</p>
+<ul>
+<li>1.1.1.1</li>
+<li>根域名服务器</li>
+<li>TLD 服务器</li>
+<li>一级域名服务器</li>
+</ul>
+<p>它们都属于 DNS 服务器，都用来接受 DNS 查询。但是作用不一样，属于不同的类别。</p>
+<h2 id="递归-dns-服务器">递归 DNS 服务器</h2>
+<p>后三种服务器只用来查询下一级域名的 IP 地址，而 1.1.1.1 则把分步骤的查询过程自动化，方便用户一次性得到结果，所以它称为递归 DNS 服务器（recursive DNS server），即可以自动递归查询。</p>
+<p>我们平常说的 DNS 服务器，一般都是指递归 DNS 服务器。它把 DNS 查询自动化了，只要向它查询就可以了。</p>
+<p>它内部有缓存，可以保存以前查询的结果，下次再有人查询，就直接返回缓存里面的结果。所以它能加快查询，减轻源 DNS 服务器的负担。</p>
+<h2 id="权威-dns-服务器">权威 DNS 服务器</h2>
+<p>一级域名服务器的正式名称叫做权威域名服务器（Authoritative Name Server）。</p>
+<p>&quot;权威&quot;的意思是域名的 IP 地址由它给定，不像递归服务器自己做不了主。我们购买域名后，设置 DNS 服务器就是在设置该域名的权威服务器。</p>
+<h2 id="四种-dns-服务器">四种 DNS 服务器</h2>
+<p>综上所述，DNS 服务器可以分成四种：</p>
+<ul>
+<li>根域名服务器</li>
+<li>TLD 服务器</li>
+<li>权威域名服务器</li>
+<li>递归域名服务器</li>
+</ul>
+<p>它们的关系如下图。</p>
+<figure data-type="image" tabindex="5"><img src="https://www.gd1214b.icu/post-images/1659696017473.webp" alt="" loading="lazy"></figure>
+<p>知道了 DNS 查询的原理，完全可以自己写一个 DNS 的递归服务器，方法很简单。网上有很多参考资料，有兴趣的话，大家可以试试看。</p>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://zh.wikipedia.org/zh-cn/%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F">https://zh.wikipedia.org/zh-cn/域名系统</a></li>
+<li><a href="https://www.ruanyifeng.com/blog/2022/08/dns-query.html">https://www.ruanyifeng.com/blog/2022/08/dns-query.html</a></li>
+<li><a href="https://timothya.com/blog/dns/">https://timothya.com/blog/dns/</a></li>
+<li><a href="https://www.dnsfilter.com/blog/authoritative-vs-recursive-dns">https://www.dnsfilter.com/blog/authoritative-vs-recursive-dns</a></li>
+<li><a href="https://www.cloudflare.com/zh-cn/learning/dns/dns-server-types/">https://www.cloudflare.com/zh-cn/learning/dns/dns-server-types/</a></li>
+</ul>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/7tTaVc1KX.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/7tTaVc1KX/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-08-17">2022-08-17</time>
+                  <h4 class="title white no-margin">PGP 加解密完整教程</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/qfDddx_kZ.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/qfDddx_kZ/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-07-27">2022-07-27</time>
+                  <h4 class="title white no-margin">国内至国际骨干 ISP 线路整理</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

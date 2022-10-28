@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /cdn-cgi/
+Sitemap: https://blog.gd1214b.icu/sitemap.xml

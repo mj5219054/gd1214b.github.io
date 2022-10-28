@@ -1,0 +1,908 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    互联网的刻耳柏洛斯:GFW的DNS审查系统 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="
+本文转自：https://yangxiamao.github.io/2021/09/30/互联网的刻耳柏洛斯-GFW的DNS审查系统/
+
+刻耳柏洛斯是希腊神话中看守冥界入口的恶犬，它允许每一个死者的灵魂进入冥界，但不让任何人出去，同时也不..." />
+    <meta name="keywords" content="GFW,DNS" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/o8OKv2apb.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-10-17"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/o8OKv2apb/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/o8OKv2apb/"> </span>
+              </a>
+              <span id="/o8OKv2apb/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-0 ctag-gfw" aria-label="">GFW</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-1 ctag-dns" aria-label="">DNS</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">互联网的刻耳柏洛斯:GFW的DNS审查系统</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <blockquote>
+<p>本文转自：<a href="https://yangxiamao.github.io/2021/09/30/%E4%BA%92%E8%81%94%E7%BD%91%E7%9A%84%E5%88%BB%E8%80%B3%E6%9F%8F%E6%B4%9B%E6%96%AF-GFW%E7%9A%84DNS%E5%AE%A1%E6%9F%A5%E7%B3%BB%E7%BB%9F/">https://yangxiamao.github.io/2021/09/30/互联网的刻耳柏洛斯-GFW的DNS审查系统/</a></p>
+</blockquote>
+<p>刻耳柏洛斯是希腊神话中看守冥界入口的恶犬，它允许每一个死者的灵魂进入冥界，但不让任何人出去，同时也不允许活人进入。</p>
+<p>纽约大学石溪分校的 Nguyen Phong Hoang 和多伦多大学的 Arian Akhavan Niaki 等人，建立了一个名为 GFWatch 的网络平台，对中国网络长城（俗称 GFW）的 DNS 审查系统进行了探测和实验，最后写出了一篇论文发表在历史悠久的 USENIX（高等计算系统协会）的相关会议上。文章名为《How Great is the Great Firewall? Measuring China’s DNS Censorship》，您可通过链接 <a href="https://www.usenix.org/system/files/sec21-hoang.pdf">https://www.usenix.org/system/files/sec21-hoang.pdf</a> 获得论文原文。</p>
+<p>在 GFWatch 工作的九个月时间里，它测试了 5.34 亿个域名。论文展示了一组触目惊心的数据：至少有 31.1 万个域名被 GFW 的 DNS 过滤系统干扰。并且 GFW 还主动出击，在世界范围内污染了公共 DNS 解析服务（public DNS resolvers）中至少 7.7 万个域名的数据，其中包括谷歌和 Cloudflare 的 DNS 解析器。</p>
+<p>他们在论文中说：</p>
+<blockquote>
+<p>“These techniques will not only help public DNS resolvers and other DNS-related services to sanitize tainted records, but can also assist future development of circumvention tools tobypass the GFW’s DNS censorship.”</p>
+</blockquote>
+<blockquote>
+<p>他们的研究不仅可以帮助清除 DNS 解析器和其他 DNS 相关服务中污染了的 DNS 数据，还可以帮助今后的开发人员去开发绕过 GFW 的 DNS 审查系统的工具。</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://www.gd1214b.icu/post-images/1634453176465.jpg" alt="" loading="lazy"></figure>
+<h2 id="gfw-如何污染-dns">GFW 如何污染 DNS</h2>
+<p>DNS （Domain Name System）的作用是根据域名查出IP地址。它是一个将域名和IP地址相互映射的分布式数据库，你可以把它想象成一本巨大的电话本。</p>
+<p>举一个例子，如果我们要访问域名 www.baidu.com ，首先要通过 DNS 查出它的IP地址 183.232.231.172。下图是 DNS 查询的一个简单示意图。</p>
+<figure data-type="image" tabindex="2"><img src="https://www.gd1214b.icu/post-images/1634453222188.png" alt="" loading="lazy"></figure>
+<p>论文中提到，由于 GFW 是一个通路的（on-path）/旁观者（man-on-the-side）的系统 ，所以它没办法通过修改或者简单丢弃互联网上传输的那些被封锁的域名的 DNS 查询响应。但是由于 DNS 使用无状态、未加密的 UDP 协议进行传输，所以 GFW 可以通过可以实时监测互联网上的流量，当在用户的 DNS 查询中检测到受审查的内容时，注入错误的响应。</p>
+<p>由于 GFW 的相关设备通常离客户端更近（就物理/网络距离而言），所以被检测的响应通常会比合法的响应更早到达，从而达到让用户无法获得正确的域名的 DNS 的目的。</p>
+<figure data-type="image" tabindex="3"><img src="https://www.gd1214b.icu/post-images/1634453245001.png" alt="" loading="lazy"></figure>
+<h2 id="利器观测-gfw-的平台-gfwatch">利器：观测 GFW 的平台 GFWatch</h2>
+<blockquote>
+<p>当你凝视深渊时，深渊也在凝视着你。</p>
+</blockquote>
+<p>GFWatch 的设计要求中，有一点就是要可以探测到尽可能多的被 GFW 阻断的网站。GFWatch 从 超过 1500 个TLD zone file 处获得实时更新的域名列表，平均每天会对 4.11 亿个网站进行监测，截至 2020 年总共探测了 5.34 亿个网站。发现至少有 31.1 万个域名被 GFW 的 DNS 过滤系统干扰。</p>
+<figure data-type="image" tabindex="4"><img src="https://www.gd1214b.icu/post-images/1634453293558.png" alt="" loading="lazy"></figure>
+<p>GFWatch 同时被设计以可以实行长期探测。一旦它探测到某个网站被封锁，GFWatch就会持续对这个网站进行观测，观察这个网站是否会在某个时间点被 GFW 解封。</p>
+<p>同时，GFWatch 还被设计来收集统计 GFW 返回的虚假 IP 地址。</p>
+<p>接下来我们来看看 GFWatch 的实验和探测手段。</p>
+<p>GFWatch 的主要探测器位于没有 DNS 审查制度的美国，从这台机器发送 DNS 查询消息前往位于中国的两台主机。但是位于中国的那两台主机并没有 DNS 解析能力，因此，主探测器的任何 DNS 响应都应该是来自 GFW。</p>
+<p>因为 DNS query 使用 UDP，所以 GFWatch 也被设计为使用 UDP 进行探测。而 UDP 是一个无状态和不可靠的协议，数据包可能会由于不受控制的因素（例如，网络拥堵）而丢失。为了尽量减少这些因素对数据收集的影响，GFWatch 每天至少对每个域名进行三次测试。</p>
+<figure data-type="image" tabindex="5"><img src="https://www.gd1214b.icu/post-images/1634453354769.png" alt="" loading="lazy"></figure>
+<p>很妙的一个实验方法！一个优秀的猎手往往以猎物的姿态存在。虽然你耗费了电费和带宽，但是你可是钓上了 GFW 这条大鱼啊！</p>
+<p>中国的两台主机位于两个不同的自治系统（AS）中。但是从探测结果来看，发往这两台中国主机的 DNS 查询所接受的封锁政策是相同的，故研究人员猜测 GFW 应该是采用中心化政策（centralized blocking policy）的一个系统。</p>
+<p>在位探测仪完成每个探测批次后，被检测到的受审查域名被转移到中国主机上，</p>
+<p>接着，研究人员又控制位于中国境内的主机向位于美国的主机发送网站的 DNS 查询信息。研究人员观察到从美国发往中国的 DNS 查询时会被审查的域名在中国发往美国时同样会被审查。</p>
+<figure data-type="image" tabindex="6"><img src="https://www.gd1214b.icu/post-images/1634453388819.png" alt="" loading="lazy"></figure>
+<p>通过两个探测路径探测到了相同的被审查的域名名单。</p>
+<p>截至论文发表时，GFWatch 仍在运行，每天都在收集数据。</p>
+<h2 id="从-gfw-封锁网络清单中反推规则">从 GFW 封锁网络清单中反推规则</h2>
+<blockquote>
+<p>无论多么天衣无缝的犯罪，只要是人作的，就没有解不开的道理。<br>
+——阿瑟·柯南·道尔《福尔摩斯全集》</p>
+</blockquote>
+<p>如果 subdomain.example.com 和 example.com 的所有子域都被封锁，研究人员就将 example.com 视为一个被封锁的域名（blocked domain）。最短的审查域名便称为 “基础域名”（base domain）。通过对 GFWatch 发现的 31.1 万个被审查的域名进行分析，研究人员发现了 13.87 万个基础域名。截至 2020 年 12 月 31 日，仍存在 12.6 万个被封禁的基础域名。</p>
+<figure data-type="image" tabindex="7"><img src="https://www.gd1214b.icu/post-images/1634453417947.png" alt="" loading="lazy"></figure>
+<p>但是研究人员同时注意到，当一个子域名被封锁时，基础域名可能不会被封锁。例如，cs.colorado.edu 被封锁了，而 colorado.edu 没有被封锁，这说明 GFW 没有简单地采用一刀切的封锁措施。于是研究人员进一步的进行了分类，对于一个给定的域，研究人员测试了每个审查的域和随机字符串的以下排列组合。</p>
+<ul>
+<li>Rule 0  censored_domain</li>
+<li>Rule 1  censored_domain{.rnd_str}</li>
+<li>Rule 2  censored_domain{rnd_str}</li>
+<li>Rule 3  {rnd_str.}censored_domain</li>
+<li>Rule 4  {rnd_str}censored_domain</li>
+<li>Rule 5  {rnd_str.}censored_domain{.rnd_str}</li>
+<li>Rule 6  {rnd_str.}censored_domain{rnd_str}</li>
+<li>Rule 7  {rnd_str}censored_domain{.rnd_str}</li>
+<li>Rule 8  {rnd_str}censored_domain{rnd_str}</li>
+</ul>
+<p>在 138.7 万个基础域名中，有 11.8 万个域名根据规则 0 进行是独立审查的。换句话说，这些域名是被审查的，但在与随机字符串连接时不会触发GFW的DNS审查。</p>
+<p>在这些规则中，只有规则 1 和 3 是基础域名的子域名的正确存在形式。研究人员把规则 1、3 以外的规则与较短的域名字符串组合在一起的被审查的域名称为被过度封锁（overblocked）的域名。</p>
+<p>按照封锁严重程度的升序，研究人员发现在规则2、3、4、6和8下，分别有4、11.38 万、1.09 万、1400 个和 696 个不同的基础域名被封锁。</p>
+<h3 id="对-gfw-过度封锁的研究">对 GFW 过度封锁的研究</h3>
+<p>有超过 1.3 万个基础域名被过度封锁。在发现的 33.1 万个被审查的域名中，有 41000 个域名是过度封锁的。</p>
+<p>论文中举了一个例子：GFW 将 torproject.org 进行了严格审查，对其进行了过度封锁（overblocked）。包括 mentorproject.org 在内，任何包含了 torproject.org 字段的网站都被 GFW 封锁，令人啼笑皆非。（Tor 是一个旨在实现匿名通信的自由软件（free software），Tor 用户的互联网活动相对较难追踪。）</p>
+<p>919.com、jetos.com 和 33a.com 这三个域名共造成15000个不相关的域名被过度封锁，如果有朋友打算购买域名，请注意避开包含有相关子字符串的域名。以避免被 GFW 不明不白的封锁了。</p>
+<h3 id="对被封域名种类的研究">对被封域名种类的研究</h3>
+<p>研究人员使用了 FortiGuard 提供的服务，进行域名分类。</p>
+<p>统计发现，“商业”（business）、“色情”（pornography）和 “信息技术”（information technology）这三种网站是 GFW 封锁的主要类型（除了未分类的网站外）。</p>
+<p>另外一项没有没有统计子域名的研究则发现，“代理”（proxy avoidance）和 “个人网站和博客”（personal websites and blogs）是被封锁最多的网站类型。</p>
+<figure data-type="image" tabindex="8"><img src="https://www.gd1214b.icu/post-images/1634453502537.png" alt="" loading="lazy"></figure>
+<p>虽然 &quot;教育&quot; 不是被审查的首要类别，但研究人员同时发现了许多与教育有关的域名被封锁，包括 mit.edu、umich.edu、gwu.edu、armstrong.edu、brookings.edu、citizenlab.ca、feitian.edu、languagelog.ldc.upenn.edu、pori.hk、soas.ac.uk、 scratch.mit.edu、cs.colorado.edu……</p>
+<p>这是 GFW 滥封网站的又一个证据。</p>
+<h3 id="covid-19-自动化工具与雇员">COVID-19、自动化工具与雇员</h3>
+<p>GFWatch 检测到大量与 COVID-19 有关的域名被 GFW 通过 DNS 篡改进行审查，包括 covid19classaction.it、covid19song.info、covidcon.org、ccpcoronavirus.com、covidhaber.net 以及 covid-19truth.info 等网站。</p>
+<p>虽然大多数 COVID-19 相关的网站在出现后很快被 GFW 发现并封锁，但研究人员发现 GFW 无法做到实时封禁相关网站。</p>
+<p>ccpcoronavirus.com 和 covidhaber.net 于 2020 年 4 月首次出现在 GFWatch 的测试列表上，但分别直到 7 月和 9 月才被 GFW 封杀。同样的，covid-19truth.info 在 2020 年 9 月出现在研究人员的数据集中，但直到 10 月才被审查。</p>
+<p><em>GFW 审查不同域名所需时间的巨大差异表明，封锁网站名单很可能是由自动工具和人工共同完成的。</em></p>
+<h2 id="伪造的-ip-与被蒙蔽的人们">伪造的 IP 与被蒙蔽的人们</h2>
+<blockquote>
+<p>真理是永远蒙蔽不了的。</p>
+</blockquote>
+<p>了解 GFW 伪造的 IP 和它们被注入的模式（如果有的话）是至关重要的。</p>
+<p>研究人员分析了 GFWatch 收集的 IP，以研究是否存在任何特定的注入模式，在此基础上，我们可以制定策略来有效地检测和绕过 GFW 的 DNS 审查制度。</p>
+<h3 id="伪造的-ip-的数量随时间流逝增加">伪造的 IP 的数量随时间流逝增加</h3>
+<p>研究人员从 GFWatch 捕获的所有中毒的 DNS 响应中发现了 1781 和 1799 个伪造的 IPv4 和 IPv6 地址。</p>
+<p>研究人员发现所有被 GFW 注入的 IPv6 地址都是假的，因此，研究人员把分析的重点放在伪造的IPv4地址上。</p>
+<figure data-type="image" tabindex="9"><img src="https://www.gd1214b.icu/post-images/1634453556810.png" alt="" loading="lazy"></figure>
+<p>从 2020 年 5 月份开始，GFWatch 监测到 GFW 使用的伪造 IP 数量开始增多，在2020年的最后四个月，伪造的 IP 数量增长到 1700 个左右。</p>
+<h3 id="有迹可循伪造-ip-的注入模式">有迹可循：伪造 IP 的注入模式</h3>
+<p>通过分析每个伪造 IP 地址的注入频率，我们发现并不是所有的伪造 IP 都有同样的机会被注入到被审查的回应中，也就是说，他们的注入模式并不是完全随机的。</p>
+<p>尽管 GFW 伪造的 IP 数量迅速增加，但最初的 200 个伪造的 IP 仍然对 99% 的 DNS 注入负责。从 5 月到 8 月发现的新的的 1300 个伪造 IP 位于长尾部分，研究人员只在 1% 的 GFW 伪造的 DNS 响应中发现了它们。</p>
+<figure data-type="image" tabindex="10"><img src="https://www.gd1214b.icu/post-images/1634453577653.png" alt="" loading="lazy"></figure>
+<p>根据这一试验结果，我们或许获得了些许反制 GFW DNS 污染的灵感。</p>
+<h2 id="围城双向拦截">围城：双向拦截</h2>
+<blockquote>
+<p>城外的人想进去，城里的人想出来</p>
+</blockquote>
+<p>因为有时 DNS 查询的信息不可避免的会经过中国网络，触发 GFW 的双向 DNS 过滤行为，故先前研究人员曾认为 这是中国境外的公共 DNS 解析器缓存被污染的原因。</p>
+<p>经过进一步的研究，研究人员发现许多域名的权威名称服务器（authoritative name servers）位于中国境内是另一个主要原因，这些中毒的 DNS 缓存借此玷污了世界各地的许多公共 DNS 解析器。</p>
+<p>GFWatch 发现的被审查的域名和 GFW 伪造的 IP 的数据集有助于检测和净化公共 DNS 解析器缓存中的中毒资源记录。</p>
+<h3 id="gfw-对中国域名的地理封锁">GFW 对中国域名的地理封锁</h3>
+<p>2020 年 8 月 8 日，GFWatch 检测到 GFW 一个奇怪的封锁行为：GFW 对中国政府网站进行了审查阻断。</p>
+<p>www.beian.gov.cn 名为“全国互联网安全管理服务平台”，由中国工业和信息化部管理。这个域名有两个权威的名称服务器，dns7.hichina.com 和 dns8.hichina.com，它们被托管在 16 个不同的中国境内的 IP 地址上。一旦在中国境外发出向针对该网站的 DNS 查询，GFW 便会对查询进行污染与注入。但位于中国境内的主机仍然可以正常访问这个网站。</p>
+<p>因此，这是一个明显的地理封锁案例。GFW 不仅仅封堵了主机从中国向境外被审核网站的访问，也污染了境外主机向中国境内部分网站访问时的 DNS 查询。</p>
+<p>从中国境外访问 www.beian.gov.cn 会间歇性地成功，因为 GFW 的 DNS 注入有时会比正确的响应更晚到达使用终端。</p>
+<h3 id="gfw-大炮">GFW 大炮</h3>
+<p>研究人员提到了 GFW 发动资源耗尽攻击（resource exhaustion attacks）的可能性。 一旦 GFW 将 DNS 查询的结果大量导向某个 IP 地址，受影响的组织将在服务器上付出不可忽视的开销。</p>
+<p>GFW 甚至可以针对一个 DNS 查询发出多达三个伪造响应。从GFW的角度来看，注入多个虚假响应不仅增加了成功污染查询结果的可能性，也使检测和规避 DNS 污染的成本增高，难度增大。</p>
+<h2 id="如烛者思至则见不思不见">如烛者，思至则见，不思不见</h2>
+<blockquote>
+<p>你就是这道黑暗中强烈的光束，从属于你的夜晚中，照亮了他们曾经看不见的白天。<br>
+——爱德华·勒维</p>
+</blockquote>
+<p>一旦 GFWatch 检测到有域名被 GFW 封锁，研究人员就向公共的 DNS 解析器查询它们。最终，研究人员发现了公共 DNS 解析器的缓存中，有 7.7 万个被 GFW 审查的域名被污染。下图显示了数据被污染得最多的前十个公共 DNS 解析器。</p>
+<figure data-type="image" tabindex="11"><img src="https://www.gd1214b.icu/post-images/1634453632450.png" alt="" loading="lazy"></figure>
+<p>这一发现显示了 GFW 在世界范围内的广泛影响，使得公共的 DNS 解析器的操作者必须有一个有效的机制来防止这些中毒的资源记录污染他们的缓存，以保证他们的DNS服务质量。</p>
+<p>现在，研究人员将展示如何根据前文展示的 GFW 的特点和 GFWatch 获得的浩如烟海的数据制定策略，以有效和高效地规避 GFW 的 DNS 审查制度。</p>
+<p>当收到一个以上的 IPv6 回应时，客户端可以根据 GFW 伪造的 IPV6 的显著特点排除掉被污染的 IP 地址。对于 IPv4 答案，客户端可以根据前文中发现的 GFW 伪造 IP 的注入模式和伪造的 IPv4 特点来检查它们。</p>
+<p>从下图中，我们可以看到 99% 的被 GFW 污染的 DNS 响应比正确的响应提前 364ms 到达我们的机器（这个延迟时间根据终端和 GFW 之间的相对距离的不同而可能会有所不同）。换句话说，在查询一个受审查的域名 IP 时，收到 GFW 设备发出的 DNS 响应时，客户端最多应该多等 364ms，以等待正确 IP 的到来。</p>
+<figure data-type="image" tabindex="12"><img src="https://www.gd1214b.icu/post-images/1634453663346.png" alt="" loading="lazy"></figure>
+<h2 id="愿我们能够在没有黑暗的地方相遇">愿我们能够在没有黑暗的地方相遇</h2>
+<blockquote>
+<p>人类收到火的礼物之后，国王会用它征服世界，厨师会用它喂养世界，工程师会用它移动世界。小丑只会用它玩杂耍。</p>
+</blockquote>
+<p>研究团队开发了 GFWatch，监测并统计了 GFW 基于 DNS 审查的封锁行为。然而，DNS 审查并不是 GFW 使用的唯一的封锁技术，还有其他许许多多的技术被采用来防止信息在互联网间自由的流通。例如，基于 SNI 的封锁、基于关键字的过滤、针对特定 IP 的封锁、使用深度包监测识别异常流量……</p>
+<p>本篇文章以 MIT 协议开源，欢迎任何人转载、引用。祝您生活愉快、学业、事业顺利。</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/WyCiS5dGg.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/WyCiS5dGg/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-10-31">2021-10-31</time>
+                  <h4 class="title white no-margin">一个藏在我们身边的巨型僵尸网络——PinkBot</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/7H8zpCstc.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/7H8zpCstc/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-09-30">2021-09-30</time>
+                  <h4 class="title white no-margin">Let&#39;s Encrypt根证书过期预警 请在9月30日前及时更新</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

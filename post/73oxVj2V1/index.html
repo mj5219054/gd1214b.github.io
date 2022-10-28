@@ -1,0 +1,1016 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    IP 基础知识全家桶 | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="一、对 IP地址 基本的认识
+IP地址 在 TCP/IP地址 参考模型中处于第三层，也就是网络层。
+网络层的主要作用是：实现主机与主机之间的通信，也叫点对点（end to end）通信。
+
+
+网络层与数据链路层有什么关系呢？
+有的小伙伴分不..." />
+    <meta name="keywords" content="IP,网络" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-10-13"><i class="fa fa-calendar"></i><span class="lately">15 天前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/73oxVj2V1/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/73oxVj2V1/"> </span>
+              </a>
+              <span id="/73oxVj2V1/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-0 ctag-ip" aria-label="">IP</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-1 ctag-wang-luo" aria-label="">网络</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">IP 基础知识全家桶</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h1 id="一-对-ip地址-基本的认识">一、对 IP地址 基本的认识</h1>
+<p>IP地址 在 TCP/IP地址 参考模型中处于第三层，也就是网络层。</p>
+<p>网络层的主要作用是：实现主机与主机之间的通信，也叫点对点（end to end）通信。</p>
+<figure data-type="image" tabindex="1"><img src="https://www.gd1214b.icu/post-images/1665033956556.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>网络层与数据链路层有什么关系呢？<br>
+有的小伙伴分不清 IP地址（网络层） 和 MAC （数据链路层）之间的区别和关系。</p>
+</blockquote>
+<p>其实很容易区分，在上面我们知道 IP地址 的作用是主机之间通信用的，而 MAC 的作用则是实现「直连」的两个设备之间通信，而 IP地址 则负责在「没有直连」的两个网络之间进行通信传输。</p>
+<p>举个生活的栗子，小林要去一个很远的地方旅行，制定了一个行程表，其间需先后乘坐飞机、地铁、公交车才能抵达目的地，为此小林需要买飞机票，地铁票等。</p>
+<p>飞机票和地铁票都是去往特定的地点的，每张票只能够在某一限定区间内移动，此处的「区间内」就如同通信网络中数据链路。</p>
+<p>在区间内移动相当于数据链路层，充当区间内两个节点传输的功能，区间内的出发点好比源 MAC 地址，目标地点好比目的 MAC 地址。</p>
+<p>整个旅游行程表就相当于网络层，充当远程定位的功能，行程的开始好比源 IP地址，行程的终点好比目的 IP地址。</p>
+<figure data-type="image" tabindex="2"><img src="https://www.gd1214b.icu/post-images/1665034013538.webp" alt="" loading="lazy"></figure>
+<p>如果小林只有行程表而没有车票，就无法搭乘交通工具到达目的地。相反，如果除了车票而没有行程表，恐怕也很难到达目的地。因为小林不知道该坐什么车，也不知道该在哪里换乘。</p>
+<p>因此，只有两者兼备，既有某个区间的车票又有整个旅行的行程表，才能保证到达目的地。与此类似，计算机网络中也需要「数据链路层」和「网络层」这个分层才能实现向最终目标地址的通信。</p>
+<p>还有重要一点，旅行途中我们虽然不断变化了交通工具，但是旅行行程的起始地址和目的地址始终都没变。</p>
+<p>其实，在网络中数据包传输中也是如此，源IP地址和目标IP地址在传输过程中是不会变化的（前提：没有使用 NAT 网络），只有源 MAC 地址和目标 MAC 一直在变化。</p>
+<h1 id="二-ipv4协议">二、IPv4协议</h1>
+<p>在 TCP/IP地址 网络通信时，为了保证能正常通信，每个设备都需要配置正确的 IP地址，否则无法实现正常的通信。</p>
+<p>IPv4 地址由 32 位正整数来表示，IP地址在计算机是以二进制的方式处理的。</p>
+<p>而人类为了方便记忆采用了点分十进制的标记方式，也就是将 32 位 IP地址以每 8 位为组，共分为 4 组，每组以「.」隔开，再将每组转换成十进制。</p>
+<figure data-type="image" tabindex="3"><img src="https://www.gd1214b.icu/post-images/1665034086242.webp" alt="" loading="lazy"></figure>
+<p>那么，IP地址最大值也就是</p>
+<figure data-type="image" tabindex="4"><img src="https://www.gd1214b.icu/post-images/1665034103166.webp" alt="" loading="lazy"></figure>
+<p>理论上，最大允许 43 亿台计算机连接到网络。</p>
+<p>实际上，IP地址并不是根据主机台数来配置的。像服务器、路由器等设备都是有 2 个以上的网卡，也就是它们会有 2 个以上的 IP地址。</p>
+<figure data-type="image" tabindex="5"><img src="https://www.gd1214b.icu/post-images/1665034187790.webp" alt="" loading="lazy"></figure>
+<p>因此，让 43 亿台计算机全部连网其实是不可能的，更何况 IP地址是由「网络标识」和「主机标识」这两个部分组成的，所以实际能够连接到网络的计算机个数更是少了很多。</p>
+<p>可能有的小伙伴提出了疑问，现在不仅电脑配了 IP地址， 手机、平板 等电子设备都配了 IP地址 呀，照理来说肯定会超过 43 亿啦，那是怎么能够支持这么多 IP地址 的呢？</p>
+<p>因为会根据一种可以更换 IP地址的技术 NAT，使得可连接计算机数超过 43 亿台。 NAT 技术后续会进一步讨论和说明。</p>
+<h2 id="ip地址的分类">IP地址的分类</h2>
+<p>互联网诞生之初，IP地址显得很充裕，于是计算机科学家们设计了分类地址。</p>
+<p>IP地址分类成了 5 种类型，分别是 A 类、B 类、C 类、D 类、E 类。</p>
+<figure data-type="image" tabindex="6"><img src="https://www.gd1214b.icu/post-images/1665034285875.webp" alt="" loading="lazy"></figure>
+<p>上图中黄色部分为分类号，用以区分 IP地址类别。</p>
+<blockquote>
+<p>什么是 A、B、C 类地址？</p>
+</blockquote>
+<p>其中对于 A、B、C 类主要分为两个部分，分别是网络号和主机号。这很好理解，好比小林是 A 小区 1 栋 101 号，你是 B 小区 1 栋 101 号。</p>
+<p>我们可以用下面这个表格， 就能很清楚的知道 A、B、C 分类对应的地址范围、最大主机个数。</p>
+<figure data-type="image" tabindex="7"><img src="https://www.gd1214b.icu/post-images/1665034343886.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>A、B、C 分类地址最大主机个数是如何计算的呢？</p>
+</blockquote>
+<p>最大主机个数，就是要看主机号的位数，如 C 类地址的主机号占 8 位，那么 C 类地址的最大主机个数：</p>
+<figure data-type="image" tabindex="8"><img src="https://www.gd1214b.icu/post-images/1665034370655.webp" alt="" loading="lazy"></figure>
+<p>为什么要减 2 呢？</p>
+<p>因为在 IP地址中，有两个 IP地址 是特殊的，分别是主机号全为 1 和 全为 0 地址。</p>
+<figure data-type="image" tabindex="9"><img src="https://www.gd1214b.icu/post-images/1665034407561.webp" alt="" loading="lazy"></figure>
+<ul>
+<li>主机号全为 1 指定某个网络下的所有主机，用于广播</li>
+<li>主机号全为 0 指定某个网络</li>
+</ul>
+<p>因此，在分配过程中，应该去掉这两种情况。</p>
+<blockquote>
+<p>广播地址有什么用？</p>
+</blockquote>
+<p>广播地址用于在同一个链路中相互连接的主机之间发送数据包。</p>
+<p>学校班级中就有广播的例子，在准备上课的时候，通常班长会喊：“上课， 全体起立！”，班里的同学听到这句话是不是全部都站起来了？这个句话就有广播的含义。</p>
+<p>当主机号全为 1 时，就表示该网络的广播地址。例如把 172.20.0.0/16 用二进制表示如下：</p>
+<pre><code>10101100.00010100.00000000.00000000
+</code></pre>
+<p>将这个地址的主机部分全部改为 1，则形成广播地址：</p>
+<pre><code>10101100.00010100.11111111.11111111
+</code></pre>
+<p>再将这个地址用十进制表示，则为 172.20.255.255。</p>
+<p>广播地址可以分为本地广播和直接广播两种。</p>
+<ul>
+<li>在本网络内广播的叫做本地广播。例如网络地址为 192.168.0.0/24 的情况下，广播地址是 192.168.0.255 。因为这个广播地址的包会被路由器屏蔽，所以不会到达 192.168.0.0/24 以外的其他链路上。</li>
+<li>在不同网络之间的广播叫做直接广播。例如网络地址为 192.168.0.0/24 的主机向 192.168.1.255/24 的目标地址发送包。收到这个包的路由器，将数据转发给 192.168.1.0/24，从而使得所有 192.168.1.1~192.168.1.254 的主机都能收到这个包。（由于直接广播有一定的安全问题，多数情况下会在路由器上设置为不转发）</li>
+</ul>
+<figure data-type="image" tabindex="10"><img src="https://www.gd1214b.icu/post-images/1665034509315.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>什么是 D、E 类地址？</p>
+</blockquote>
+<p>D 类和 E 类地址是没有主机号的，不可用于主机 IP地址。D 类常被用于多播，E 类是预留的分类，暂时未使用。</p>
+<figure data-type="image" tabindex="11"><img src="https://www.gd1214b.icu/post-images/1665034550903.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>多播地址用于什么？</p>
+</blockquote>
+<p>多播用于将包发送给特定组内的所有主机。</p>
+<p>还是举班级的栗子，老师说：“最后一排的同学，上来做这道数学题。”，老师指定的是最后一排的同学，也就是多播的含义了。</p>
+<p>由于广播无法穿透路由，若想给其他网段发送同样的包，就可以使用可以穿透路由的多播。</p>
+<figure data-type="image" tabindex="12"><img src="https://www.gd1214b.icu/post-images/1665034573730.webp" alt="" loading="lazy"></figure>
+<p>多播使用的 D 类地址，其前四位是 1110 就表示是多播地址，而剩下的 28 位是多播的组编号。</p>
+<p>从 224.0.0.0 ~ 239.255.255.255 都是多播的可用范围，其划分为以下三类：</p>
+<ul>
+<li>224.0.0.0 ~ 224.0.0.255 为预留的组播地址，只能在局域网中，路由器是不会进行转发的。</li>
+<li>224.0.1.0 ~ 238.255.255.255 为用户可用的组播地址，可以用于 Internet 上。</li>
+<li>239.0.0.0 ~ 239.255.255.255 为本地管理组播地址，可供内部网在内部使用，仅在特定的本地范围内有效。</li>
+</ul>
+<blockquote>
+<p>IP地址 分类的优点</p>
+</blockquote>
+<p>不管是路由器还是主机解析到一个 IP地址时候，我们判断其 IP地址的首位是否为 0，为 0 则为 A 类地址，那么就能很快的找出网络地址和主机地址。</p>
+<p>其余分类判断方式参考如下图：</p>
+<figure data-type="image" tabindex="13"><img src="https://www.gd1214b.icu/post-images/1665034629589.webp" alt="" loading="lazy"></figure>
+<p>所以，这种分类地址的优点就是简单明了、选路（基于网络地址）简单。</p>
+<blockquote>
+<p>IP地址 分类的缺点</p>
+</blockquote>
+<ul>
+<li>缺点一</li>
+</ul>
+<p>同一网络下没有地址层次，比如一个公司里用了 B 类地址，但是可能需要根据生产环境、测试环境、开发环境来划分地址层次，而这种 IP地址 分类是没有地址层次划分的功能，所以这就缺少地址的灵活性。</p>
+<ul>
+<li>缺点二</li>
+</ul>
+<p>A、B、C类有个尴尬处境，就是不能很好的与现实网络匹配。</p>
+<p>C 类地址能包含的最大主机数量实在太少了，只有 254 个，估计一个网吧都不够用。</p>
+<p>而 B 类地址能包含的最大主机数量又太多了，6 万多台机器放在一个网络下面，一般的企业基本达不到这个规模，闲着的地址就是浪费。</p>
+<p>这两个缺点，都可以在 CIDR (无类别域间路由)解决。</p>
+<h2 id="无类别域间路由cidr">无类别域间路由(CIDR)</h2>
+<p>正因为 IP地址 分类存在许多缺点，所以后面提出了无分类地址的方案，即 CIDR。</p>
+<p>这种方式不再有分类地址的概念，32 比特的 IP地址被划分为两部分，前面是网络号，后面是主机号。</p>
+<blockquote>
+<p>怎么划分网络号和主机号的呢？</p>
+</blockquote>
+<p>表示形式 a.b.c.d/x，其中 /x 表示前 x 位属于网络号， x 的范围是 0 ~ 32，这就使得 IP地址更加具有灵活性。</p>
+<p>比如 10.100.122.2/24，这种地址表示形式就是 CIDR，/24 表示前 24 位是网络号，剩余的 8 位是主机号。</p>
+<figure data-type="image" tabindex="14"><img src="https://www.gd1214b.icu/post-images/1665034800403.webp" alt="" loading="lazy"></figure>
+<p>还有另一种划分网络号与主机号形式，那就是子网掩码，掩码的意思就是掩盖掉主机号，剩余的就是网络号。</p>
+<p>将子网掩码和 IP地址按位计算 AND，就可得到网络号。</p>
+<figure data-type="image" tabindex="15"><img src="https://www.gd1214b.icu/post-images/1665034816591.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>为什么要分离网络号和主机号？</p>
+</blockquote>
+<p>因为两台计算机要通讯，首先要判断是否处于同一个广播域内，即网络地址是否相同。如果网络地址相同，表明接受方在本网络上，那么可以把数据包直接发送到目标主机。</p>
+<p>路由器寻址工作中，也就是通过这样的方式来找到对应的网络号的，进而把数据包转发给对应的网络内。</p>
+<figure data-type="image" tabindex="16"><img src="https://www.gd1214b.icu/post-images/1665034862018.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>怎么进行子网划分？</p>
+</blockquote>
+<p>在上面我们知道可以通过子网掩码划分出网络号和主机号，那实际上子网掩码还有一个作用，那就是划分子网。</p>
+<p>子网划分实际上是将主机地址分为两个部分：子网网络地址和子网主机地址。形式如下：</p>
+<figure data-type="image" tabindex="17"><img src="https://www.gd1214b.icu/post-images/1665034889465.webp" alt="" loading="lazy"></figure>
+<ul>
+<li>未做子网划分的 IP地址：网络地址＋主机地址</li>
+<li>做子网划分后的 IP地址：网络地址＋（子网网络地址＋子网主机地址）<br>
+假设对 C 类地址进行子网划分，网络地址 192.168.1.0，使用子网掩码 255.255.255.192 对其进行子网划分。</li>
+</ul>
+<p>C 类地址中前 24 位是网络号，最后 8 位是主机号，根据子网掩码可知从 8 位主机号中借用 2 位作为子网号。</p>
+<figure data-type="image" tabindex="18"><img src="https://www.gd1214b.icu/post-images/1665034985061.webp" alt="" loading="lazy"></figure>
+<p>由于子网网络地址被划分成 2 位，那么子网地址就有 4 个，分别是 00、01、10、11，具体划分如下图：</p>
+<figure data-type="image" tabindex="19"><img src="https://www.gd1214b.icu/post-images/1665034999965.webp" alt="" loading="lazy"></figure>
+<p>划分后的 4 个子网如下表格：</p>
+<figure data-type="image" tabindex="20"><img src="https://www.gd1214b.icu/post-images/1665035018708.webp" alt="" loading="lazy"></figure>
+<h2 id="公有-ip地址与私有-ip地址">公有 IP地址与私有 IP地址</h2>
+<p>在 A、B、C 分类地址，实际上有分公有 IP地址和私有 IP地址。</p>
+<figure data-type="image" tabindex="21"><img src="https://www.gd1214b.icu/post-images/1665035086656.webp" alt="" loading="lazy"></figure>
+<p>平时我们办公室、家里、学校用的 IP地址，一般都是私有 IP地址。因为这些地址允许组织内部的 IT 人员自己管理、自己分配，而且可以重复。因此，你学校的某个私有 IP地址和我学校的可以是一样的。</p>
+<p>就像每个小区都有自己的楼编号和门牌号，你小区家可以叫 1 栋 101 号，我小区家也可以叫 1 栋 101，没有任何问题。但一旦出了小区，就需要带上中山路 666 号（公网 IP地址），是国家统一分配的，不能两个小区都叫中山路 666。</p>
+<p>所以，公有 IP地址是有个组织统一分配的，假设你要开一个博客网站，那么你就需要去申请购买一个公有 IP地址，这样全世界的人才能访问。并且公有 IP地址基本上要在整个互联网范围内保持唯一。</p>
+<figure data-type="image" tabindex="22"><img src="https://www.gd1214b.icu/post-images/1665035555145.webp" alt="" loading="lazy"></figure>
+<blockquote>
+<p>公有 IP地址由谁管理呢？</p>
+</blockquote>
+<p>私有 IP地址通常是内部的 IT 人员管理，公有 IP地址是由 ICANN 组织管理，中文叫「互联网名称与数字地址分配机构」。</p>
+<p>IANA 是 ICANN 的其中一个机构，它负责分配互联网 IP地址，是按洲的方式层层分配。</p>
+<figure data-type="image" tabindex="23"><img src="https://www.gd1214b.icu/post-images/1665035592477.webp" alt="" loading="lazy"></figure>
+<ul>
+<li>ARIN 北美地区</li>
+<li>LACNIC 拉丁美洲和一些加勒比群岛</li>
+<li>RIP地址E NCC 欧洲、中东和中亚</li>
+<li>AFRINIC 非洲地区</li>
+<li>APNIC 亚太地区<br>
+其中，在中国是由 CNNIC 的机构进行管理，它是中国国内唯一指定的全局 IP地址管理的组织。</li>
+</ul>
+<h1 id="ip地址与路由控制">IP地址与路由控制</h1>
+<p>IP地址的网络地址这一部分用于进行路由控制。</p>
+<p>路由控制表中记录着网络地址与下一步应该发送至路由器的地址。在主机和路由器上都会有各自的路由器控制表。</p>
+<p>在发送 IP 包时，首先要确定 IP 包首部中的目标地址，再从路由控制表中找到与该地址具有相同网络地址的记录，根据该记录将 IP 包转发给相应的下一个路由器。如果路由控制表中存在多条相同网络地址的记录，就选择相同位数最多的网络地址，也就是最长匹配。</p>
+<p>下面以下图的网络链路作为例子说明：</p>
+<figure data-type="image" tabindex="24"><img src="https://www.gd1214b.icu/post-images/1665645320998.webp" alt="" loading="lazy"></figure>
+<ol>
+<li>主机 A 要发送一个 IP 包，其源地址是 10.1.1.30 和目标地址是 10.1.2.10，由于没有在主机 A 的路由表找到与目标地址 10.1.2.10 相同的网络地址，于是包被转发到默认路由（路由器 1 ）</li>
+<li>路由器 1 收到 IP 包后，也在路由器 1 的路由表匹配与目标地址相同的网络地址记录，发现匹配到了，于是就把 IP 数据包转发到了 10.1.0.2 这台路由器 2</li>
+<li>路由器 2 收到后，同样对比自身的路由表，发现匹配到了，于是把 IP 包从路由器 2 的 10.1.2.1 这个接口出去，最终经过交换机把 IP 数据包转发到了目标主机</li>
+</ol>
+<p>本机使用一个特殊的 IP 地址 127.0.0.1， 称为环回地址。与该地址具有相同意义的是一个叫做 localhost 的主机名。使用这个 IP 或主机名时，数据包不会流向网络。</p>
+<h1 id="ip-的分片与重组">IP 的分片与重组</h1>
+<p>每种数据链路的最大传输单元 （MTU） 都是不相同的，如 FDDI 数据链路 MTU 为4352、以太网的 MTU 是 1500 字节等。</p>
+<p>每种数据链路的 MTU 之所以不同，是因为每个不同类型的数据链路的使用目的不同。使用目的不同，可承载的 MTU 也就不同。</p>
+<p>其中，我们最常见数据链路是以太网，它的 MTU 是 1500 字节。</p>
+<p>那么当 IP 数据包大小大于 MTU 时， IP 数据包就会被分片。</p>
+<p>经过分片之后的 IP 数据包在被重组的时候，只能由目标主机进行，路由器是不会进行重组的。</p>
+<p>假设发送方发送一个 4000 字节的大数据包，若要传输在以太网链路，则需要把数据包分片成 3 个小数据包进行传输，再交由接收方重组成大数据包。</p>
+<figure data-type="image" tabindex="25"><img src="https://www.gd1214b.icu/post-images/1665645787464.webp" alt="" loading="lazy"></figure>
+<p>在分片传输中，一旦某个分片丢失，则会造成整个 IP 数据报作废，所以 TCP 引入了最大分段大小（ MSS） 也就是在 TCP 层进行分片不由 IP 层分片，所以对于 UDP 我们尽量不要发送一个大于 MTU 的数据报文。</p>
+<h1 id="ipv6地址">IPv6地址</h1>
+<p>最后再来谈谈IPv6.</p>
+<p>IPv4 的地址是 32 位的，大约可以提供 42 亿个地址，但是早在 2011 年 IPv4 地址就已经被分配完了。</p>
+<p>但是 IPv6 的地址是 128 位的，这可分配的地址数量是大的惊人，据说 IPv6 可以保证地球上的每粒沙子都能被分配到一个 IP 地址。</p>
+<p>但 IPv6 除了有更多的地址之外，还有更好的安全性和扩展性，说简单点就是 IPv6 相比于 IPv4 能带来更好的网络体验。</p>
+<p>但是因为 IPv4 和 IPv6 不能相互兼容，所以不但要我们电脑、手机之类的设备支持，还需要网络运营商对现有的设备进行升级，所以这可能是 IPv6 普及率比较慢的一个原因。</p>
+<h2 id="ipv6-的亮点">IPv6 的亮点</h2>
+<p>IPv6 不仅仅只是可分配的地址变多了，它还有非常多的亮点。</p>
+<ul>
+<li>IPv6 可自动配置，即使没有 DHCP 服务器也可以实现自动分配IP地址，真是便捷到即插即用啊。</li>
+<li>IPv6 包头包首部长度采用固定的值 40 字节，去掉了包头校验和，简化了首部结构，减轻了路由器负荷，大大提高了传输的性能。</li>
+<li>IPv6 有应对伪造 IP 地址的网络安全功能以及防止线路窃听的功能，大大提升了安全性。<br>
+...</li>
+</ul>
+<h2 id="ipv6-地址的标识方法">IPv6 地址的标识方法</h2>
+<p>IPv4 地址长度共 32 位，是以每 8 位作为一组，并用点分十进制的表示方式。</p>
+<p>IPv6 地址长度是 128 位，是以每 16 位作为一组，每组用冒号 「:」 隔开。</p>
+<figure data-type="image" tabindex="26"><img src="https://www.gd1214b.icu/post-images/1665646769204.webp" alt="" loading="lazy"></figure>
+<p>如果出现连续的 0 时还可以将这些 0 省略，并用两个冒号 「::」隔开。但是，一个 IP 地址中只允许出现一次两个连续的冒号。</p>
+<figure data-type="image" tabindex="27"><img src="https://www.gd1214b.icu/post-images/1665646782121.webp" alt="" loading="lazy"></figure>
+<h2 id="ipv6-地址的结构">IPv6 地址的结构</h2>
+<p>IPv6 类似 IPv4，也是通过 IP 地址的前几位标识 IP 地址的种类。</p>
+<p>IPv6 的地址主要有以下类型地址：</p>
+<ul>
+<li>单播地址，用于一对一的通信</li>
+<li>组播地址，用于一对多的通信</li>
+<li>任播地址，用于通信最近的节点，最近的节点是由路由协议决定</li>
+<li>没有广播地址</li>
+</ul>
+<figure data-type="image" tabindex="28"><img src="https://www.gd1214b.icu/post-images/1665646830999.webp" alt="" loading="lazy"></figure>
+<h2 id="ipv6-单播地址类型">IPv6 单播地址类型</h2>
+<p>对于一对一通信的 IPv6 地址，主要划分了三类单播地址，每类地址的有效范围都不同。</p>
+<ul>
+<li>在同一链路单播通信，不经过路由器，可以使用链路本地单播地址，IPv4 没有此类型</li>
+<li>在内网里单播通信，可以使用唯一本地地址，相当于 IPv4 的私有 IP</li>
+<li>在互联网通信，可以使用全局单播地址，相当于 IPv4 的公有 IP</li>
+</ul>
+<figure data-type="image" tabindex="29"><img src="https://www.gd1214b.icu/post-images/1665646880285.webp" alt="" loading="lazy"></figure>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://xiaolincoding.com/network/4_ip/ip_base.html">https://xiaolincoding.com/network/4_ip/ip_base.html</a></li>
+</ul>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></div>
+                 <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-10-23">2022-10-23</time>
+                  <h4 class="title white no-margin">缓解假墙伪墙攻击勒索的多种技术手段</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/__J_EhPni.png');"></div>
+                 <a href="https://www.gd1214b.icu/post/__J_EhPni/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-10-10">2022-10-10</time>
+                  <h4 class="title white no-margin">【主机测评】——蓝易云——1C1G 10M香港CN2 服务器 29元/月起</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

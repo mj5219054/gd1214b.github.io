@@ -1,0 +1,978 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    利用GitHub Actions 监控网站- Upptime | gd1214b&#39;s blog
+</title>
+<meta name="description" content="念念不忘，必有回响" />
+<link rel="shortcut icon" href="https://www.gd1214b.icu/favicon.ico">
+<link rel="stylesheet" href="https://www.gd1214b.icu/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="RSS" href="https://blog.gd1214b.icu/atom.xml">
+<script src="https://www.gd1214b.icu/media/js/jquery.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/masonry.pkgd.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/aos.js"></script>
+<script src="https://www.gd1214b.icu/media/js/pace.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/view-image.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://www.gd1214b.icu/media/js/functions.js"></script>
+<script src="//instant.page/5.1.1" type="module"
+    integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DX8ZG93X7W"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DX8ZG93X7W');
+</script>
+
+<script type="text/javascript">
+    (function (c, l, a, r, i, t, y) {
+        c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+        t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, "clarity", "script", "7hirib7ekv");
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-217344475-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-217344475-1');
+</script>
+
+<script async defer src="https://sa.gd1214b.icu/latest.js"></script>
+<noscript><img src="https://sa.gd1214b.icu/noscript.gif" alt=""
+        referrerpolicy="no-referrer-when-downgrade" /></noscript>
+    <meta name="referrer" content="never">
+    <meta name="description" content="前阵子在网络上看到一个很酷的开源项目： Upptime
+每隔一段时间用GitHub Actions 看网站能否访问,若不能访问就用GitHub Issues 回报异常事件,使用GitHub Pages 产生服务状态的页面.
+GitHub A..." />
+    <meta name="keywords" content="GitHub Actions,Upptime" />
+    <script src="https://www.gd1214b.icu/media/js/waterfall.min.js"></script>
+    <script src="https://www.gd1214b.icu/media/js/prism.min.js"></script>
+  </head>
+  <body>
+      <header id="header" class="grid-container">
+  <!-- start: .menu-wrapper -->
+  <div class="menu-mobile">
+    <i class="fa fa-reorder"></i>
+  </div>
+  <div class="menu-wrapper">
+    <div class="">
+      <p align="center">
+      <div class="logo">
+        <a href="https://www.gd1214b.icu"><img src="\media\images\custom-headerLogo.ico" alt=""></a>
+        <font href="/" size="5" color="white">gd1214b's blog</font>
+      </div>
+      </p>
+    </div>
+    <!-- start: .main-nav -->
+
+    <nav class="main-nav grid-container grid-parent">
+      <ul id="menu-header" class="menu gradient-effect">
+        <!-- <li class=""><a href="https://www.gd1214b.icu" class="menu">首页</a></li> -->
+        
+          <li class="">
+            <a href="/" class="menu">
+              🏠首页
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/archives" class="menu">
+              🗄️归档
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/tags" class="menu">
+              🏷️标签
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/copyright" class="menu">
+              ©︎版权声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/privacy-policy" class="menu">
+              🔒隐私政策
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/disclaimers" class="menu">
+              🌐免责声明
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/lab" class="menu">
+              🧪实验室
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://drive.gd1214b.icu" class="menu">
+              ☁️网盘
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://status.gd1214b.tech/" class="menu">
+              📊探针
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="https://travellings.link" class="menu">
+              🚇开往
+            </a>
+          </li>
+          
+          <li class="">
+            <a href="/post/about" class="menu">
+              👋关于
+            </a>
+          </li>
+          
+            <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox"
+                class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+      </ul>
+    </nav>
+    <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i
+        class="fa fa-search-line"></i></a>
+    <!-- end: .main-nav -->
+    <div class="clear"></div>
+    <div class="border hide-on-tablet hide-on-mobile"></div>
+  </div>
+  <div class="clear"></div>
+  </div>
+  <!-- end: .menu-wrapper -->
+  <div class="clear"></div>
+</header>
+<div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+  <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+    <div class="search-wrapper section">
+      <form id="gridea-search-form" data-update="1666956796253" action="/search/index.html" class="search-form"
+        _lpchecked="1">
+        <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..."
+          required="">
+        <button type="submit" class="submit" aria-label="Submit">
+          <i class="fa fa-search-line"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://blog.gd1214b.icu/post-images/1624170045428.png');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-06-20"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://www.gd1214b.icu/post/G9dquz6bG/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/G9dquz6bG/"> </span>
+              </a>
+              <span id="/G9dquz6bG/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-0 ctag-github-actions" aria-label="">GitHub Actions</a>
+                    
+                      <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-1 ctag-upptime" aria-label="">Upptime</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">利用GitHub Actions 监控网站- Upptime</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>前阵子在网络上看到一个很酷的开源项目： <a href="https://github.com/upptime/upptime">Upptime</a></p>
+<p>每隔一段时间用GitHub Actions 看网站能否访问,若不能访问就用GitHub Issues 回报异常事件,使用GitHub Pages 产生服务状态的页面.</p>
+<h1 id="github-actions-简介">GitHub Actions 简介</h1>
+<p>GitHub Actions是GitHub上的一个自动化服务，你可以把脚本放到上面，当特定事件发生时，自动执行你的脚本。</p>
+<p>以Upptime来说，预设是每隔五分钟访问你的网站一次（实际上由于GitHub的限制，间隔可能会更长），同时也会记录每次的response time，让你在页面上看历史纪录等等。</p>
+<p>这些动作都写在Actions的脚本中，机器都会自己执行，完全不用动到一根指头。</p>
+<p>介绍完之后，就来开始部署Upptime吧。</p>
+<h1 id="创建github-repo">创建GitHub Repo</h1>
+<ol>
+<li>进入Upptime的<a href="https://github.com/upptime/upptime">repo</a></li>
+<li>点击 <strong>Use this template</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624168642287.png" alt="" loading="lazy"></li>
+<li>创建repo<br>
+* 输入repo name<br>
+* 勾选 <strong>Include all branches</strong><br>
+* 点击 <strong>Create repository from temple</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624168745412.png" alt="" loading="lazy"><br>
+等一阵子后,就会复制一样的repo到你的帐号下</li>
+</ol>
+<h1 id="设置github-pages">设置GitHub Pages</h1>
+<ol>
+<li>到你的repo，点击 <strong>Settings</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624168798869.png" alt="" loading="lazy"></li>
+<li>往下找到GitHub Pages 的<strong>Source</strong></li>
+</ol>
+<ul>
+<li>Branch 设为 <strong>gh-pages</strong></li>
+<li>点击 <strong>Save</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624168860771.png" alt="" loading="lazy"></li>
+</ul>
+<h1 id="设置repository-secret">设置Repository Secret</h1>
+<p>为了让Upptime有commit和publish网页的权限，需要设定Personal Access Token</p>
+<ol>
+<li>点击自己的<strong>Profile picture</strong> &gt; <strong>Settings</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624168921775.png" alt="" loading="lazy"></li>
+<li>点击左侧的<strong>Developer settings</strong> &gt; <strong>Personal access tokens</strong> &gt; <strong>Generate new token</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624168964700.png" alt="" loading="lazy"></li>
+<li>新增token
+<ul>
+<li>Note: <strong>upptime</strong></li>
+<li>Select scopes:勾选<strong>repo</strong>和<strong>workflow</strong></li>
+<li>点击 <strong>Generate token</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624169013442.png" alt="" loading="lazy"></li>
+</ul>
+</li>
+<li>复制token<br>
+<img src="https://www.gd1214b.icu/post-images/1624169029896.png" alt="" loading="lazy"></li>
+<li>返回<strong>repo</strong> &gt;<strong>Settings</strong><br>
+点击左侧<strong>Secrets</strong>&gt; <strong>Add a new secret</strong> &gt; <strong>New repository secret</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624169066911.png" alt="" loading="lazy"></li>
+<li>设定repo 的token</li>
+</ol>
+<ul>
+<li>Name: <strong>GH_PAT</strong></li>
+<li>Value: 贴上刚刚复制的 <strong>token</strong></li>
+<li>点击 <strong>Add secret</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624169109524.png" alt="" loading="lazy"></li>
+</ul>
+<h1 id="更新yaml文件">更新YAML文件</h1>
+<p>Upptime使用.yml来做“集中式设置”，只要更改这个文件的设置，所有相关代码就会一起修改。</p>
+<ol>
+<li>到你的repo，点击<strong>Code</strong> &gt; <strong>.upptimerc.yml</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624169199844.png" alt="" loading="lazy"></li>
+<li>点击铅笔按钮编辑文件</li>
+<li>按照以下模版修改此文件：(方括号内是需要修改的内容，修改完之后请删除方括号)</li>
+</ol>
+<pre><code class="language-yaml">#你的GitHub username 
+owner: 【GitHub username】
+
+#你的GitHub repo name 
+repo: 【repo name】
+
+#加入要监控的网站名称与URL ,可以添加多个网站
+sites: 
+  - name: 【网站名称】
+    url: 【URL】
+
+#没有域名的按照以下模版填写
+status-website: 
+    #cname: demo.upptime.js.org (移除) 
+    baseUrl: /upptime
+
+#有域名的按照以下模版填写
+status-website: 
+    cname: 【你的域名】
+    
+#自定义状态页面的navbar名称与链接
+navbar: 
+    - title: 【名称】
+      href: 【链接】
+</code></pre>
+<h1 id="查看github-actions">查看GitHub Actions</h1>
+<p>设定好.upptimerc.yml后，Actions就会自动开始运行(黄圈在转)。运行成功会显示绿色的勾，运行失败会显示红色的叉。<br>
+<img src="https://www.gd1214b.icu/post-images/1624169705043.png" alt="" loading="lazy"><br>
+如果发现Actions没运行，或是想要让它马上执行，就点击左侧的<strong>Setup CI</strong>&gt; <strong>Run workflow</strong> &gt; <strong>Run workflow</strong><br>
+<img src="https://www.gd1214b.icu/post-images/1624169731129.png" alt="" loading="lazy"></p>
+<h1 id="查看status-website">查看Status Website</h1>
+<p>你的状态页面URL是:https://【user_name】.github.io/【repo_name】/<br>
+或是可以到<strong>repo</strong> &gt; <strong>Settings</strong> &gt; <strong>GitHub Pages</strong>查看URL</p>
+<p>点击URL后，我们来到了状态页面，页面分成三个区块。</p>
+<p>Active Incidents 显示目前的异常事件，Past Incidents 显示过去的异常事件，Live Status 可以切换五种response time 图形。<br>
+<img src="https://www.gd1214b.icu/post-images/1624170045428.png" alt="" loading="lazy"></p>
+<h1 id="进阶操作">进阶操作</h1>
+<h2 id="自定义运行时间">自定义运行时间</h2>
+<p>Upptime有七个Workflows，只要把下面这段粘贴到.upptimerc.yml，就可以自定义Workflow的时间点</p>
+<pre><code class="language-yaml">workflowSchedule: 
+  graphs: &quot;0 0 * * *&quot; 
+  responseTime: &quot;0 23 * * *&quot; 
+  staticSite: &quot;0 1 * * *&quot; 
+  summary: &quot;0 0 * * *&quot; 
+  updateTemplate: &quot;0 0 * * *&quot; 
+  updates: &quot; 0 3 * * *&quot; 
+  uptime: &quot;*/5 * * * *&quot;
+</code></pre>
+<h2 id="自定义状态页面">自定义状态页面</h2>
+<p>Status Website预设是英文的，如果你想要改成其他语言，可以把要修改的部分粘贴到.upptimerc.yml</p>
+<p>例如：</p>
+<pre><code class="language-yaml">i18n:
+  activeIncidents: 活动事件
+  allSystemsOperational: 所有系统都可以正常运行
+  incidentReport: &quot;事件 #$NUMBER 报告 →&quot;
+  activeIncidentSummary: 在 $DATE 打开，有 $POSTS 个帖子
+  incidentTitle: 事件 $NUMBER 的详细信息
+  incidentDetails: 事件详细信息
+  incidentFixed: 已修复
+  incidentOngoing: 正在进行
+  incidentOpenedAt: 开始于
+  incidentClosedAt: 结束于
+  incidentSubscribe: 订阅更新
+  incidentViewOnGitHub: 在 GitHub 上查看
+  incidentCommentSummary: 由 $AUTHOR 在 $DATE 发布
+  incidentBack: ← 返回所有事件
+  pastIncidents: 过去的事件
+  pastIncidentsResolved: $POSTS 个问题在 $MINUTES 分钟内得到解决
+  liveStatus: 实时状态
+  overallUptime: &quot;总体正常运行时间： $UPTIME&quot;
+  overallUptimeTitle: 总体正常运行时间
+  averageResponseTime: &quot;平均响应时间: $TIMEms&quot;
+  averageResponseTimeTitle: 平均响应时间
+  sevelDayResponseTime: 7 天响应时间
+  responseTimeMs: 响应时间（毫秒）
+  ms: 毫秒
+  loading: 加载中
+  navGitHub: GitHub
+  footer: gd1214b保留所有权利。 Copyright © 2021 gd1214b. All Rights Reserved.
+  rateLimitExceededTitle: 超出速率限制
+  rateLimitExceededIntro: 您已超过一小时内可以执行的请求数，因此您必须等待才能再次访问此网站。或者，您可以添加 GitHub 个人访问令牌以继续使用本网站。
+  rateLimitExceededWhatDoesErrorMean: 这个错误是什么意思？本网站使用 GitHub API 访问有关我们网站状态的实时数据。默认情况下，GitHub 允许每个 IP 地址每小时 60 个请求，您已经消耗了这些请求。
+  rateLimitExceededErrorHowCanFix: 我该如何解决？
+  rateLimitExceededErrorFix: 您可以再等一个小时，您的 IP 地址限制将恢复。或者，您可以添加您的 GitHub 个人访问令牌，这将为您提供每小时额外 5,000 个请求。
+  rateLimitExceededGeneratePAT: 了解如何生成个人访问令牌
+  rateLimitExceededHasSet: 您有一个个人访问令牌集。
+  rateLimitExceededRemoveToken: 删除令牌
+  rateLimitExceededGitHubPAT: GitHub 个人访问令牌
+  rateLimitExceededCopyPastePAT: 复制并粘贴您的令牌
+  rateLimitExceededSaveToken: 保存令牌
+  errorTitle: 发生错误
+  errorIntro: 尝试获取最新状态详细信息时出错。
+  errorText: 您可以稍后再试。
+  errorHome: 转到主页
+  pastScheduledMaintenance: 过去的预定维护
+  scheduledMaintenance: 定期维护
+  scheduledMaintenanceSummaryStarted: 从 $DATE 开始，持续 $DURATION 分钟
+  scheduledMaintenanceSummaryStarts: 从 $DATE 开始，持续 $DURATION 分钟
+  startedAt: 开始在
+  startsAt: 开始于
+  duration: 持续时间
+  durationMin: $DURATION 分钟
+  incidentCompleted: 已完成
+  incidentScheduled: 已预定
+  url: &quot;链接&quot;
+  status: &quot;状态&quot;
+  history: &quot;历史&quot;
+  responseTime: &quot;响应时间&quot;
+  uptime: &quot;正常运行时间&quot;
+  up: &quot;🟩 正常运行&quot;
+  degraded: &quot;🟨 运行缓慢&quot;
+  down: &quot;🟥 停机&quot;
+  responseTimeGraphAlt: &quot;响应时间图像&quot;
+  responseTimeDay: &quot;24 小时响应时间&quot;
+  responseTimeWeek: &quot;7 天正常运行时间&quot;
+  responseTimeMonth: &quot;30天的正常运行时间&quot;
+  responseTimeYear: &quot;1年的正常运行时间&quot;
+  uptimeDay: &quot;24 小时正常运行时间&quot;
+  uptimeWeek: &quot;7 天正常运行时间&quot;
+  uptimeMonth: &quot;30天的正常运行时间&quot;
+  uptimeYear: &quot;1年的正常运行时间&quot;
+  liveStatusHtmlComment: &quot;&lt;！ -实时状态- &gt;&quot;
+  degradedPerformance: &quot;🟨 性能降低&quot;
+  completeOutage: &quot;🟥 全部停机&quot;
+  partialOutage: &quot;🟧 部分停机&quot;
+</code></pre>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><a href="https://annkuoq.github.io/blog/2021-01-09-uptime-monitor-and-status-website-service-with-upptime/">AnnKuoQ Blog</a></li>
+<li><a href="https://upptime.js.org/docs/get-started">Getting started | Upptime</a></li>
+<li><a href="https://github.com/upptime/upptime">upptime - GitHub</a></li>
+</ul>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://www.gd1214b.icu/post-images/sZOPxqKBm.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/sZOPxqKBm/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-06-21">2021-06-21</time>
+                  <h4 class="title white no-margin">网络空间的兴衰</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://blog.gd1214b.icu/post-images/1623555369281.jpg');"></div>
+                 <a href="https://www.gd1214b.icu/post/yZTkyJpRj/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-06-13">2021-06-13</time>
+                  <h4 class="title white no-margin">大话中国骨干网</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://www.gd1214b.icu/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                
+                  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+<div class="clear"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '814b1bd24e8d16500e7d',
+    clientSecret: '2ca3dfed5c49a6f5905de256bfaffdd3e452f5ee',
+    repo: 'gd1214b.github.io',
+    owner: 'gd1214b',
+    admin: ['gd1214b'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+</script>
+
+                
+                
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+      <footer id="footer" class="grid-container">
+  <div class="widgets row gradient-effect">
+    <div class="default-sidebar border-effect">
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+          <h4 class="widget-title title white bordered">最新文章</h4>
+          
+            
+              <article
+                class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/Wmy6lTJ40.jpg');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-28">
+                    2022-10-28
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/Wmy6lTJ40/">
+                      中间人如何识别代理流量
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/t3pZq_036/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/t3pZq_036.webp');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-23">
+                    2022-10-23
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/t3pZq_036/">
+                      缓解假墙伪墙攻击勒索的多种技术手段
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+              <article
+                class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                <a href="https://www.gd1214b.icu/post/73oxVj2V1/" class="thumb hover-effect">
+                  <span class="fullimage cover"
+                    style="display:block;border-radius:50%;background-image: url('https://www.gd1214b.icu/post-images/73oxVj2V1.png');"></span>
+                </a>
+                <div class="info gradient-effect">
+                  <time datetime="2022-10-13">
+                    2022-10-13
+                  </time>
+                  <h4 class="title usmall">
+                    <a href="https://www.gd1214b.icu/post/73oxVj2V1/">
+                      IP 基础知识全家桶
+                    </a>
+                  </h4>
+                </div>
+                <div class="clear"></div>
+              </article>
+              
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                  <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+          <h4 class="widget-title title white bordered">标签云</h4>
+          <div class="tagcloud">
+            
+              <a href="https://www.gd1214b.icu/tag/zhong-jian-ren-gong-ji/" class="ctag ctag-0 ctag-zhong-jian-ren-gong-ji" aria-label="">
+                中间人攻击
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gfw/" class="ctag ctag-1 ctag-gfw" aria-label="">
+                GFW
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/wang-luo/" class="ctag ctag-2 ctag-wang-luo" aria-label="">
+                网络
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ip/" class="ctag ctag-3 ctag-ip" aria-label="">
+                IP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/vps/" class="ctag ctag-4 ctag-vps" aria-label="">
+                VPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/virtualbox/" class="ctag ctag-5 ctag-virtualbox" aria-label="">
+                VirtualBox
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/macos/" class="ctag ctag-6 ctag-macos" aria-label="">
+                macOS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pgp/" class="ctag ctag-7 ctag-pgp" aria-label="">
+                PGP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dns/" class="ctag ctag-8 ctag-dns" aria-label="">
+                DNS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/yun-ying-shang/" class="ctag ctag-9 ctag-yun-ying-shang" aria-label="">
+                运营商
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/telegram/" class="ctag ctag-10 ctag-telegram" aria-label="">
+                Telegram
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/backblaze/" class="ctag ctag-11 ctag-backblaze" aria-label="">
+                Backblaze
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare/" class="ctag ctag-12 ctag-cloudflare" aria-label="">
+                Cloudflare
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/jsdelivr/" class="ctag ctag-13 ctag-jsdelivr" aria-label="">
+                jsDelivr
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/an-quan/" class="ctag ctag-14 ctag-an-quan" aria-label="">
+                安全
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/diceware/" class="ctag ctag-15 ctag-diceware" aria-label="">
+                Diceware
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/rss/" class="ctag ctag-16 ctag-rss" aria-label="">
+                RSS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/seo/" class="ctag ctag-17 ctag-seo" aria-label="">
+                SEO
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/koyeb/" class="ctag ctag-18 ctag-koyeb" aria-label="">
+                Koyeb
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/v2ray/" class="ctag ctag-19 ctag-v2ray" aria-label="">
+                v2ray
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/okteto/" class="ctag ctag-20 ctag-okteto" aria-label="">
+                Okteto
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/metaverse/" class="ctag ctag-21 ctag-metaverse" aria-label="">
+                Metaverse
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/shi-ping/" class="ctag ctag-22 ctag-shi-ping" aria-label="">
+                时评
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/pinkbot/" class="ctag ctag-23 ctag-pinkbot" aria-label="">
+                PinkBot
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/https/" class="ctag ctag-24 ctag-https" aria-label="">
+                HTTPS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ca-zheng-shu/" class="ctag ctag-25 ctag-ca-zheng-shu" aria-label="">
+                CA证书
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-ji-huo/" class="ctag ctag-26 ctag-windows-ji-huo" aria-label="">
+                Windows激活
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gpl/" class="ctag ctag-27 ctag-gpl" aria-label="">
+                GPL
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onemanager/" class="ctag ctag-28 ctag-onemanager" aria-label="">
+                OneManager
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/glitch/" class="ctag ctag-29 ctag-glitch" aria-label="">
+                Glitch
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/onedrive/" class="ctag ctag-30 ctag-onedrive" aria-label="">
+                Onedrive
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/sui-bi/" class="ctag ctag-31 ctag-sui-bi" aria-label="">
+                随笔
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/windows-11/" class="ctag ctag-32 ctag-windows-11" aria-label="">
+                Windows 11
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/dnssec/" class="ctag ctag-33 ctag-dnssec" aria-label="">
+                DNSSEC
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/github-actions/" class="ctag ctag-34 ctag-github-actions" aria-label="">
+                GitHub Actions
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/upptime/" class="ctag ctag-35 ctag-upptime" aria-label="">
+                Upptime
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/gridea/" class="ctag ctag-36 ctag-gridea" aria-label="">
+                Gridea
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cdn/" class="ctag ctag-37 ctag-cdn" aria-label="">
+                CDN
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/heroku/" class="ctag ctag-38 ctag-heroku" aria-label="">
+                Heroku
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fastly/" class="ctag ctag-39 ctag-fastly" aria-label="">
+                Fastly
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/cloudflare-worker/" class="ctag ctag-40 ctag-cloudflare-worker" aria-label="">
+                Cloudflare Worker
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/fan-xiang-dai-li/" class="ctag ctag-41 ctag-fan-xiang-dai-li" aria-label="">
+                反向代理
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/program-think/" class="ctag ctag-42 ctag-program-think" aria-label="">
+                program-think
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/http/" class="ctag ctag-43 ctag-http" aria-label="">
+                HTTP
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ddos/" class="ctag ctag-44 ctag-ddos" aria-label="">
+                DDoS
+              </a>
+              
+              <a href="https://www.gd1214b.icu/tag/ce-shi/" class="ctag ctag-45 ctag-ce-shi" aria-label="">
+                测试
+              </a>
+              
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+      <div class="grid-33 tablet-grid-50 mobile-grid-100">
+        <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+          <h4 class="widget-title title white bordered">关于我</h4>
+          <div class="avatar">
+            <a href="" class="translate-effect thumb"><span class="fullimage cover"
+                style="background-image: url(https://www.gd1214b.icu/images/avatar.png);"></span></a>
+          </div>
+          <div class="info">
+            <h4 class="title small author-name gradient-effect no-margin"><a href="">
+                gd1214b&#39;s blog
+              </a></h4>
+            <p class="founder">
+              念念不忘，必有回响
+            </p>
+            <div class="social">
+              
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-github"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-twitter"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-telegram"></i></a>
+                  
+                    
+                
+                  <a href="" class="translate-effect" target="_blank"><i
+                      class="fa fa-feed"></i></a>
+                  
+                    
+            </div>
+          </div>
+          <div class="clear"></div>
+        </section>
+      </div>
+
+    </div>
+    <div class="clear"></div>
+  </div>
+
+
+  <p align="center">
+    <!--开往-->
+    <a href="https://travellings.cn/" target="_blank" rel="noopener" title="开往-友链接力">
+      <img src="https://travellings.cn/assets/logo.gif" alt="开往-友链接力" width="120">
+    </a>
+    ㅤㅤㅤ
+    <!--虫洞-->
+    <a href="https://www.foreverblog.cn/go.html" target="_blank"> <img src="https://img.foreverblog.cn/wormhole_3.gif"
+        alt="" style="width:auto;height:32px;" title="穿梭虫洞-随机访问十年之约友链博客"></a>
+  </p>
+
+
+  <p align="center">
+    本站访问次数：
+  </p>
+
+  <p align="center">
+
+    <img src="https://count.getloli.com/get/@gd1214b?theme=rule34">
+  </p>
+
+  
+
+  <p align="center">
+    <b> gd1214b保留所有权利。 Copyright © 2022 gd1214b. All Rights Reserved. </b>
+  </p>
+
+  <p align="center">
+     <a href="/post/copyright/">版权声明</a> | <a href="/post/privacy-policy/">隐私政策</a> | <a
+        href="/post/disclaimers/">免责声明</a> | <a href="/sitemap.xml">站点地图</a> | <a href="/post/about/">联系站长</a> | <a
+        class="rss" href="/atom.xml" target="_blank">RSS</a> |
+  </p>
+
+  <p align="center">
+    <img src="https://api.xhofe.top/ip/?line1=欢迎访问 gd1214b's blog&line2=念念不忘，必有回响">
+  </p>
+
+  <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+    <i class="fa fa-arrow"></i>
+  </a>
+</footer>
+
+<div class="clear"></div>
+
+
+      
+    <script src="https://www.gd1214b.icu/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>
